@@ -776,54 +776,49 @@ curl -X POST https://YOUR-DOMAIN.example/api/recommend ^
 ```
 Replace the placeholder domain with the actual deployment URL. Never put API
 keys or private data in this command or in committed documentation.
-## 13. GitHub Issues Mapping
-### Issue 1: Scaffold Frontend
-**Owner:** Member 5
-**Branch:** `feature/frontend-scaffold`
-**Folder:** `frontend/`
-**Description:** Create the minimal React and Vite application with a visible
-heading, request action, and successful production build.
-**Acceptance criteria:** `npm run build` succeeds, `dist/index.html` exists,
-and the local page renders without console errors.
-### Issue 2: Implement Recommendation API
-**Owner:** Jerome
-**Branch:** `feature/api-recommend`
-**Folder:** `backend/`
-**Description:** Add the validated `POST /api/recommend` endpoint and return
-the agreed recommendation response.
-**Acceptance criteria:** Valid input returns `200`, the response contains a
-list, and malformed input returns a documented validation error.
-### Issue 3: Implement Rule Engine Baseline
-**Owner:** Nishant
-**Branch:** `feature/rule-baseline`
-**Folder:** `data/`
-**Description:** Implement deterministic recommendations for sample and
-alternate user inputs with stable IDs, titles, and scores.
-**Acceptance criteria:** Direct calls are deterministic, serializable, and
-covered by representative examples.
-### Issue 4: Local E2E Smoke Test
-**Owner:** Member 4 and Aarjan
-**Branch:** `test/local-e2e`
-**Folders:** `backend/`, `frontend/`, and test documentation
-**Description:** Verify the browser request reaches the API and results render.
-**Acceptance criteria:** The smoke-test steps are repeatable, the valid flow
-passes, and at least one invalid flow is recorded.
-### Issue 5: Verify Vercel Deployment
-**Owner:** Jerome
-**Branch:** `fix/vercel-routing` when required
-**Files:** root `vercel.json` and deployment evidence
-**Description:** Verify static build output, API routing, root-page loading, and
-production recommendation requests.
-**Acceptance criteria:** Production UI loads, API requests reach FastAPI, and
-the deployment commit and URL are recorded.
-### Issue 6: Update README and Sprint Document
-**Owner:** Member 6
-**Branch:** `docs/sprint-1`
-**Files:** documentation files only
-**Description:** Document setup, contract, sprint progress, known limitations,
-and verification commands.
-**Acceptance criteria:** A new member can follow the documented commands and
-the sprint document reflects the actual implementation.
+## 13. GitHub Issues Mapping (Updated for Sprint 1 Release)
+
+Issue 1: Scaffold Frontend  
+Owner: Astraea  
+Branch: feature/frontend-scaffold  
+Folder: frontend/  
+Description: Create the minimal React + Vite application with a visible heading, request action, and successful production build.  
+Acceptance criteria: npm run build succeeds, dist/index.html exists, and the local page renders without console errors.
+
+Issue 2: Implement Recommendation API  
+Owner: Jerome  
+Branch: feature/api-recommend  
+Folder: backend/  
+Description: Add the validated POST /api/recommend endpoint and return the agreed recommendation response.  
+Acceptance criteria: Valid input returns 200, the response contains a list, and malformed input returns a documented validation error.
+
+Issue 3: Implement Rule Engine Baseline  
+Owner: Nishant  
+Branch: feature/rule-baseline  
+Folder: data/  
+Description: Implement deterministic recommendations for sample and alternate user inputs with stable IDs, titles, and scores.  
+Acceptance criteria: Direct calls are deterministic, serializable, and covered by representative examples.
+
+Issue 4: Local E2E Smoke Test  
+Owners: Jasim & Aarjan  
+Branch: test/local-e2e  
+Folders: backend/, frontend/  
+Description: Verify the browser request reaches the API and results render.  
+Acceptance criteria: The smoke-test steps are repeatable, the valid flow passes, and at least one invalid flow is recorded.
+
+Issue 5: Verify Vercel Deployment  
+Owner: Jerome  
+Branch: fix/vercel-routing  
+Files: root vercel.json and deployment evidence  
+Description: Verify static build output, API routing, root-page loading, and production recommendation requests.  
+Acceptance criteria: Production UI loads, API requests reach FastAPI, and the deployment commit and URL are recorded.
+
+Issue 6: Update README and Sprint Document  
+Owner: Maleesha  
+Branch: docs/sprint-1  
+Files: documentation files only  
+Description: Document setup, contract, sprint progress, known limitations, and verification commands.  
+Acceptance criteria: A new member can follow the documented commands and the sprint document reflects the actual implementation.
 ## 14. VS Code Workflow
 ### 14.1 Recommended Extensions
 Use extensions that match the project and team environment:
@@ -1197,3 +1192,20 @@ jobs:
 					. .venv/bin/activate
 					pytest -q
 ```
+
+## Sprint 1 Release Summary
+
+Sprint 1 is complete and released.  
+All required vertical-slice components are implemented:
+
+- Frontend scaffold — Astraea  
+- Backend API endpoint — Jerome  
+- Deterministic rule engine — Nishant  
+- Local integration tests — Jasim & Aarjan  
+- Vercel deployment verification — Jerome  
+- Documentation updates — Maleesha
+
+The production domain loads the UI and successfully calls `/api/recommend`.  
+Backend tests pass, and the rule engine output is deterministic.
+
+Sprint 1 is now the baseline for Sprint 2 development.
