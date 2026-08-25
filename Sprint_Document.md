@@ -24,12 +24,12 @@ Maleesha — Frontend Support (styling, state)
 **Sprint 4 Week 11–12:** Final polish and presentation
 - Deliverables: Final UI; final model; README and developer docs; presentation slides and demo script.
 ## Sprint 1 Tasks and Owners
-1. **Scaffold frontend** — Member 5
-2. **Implement /api/recommend** — Jerome
-3. **Implement rule engine baseline** — Nishant
-4. **Local integration and tests** — Member 4 & Aarjan
-5. **Vercel deployment check** — Jerome
-6. **Documentation and issues** — Member 6
+- Scaffold frontend — Astraea  
+- Implement /api/recommend — Jerome  
+- Implement rule engine baseline — Nishant  
+- Local integration and tests — Jasim & Aarjan  
+- Vercel deployment check — Jerome  
+- Documentation and issues — Maleesha
 ## Quick Start for Developers
 ### Frontend
 ```bash
