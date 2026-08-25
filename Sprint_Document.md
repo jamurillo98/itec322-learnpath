@@ -1209,3 +1209,116 @@ The production domain loads the UI and successfully calls `/api/recommend`.
 Backend tests pass, and the rule engine output is deterministic.
 
 Sprint 1 is now the baseline for Sprint 2 development.
+
+---
+
+## Sprint 1 Execution Summary
+
+### Sprint 1 Overview
+Sprint 1 establishes the first working vertical slice of the system:
+frontend → backend → rule engine → deployment.
+This release proves the architecture works end‑to‑end and sets the baseline for Sprint 2.
+
+### Roles and Ownership
+- **Jerome** — Backend Lead (API, deployment, release owner)
+- **Jasim** — Backend Support (tests, CI, validation)
+- **Nishant** — Data/Model Lead (rule engine, dataset, deterministic outputs)
+- **Aarjan** — Data Support (fixtures, feature engineering, evaluation)
+- **Astraea** — Frontend Lead (Vite scaffold, UI, build verification)
+- **Maleesha** — Docs & UX Support (README, sprint notes, presentation assets)
+
+### Folder Ownership
+| Folder     | Lead      | Support     | Boundary |
+|-----------|-----------|-------------|----------|
+| frontend/ | Astraea   | Maleesha    | UI, components, API client |
+| backend/  | Jerome    | Jasim       | Endpoints, validation, tests |
+| data/     | Nishant   | Aarjan      | Rules, fixtures, dataset notes |
+| docs/     | Maleesha  | All members | Sprint docs, release notes |
+
+### Sprint 1 Branches
+| Purpose | Branch | Folder |
+|---------|--------|--------|
+| Frontend scaffold | feature/frontend-scaffold | frontend/ |
+| API endpoint | feature/api-recommend | backend/ |
+| Rule engine baseline | feature/rule-baseline | data/ |
+| Local E2E smoke tests | test/local-e2e | backend/, frontend/ |
+| Vercel routing fixes | fix/vercel-routing | repo root |
+| Docs updates | docs/sprint-1 | repo root |
+
+### Issue Mapping
+**Issue 1 — Scaffold Frontend**  
+Owner: **Astraea**  
+Branch: feature/frontend-scaffold  
+Folder: frontend/  
+Acceptance: `npm run build` succeeds, `dist/index.html` exists, UI renders.
+
+**Issue 2 — Implement Recommendation API**  
+Owner: **Jerome**  
+Branch: feature/api-recommend  
+Folder: backend/  
+Acceptance: Valid input returns 200 with list; invalid input returns validation error.
+
+**Issue 3 — Rule Engine Baseline**  
+Owner: **Nishant**  
+Branch: feature/rule-baseline  
+Folder: data/  
+Acceptance: Deterministic output for sample and alternate inputs.
+
+**Issue 4 — Local E2E Smoke Test**  
+Owners: **Jasim & Aarjan**  
+Branch: test/local-e2e  
+Folders: backend/, frontend/  
+Acceptance: Browser → API → results flow works; invalid flow recorded.
+
+**Issue 5 — Verify Vercel Deployment**  
+Owner: **Jerome**  
+Branch: fix/vercel-routing  
+Acceptance: Production UI loads; API reachable; deployment evidence recorded.
+
+**Issue 6 — Update README & Sprint Doc**  
+Owner: **Maleesha**  
+Branch: docs/sprint-1  
+Acceptance: New member can follow README to run app locally.
+
+### Sprint 1 Checklists and Acceptance Criteria
+
+**Backend (Jerome & Jasim)**
+- [ ] POST /api/recommend implemented
+- [ ] Validation errors return correct schema
+- [ ] Deterministic rule engine integration
+- [ ] Backend tests pass in CI
+
+**Data (Nishant & Aarjan)**
+- [ ] Deterministic rule engine with stable IDs
+- [ ] Sample fixtures created
+- [ ] Example inputs documented
+
+**Frontend (Astraea & Maleesha)**
+- [ ] Vite scaffold builds successfully
+- [ ] UI calls /api/recommend
+- [ ] Results render correctly
+- [ ] Error states visible
+
+**Sprint 1 Definition of Done**
+- [ ] Frontend builds and `dist/` exists  
+- [ ] Backend tests pass  
+- [ ] Rule engine deterministic  
+- [ ] UI calls backend successfully  
+- [ ] Production domain loads UI  
+- [ ] Documentation updated  
+
+### Sprint 1 Local Setup
+```bash
+# Backend
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn backend.main:app --reload
+
+# Frontend
+cd frontend
+npm install
+npm run dev
+npm run build
+```
