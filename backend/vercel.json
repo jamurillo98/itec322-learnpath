@@ -1,4 +1,14 @@
 {
-  "runtime": "python3.9",
-  "entrypoint": "main.py"
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "main.py"
+    }
+  ]
 }
