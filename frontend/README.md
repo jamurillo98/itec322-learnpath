@@ -1,9 +1,10 @@
 # Frontend (Sprint 1)
 
-This is a minimal React + Vite frontend scaffold for Sprint 1.
+This is a minimal React + Vite frontend service scaffold for Sprint 1 and Vercel.
 
 What goes inside:
 - `src/`: React source files
+- `vite.config.js`: Vite configuration
 - `package.json`: npm scripts and dependencies
 
 How to run locally:
@@ -13,4 +14,4 @@ How to run locally:
 3. `npm run dev`
 
 Notes:
-- Components are minimal placeholders. Expand them to connect to the backend `/recommend` endpoint.
+- Components are minimal placeholders. Expand them to connect to the backend `/api/recommend` endpoint.
