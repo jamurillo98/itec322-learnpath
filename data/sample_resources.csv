@@ -1,0 +1,4 @@
+id,title,topic,tags,level,url
+1,Introduction to Algorithms,algorithms,algorithms;data-structures,intermediate,https://example.com/algorithms
+2,Linear Algebra Basics,math,linear-algebra;math,beginner,https://example.com/linear-algebra
+3,Python for Data,programming,python;programming,beginner,https://example.com/python-data
