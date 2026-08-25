@@ -6,12 +6,13 @@
 **Team size:** 6 members.
 **Repo state:** `frontend/` empty; `backend/` minimal FastAPI; `data/` rule scaffold; `vercel.json` configured.
 ## Team Roles and Assignments
-- **Jerome** — Backend Lead (backend, API, deployment)
-- **Member 4** — Backend Support (tests, validation, CI)
-- **Nishant** — Data/Model Lead (rule engine, dataset)
-- **Aarjan** — Data/Model Support (feature engineering, tests)
-- **Member 5** — Frontend Lead (Vite scaffold, UI)
-- **Member 6** — Frontend Support (styling, state)
+
+Jerome — Backend Lead (backend, API, deployment)  
+Jasim — Backend Support (tests, validation, CI)  
+Nishant — Data/Model Lead (rule engine, dataset)  
+Aarjan — Data/Model Support (feature engineering, tests)  
+Astraea — Frontend Lead (Vite scaffold, UI)  
+Maleesha — Frontend Support (styling, state)
 ## Timeline and Sprints
 **Sprint 1 Week 4–5:** Working skeleton
 - Deliverables: Minimal Vite app; `/api/recommend` endpoint; `data/rule_engine.py` returns sample recommendations; Vercel serves UI (no 404).
@@ -129,14 +130,15 @@ deployment are stable. Explainability and predictable fallback behavior remain
 required even after model experimentation begins.
 ## 2. Team Responsibilities (Deep Version)
 ### 2.1 Responsibility Matrix
-| Member | Primary area | Sprint 1 | Sprint 2 | Sprint 3 | Sprint 4 |
-|---|---|---|---|---|---|
-| Jerome | Backend and deployment | API and Vercel | endpoint expansion | reliability | release owner |
-| Member 4 | Backend support | tests and CI | validation tests | monitoring tests | release test |
-| Nishant | Data and rules | baseline rules | feature logic | model prototype | model story |
-| Aarjan | Data support | fixtures and smoke test | dataset support | evaluation | demo data |
-| Member 5 | Frontend | Vite scaffold | form and results | UI refinement | demo UI |
-| Member 6 | Frontend support | documentation and styling | state and layout | accessibility | presentation assets |
+
+Member      | Primary Area        | Sprint 1                | Sprint 2                | Sprint 3                | Sprint 4
+----------- | ------------------- | ------------------------ | ------------------------ | ------------------------ | ------------------------
+Jerome      | Backend + Deployment| API + Vercel            | Endpoint expansion       | Reliability              | Release owner
+Jasim       | Backend Support     | Tests + CI              | Validation tests         | Monitoring tests         | Release test
+Nishant     | Data + Rules        | Baseline rules          | Feature logic            | Model prototype          | Model story
+Aarjan      | Data Support        | Fixtures + smoke tests  | Dataset support          | Evaluation               | Demo data
+Astraea     | Frontend Lead       | Vite scaffold           | Form + results UI        | UI refinement            | Demo UI
+Maleesha    | Frontend Support    | Docs + styling          | State + layout           | Accessibility            | Presentation assets
 ### 2.2 Responsibilities Per Sprint
 Every owner is responsible for implementation, a focused test or verification,
 and a short update in the pull request. Support members should review their
@@ -150,13 +152,14 @@ regression tests, and resolves the highest-impact usability or reliability
 issues.
 Sprint 4 prepares the release. The team freezes the contract, rehearses the
 demo, checks production behavior, and documents known limitations.
-### 2.3 Responsibilities Per Folder
-| Folder | Lead | Support | Ownership boundary |
-|---|---|---|---|
-| `frontend/` | Member 5 | Member 6 | UI, browser state, API client |
-| `backend/` | Jerome | Member 4 | HTTP contract, validation, tests |
-| `data/` | Nishant | Aarjan | rules, fixtures, future features |
-| `docs/` and root docs | Member 6 | all members | decisions, setup, evidence |
+### 2.3 Folder Ownership
+
+Folder     | Lead      | Support     | Ownership Boundary
+---------- | --------- | ----------- | -----------------------------------------
+frontend/  | Astraea   | Maleesha    | UI, browser state, API client
+backend/   | Jerome    | Jasim       | HTTP contract, validation, tests
+data/      | Nishant   | Aarjan      | Rules, fixtures, future features
+docs/      | Maleesha  | All members | Decisions, setup, evidence
 Frontend code may call the API but may not import Python or rule files.
 Backend code may call the data layer but should not contain UI formatting.
 Data code may define recommendation logic but should not depend on FastAPI.
