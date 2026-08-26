@@ -1,9 +1,9 @@
-# Sprint 1 Release — Simple, Clear, Role‑Specific
+# Sprint 1 Release — Polished, Clear, Role‑Specific
 
 ## Overview
-Sprint 1 delivers the first working vertical slice:
-frontend → backend → rule engine → deployment.
-This release proves the architecture works end‑to‑end.
+Sprint 1 delivered the first working vertical slice of the system:<br>
+**frontend → backend → rule engine → deployment**.<br>
+This release confirms the architecture works end‑to‑end and establishes the baseline for Sprint 2.
 
 ## Roles and Responsibilities
 - **Jerome** — Backend Lead (API, deployment)
@@ -21,19 +21,20 @@ This release proves the architecture works end‑to‑end.
 | Rule engine baseline | feature/rule-baseline | data/ |
 | Local E2E smoke tests | test/local-e2e | backend/, frontend/ |
 | Vercel routing fixes | fix/vercel-routing | repo root |
-| Docs updates | docs/sprint-1 | repo root |
+| Documentation updates | docs/sprint-1 | repo root |
 
 ## Tasks and Owners
-- Scaffold frontend — **Astraea**
-- Implement `/api/recommend` — **Jerome**
-- Rule engine baseline — **Nishant**
-- Local E2E tests — **Jasim & Aarjan**
-- Vercel deployment check — **Jerome**
-- Documentation updates — **Maleesha**
+- **Astraea** — Scaffold frontend
+- **Jerome** — Implement `/api/recommend`
+- **Nishant** — Rule engine baseline
+- **Jasim & Aarjan** — Local E2E tests
+- **Jerome** — Vercel deployment check
+- **Maleesha** — Documentation updates
 
 ## Acceptance Criteria
+
 ### Backend (Jerome & Jasim)
-- POST /api/recommend implemented
+- POST `/api/recommend` implemented
 - Validation errors return correct schema
 - Deterministic rule engine integration
 - Backend tests pass in CI
@@ -45,7 +46,7 @@ This release proves the architecture works end‑to‑end.
 
 ### Frontend (Astraea & Maleesha)
 - Vite scaffold builds successfully
-- UI calls /api/recommend
+- UI calls `/api/recommend`
 - Results render correctly
 - Error states visible
 

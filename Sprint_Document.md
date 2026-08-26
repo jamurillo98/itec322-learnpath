@@ -1,10 +1,12 @@
 # Sprint Document — Group 5 Rule Recommendation Engine
+
 ## Project Summary
 **Project name:** Rule‑based Recommendation Engine (TBD)
 **Goal:** Deliver an end‑to‑end prototype (frontend → backend → rule engine) by Week 12.
 **Current week:** Week 4 (one week mid‑semester break remaining).
 **Team size:** 6 members.
 **Repo state:** `frontend/` empty; `backend/` minimal FastAPI; `data/` rule scaffold; `vercel.json` configured.
+
 ## Team Roles and Assignments
 
 Jerome — Backend Lead (backend, API, deployment)  
@@ -13,6 +15,7 @@ Nishant — Data/Model Lead (rule engine, dataset)
 Aarjan — Data/Model Support (feature engineering, tests)  
 Astraea — Frontend Lead (Vite scaffold, UI)  
 Maleesha — Frontend Support (styling, state)
+
 ## Timeline and Sprints
 **Sprint 2 Week 6–8:** Feature build and model prototype
 - Deliverables: User input form; results page; baseline ML prototype or improved rule logic; expanded endpoints.
@@ -20,14 +23,17 @@ Maleesha — Frontend Support (styling, state)
 - Deliverables: Model tuning; caching/preprocessing; unit tests; UI polish.
 **Sprint 4 Week 11–12:** Final polish and presentation
 - Deliverables: Final UI; final model; README and developer docs; presentation slides and demo script.
+
 ## Sprint 1 Overview (Simplified)
-Sprint 1 establishes the first working vertical slice of the system:
-frontend → backend → rule engine → deployment.
+Sprint 1 delivered the first working vertical slice of the system:<br>
+**frontend → backend → rule engine → deployment**.
 
-All detailed Sprint 1 release notes, tasks, acceptance criteria, and deployment evidence have been moved to a dedicated file:
+All detailed Sprint 1 tasks, acceptance criteria, execution plan, and release notes are documented in:
 
-**See SPRINT1_RELEASE.md for full Sprint 1 details.**
+**SPRINT1_RELEASE.md**
+
 ## Quick Start for Developers
+
 ### Frontend
 ```bash
 cd frontend
@@ -35,7 +41,9 @@ npm install
 npm run dev
 npm run build
 ```
+
 ## 1. Extended Project Overview
+
 ### 1.1 Product Scope
 The project delivers a small rule-based recommendation engine for demonstrating
 an end-to-end software workflow. A user interacts with a React and Vite web
@@ -47,6 +55,7 @@ the input and output, and explain the result during the final presentation.
 The semester objective is to move from a working skeleton to a tested prototype
 with a clear path toward data-driven ranking. The prototype must remain small
 enough to deploy and demonstrate reliably.
+
 ### 1.2 Architecture Explanation
 The frontend owns presentation, browser state, and HTTP requests. It should not
 contain recommendation rules or duplicate backend validation.
@@ -58,6 +67,7 @@ and the future model adapter. It should expose a stable function or service
 boundary so the backend does not depend on implementation details.
 Vercel hosts the built frontend and exposes the FastAPI function through the API
 route. Local development uses Vite for the browser and Uvicorn for the API.
+
 ### 1.3 ASCII Architecture Diagram
 ```text
 +----------------------+       POST /api/recommend       +---------------------+
@@ -84,6 +94,7 @@ route. Local development uses Vite for the browser and Uvicorn for the API.
 								 | static frontend build + serverless API route   |
 								 +-----------------------------------------------+
 ```
+
 ### 1.4 Request Lifecycle
 1. The user enters or confirms values in the frontend form.
 2. The frontend serializes the values into the documented request schema.
@@ -93,6 +104,7 @@ route. Local development uses Vite for the browser and Uvicorn for the API.
 6. The rule engine evaluates deterministic rules and creates ranked results.
 7. FastAPI wraps the list in the documented response object.
 8. The frontend renders loading, success, or error state.
+
 ### 1.5 Rule-Based Recommendation Engine Overview
 The baseline engine is a transparent function that accepts a payload and
 returns recommendation dictionaries. Rules should be explicit, deterministic,
@@ -110,6 +122,7 @@ Recommended rule order:
 4. Calculate or assign scores.
 5. Sort candidates by score.
 6. Return the agreed response shape.
+
 ### 1.6 Future ML Model Pathway
 The deterministic engine is the first implementation of a future recommender
 interface. Later work can introduce feature extraction, a training dataset,
@@ -125,7 +138,9 @@ The proposed migration path is:
 The team should not add ML dependencies until the rule baseline, tests, and
 deployment are stable. Explainability and predictable fallback behavior remain
 required even after model experimentation begins.
+
 ## 2. Team Responsibilities (Deep Version)
+
 ### 2.1 Responsibility Matrix
 
 Member      | Primary Area        | Sprint 1                | Sprint 2                | Sprint 3                | Sprint 4
@@ -136,6 +151,7 @@ Nishant     | Data + Rules        | Baseline rules          | Feature logic     
 Aarjan      | Data Support        | Fixtures + smoke tests  | Dataset support          | Evaluation               | Demo data
 Astraea     | Frontend Lead       | Vite scaffold           | Form + results UI        | UI refinement            | Demo UI
 Maleesha    | Frontend Support    | Docs + styling          | State + layout           | Accessibility            | Presentation assets
+
 ### 2.2 Responsibilities Per Sprint
 Every owner is responsible for implementation, a focused test or verification,
 and a short update in the pull request. Support members should review their
@@ -149,6 +165,7 @@ regression tests, and resolves the highest-impact usability or reliability
 issues.
 Sprint 4 prepares the release. The team freezes the contract, rehearses the
 demo, checks production behavior, and documents known limitations.
+
 ### 2.3 Folder Ownership
 
 Folder     | Lead      | Support     | Ownership Boundary
@@ -162,6 +179,7 @@ Backend code may call the data layer but should not contain UI formatting.
 Data code may define recommendation logic but should not depend on FastAPI.
 Documentation describes actual behavior and must be updated with contract
 changes.
+
 ### 2.4 Branch Ownership
 The owner of a folder is responsible for keeping its branch current, responding
 to review comments, and confirming the acceptance criteria. Ownership does not
@@ -169,13 +187,16 @@ prevent another member from contributing; it identifies the first reviewer and
 the person who confirms the result.
 Branches must contain one coherent change. A branch that modifies multiple
 folders must explain the integration reason in its pull request.
+
 ### 2.5 Expected Weekly Workload
 Each member should plan approximately two to four focused hours per week,
 including implementation, review, testing, and documentation. Leads may need
 additional time during integration and presentation weeks.
 The team should agree on a weekly checkpoint. Before the checkpoint, each
 member posts completed work, current blocker, next action, and test evidence.
+
 ## 3. Branching Strategy
+
 ### 3.1 Naming Conventions
 Use short, descriptive branch names based on the change type:
 | Prefix | Use | Example |
@@ -186,6 +207,7 @@ Use short, descriptive branch names based on the change type:
 | `test/` | test-only work | `test/recommendation-api` |
 Use lowercase names and hyphens. Avoid member names, dates, and vague names
 such as `changes` or `work`.
+
 ### 3.2 Pull Request Workflow
 1. Start from an updated `main` branch.
 2. Create a branch using the naming convention.
@@ -197,6 +219,7 @@ such as `changes` or `work`.
 8. Resolve comments and rerun checks.
 9. Merge after approval and passing CI.
 10. Delete the branch after merge.
+
 ### 3.3 Review Guidelines
 Reviewers should verify behavior before style. Check the API contract, error
 paths, input validation, security-sensitive data, tests, and deployment impact.
@@ -206,12 +229,14 @@ Every review should answer these questions:
 - Does it preserve the boundaries between folders?
 - Does it introduce an undocumented contract change?
 - Is the implementation understandable to another team member?
+
 ### 3.4 Merge Rules
 Only reviewed pull requests may merge to `main`. CI must pass, unresolved
 blocking comments must be absent, and the author must update documentation for
 user-visible or contract-visible behavior.
 Prefer squash merging for focused tasks. Do not force-push `main`. Resolve
 conflicts in the feature branch and rerun the checks before merging.
+
 ### 3.5 Folder-to-Branch Mapping
 | Work area | Typical branch examples |
 |---|---|
@@ -221,7 +246,9 @@ conflicts in the feature branch and rerun the checks before merging.
 | Documentation | `docs/sprint-document`, `docs/api-contract` |
 Integration branches are allowed only when a task genuinely crosses boundaries
 and the pull request identifies each affected folder.
+
 ## 4. Repo Structure Deep Dive
+
 ### 4.1 `frontend/`
 **Purpose:** Browser application, presentation, state, and API client.
 **Expected files:**
@@ -259,6 +286,7 @@ export default function App() {
 	return <main>{error ? <p>{error}</p> : JSON.stringify(result)}</main>;
 }
 ```
+
 ### 4.2 `backend/`
 **Purpose:** FastAPI application, schemas, endpoint behavior, and API tests.
 **Expected files:**
@@ -286,6 +314,7 @@ class RecommendationInput(BaseModel):
 def recommendation_endpoint(payload: RecommendationInput):
 		return {"recommendations": recommend(payload.model_dump())}
 ```
+
 ### 4.3 `data/`
 **Purpose:** Rules, resource data, feature preparation, and model experiments.
 **Expected files:**
@@ -309,6 +338,7 @@ def recommend(payload):
 				{"id": 2, "title": "Secondary suggestion", "score": 0.75},
 		]
 ```
+
 ### 4.4 `docs/`
 **Purpose:** Developer onboarding, API details, decisions, testing evidence,
 and release notes.
@@ -328,6 +358,7 @@ List the exact command and expected result.
 ## API or data impact
 Describe changed inputs, outputs, and compatibility.
 ```
+
 ## 5. Sprint Breakdown (Week 4–12)
 
 See SPRINT1_RELEASE.md for Sprint 1 details.
@@ -356,6 +387,7 @@ extend. The team must agree on field names before parallel implementation.
 explain.
 **Mitigation:** Freeze a small schema, review examples first, and keep a
 deterministic fallback for every path.
+
 ### 5.3 Sprint 3: Accuracy and Stability, Weeks 9–10
 **Goal:** Improve recommendation quality and operational confidence.
 **Deliverables:** Tuned rules or baseline model comparison, regression tests,
@@ -382,6 +414,7 @@ document important dependency versions.
 **Expected folder output:** Evaluation or regression assets in `data/`, tests
 and logging improvements in `backend/`, polished states in `frontend/`, and a
 test evidence note in `docs/`.
+
 ### 5.4 Sprint 4: Final Polish, Weeks 11–12
 **Goal:** Produce a reliable, understandable demonstration and final handoff.
 **Deliverables:** Final UI, final rules or model, deployment runbook, README,
@@ -406,13 +439,16 @@ slides, demo script, and known-limitations list.
 screenshots or recorded evidence as a fallback.
 **Expected folder output:** Release-ready source in all three code folders,
 deployment and presentation documentation, and a final verification record.
+
 ## 7. API Contract
+
 ### 7.1 Endpoint
 | Method | Path | Purpose |
 |---|---|---|
 | `POST` | `/api/recommend` | Return ranked recommendations |
 The endpoint accepts JSON and should return JSON for both success and validation
 failures. The frontend must use the relative path `/api/recommend`.
+
 ### 7.2 Request Schema
 Sample request:
 ```json
@@ -425,6 +461,7 @@ Sample request:
 | `user` | string | yes | non-empty after trimming |
 Later sprints may add fields, but additions must be documented and tested. The
 backend remains the source of truth for validation.
+
 ### 7.3 Response Schema
 ```json
 {
@@ -443,6 +480,7 @@ backend remains the source of truth for validation.
 | `id` | integer or string | stable recommendation identifier |
 | `title` | string | display label |
 | `score` | number | comparable ranking score |
+
 ### 7.4 Example Payloads
 Valid request:
 ```json
@@ -460,6 +498,7 @@ Invalid request with the wrong type:
 ```json
 {"user": 42}
 ```
+
 ### 7.5 Error Handling
 Validation failures should use FastAPI's standard `422` response unless the
 team explicitly documents a different error envelope. Unexpected server errors
@@ -468,6 +507,7 @@ the browser.
 The frontend must distinguish loading, successful empty results, validation
 errors, network errors, and unexpected server errors. Empty recommendations are
 not automatically a network failure.
+
 ### 7.6 Frontend Call
 ```js
 export async function getRecommendation(payload) {
@@ -482,73 +522,93 @@ export async function getRecommendation(payload) {
 	return response.json();
 }
 ```
+
 ## 8. Frontend Prompts
+
 ### 8.1 Component Structure Prompt
 > Build a small React component structure for a recommendation form and results
 > view. Keep components focused, pass data through explicit props, and keep API
 > calls outside presentational components. Include loading, empty, success, and
 > error states.
+
 ### 8.2 API Calls Prompt
 > Create a frontend API client for `POST /api/recommend`. Use a relative URL,
 > JSON headers, explicit response checking, and an error that includes the HTTP
 > status. Do not place rule-engine logic in the browser.
+
 ### 8.3 State Management Prompt
 > Add local React state for form values, request status, results, and errors.
 > Prevent duplicate submissions while a request is in progress and clear stale
 > errors when a new request starts.
+
 ### 8.4 Error Handling Prompt
 > Design accessible error handling for validation failures, network failures,
 > server failures, and empty results. Keep the user's input visible so they can
 > correct it without starting over.
+
 ### 8.5 UI Layout Prompt
 > Create a clear, responsive recommendation screen with a heading, short
 > description, input area, primary submit action, loading state, and readable
 > results. Use simple spacing and strong hierarchy without hiding important
 > error text.
+
 ### 8.6 Folder Structure Prompt
 > Propose a minimal Vite React folder structure for `src/components`, an API
 > client, styles, and tests. Keep the structure shallow until repeated patterns
 > justify additional folders.
+
 ## 9. Backend Prompts
+
 ### 9.1 FastAPI Structure Prompt
 > Implement a minimal FastAPI application with a typed request model, a
 > `POST /api/recommend` endpoint, standard validation responses, and a clear
 > import boundary to the data rule engine.
+
 ### 9.2 Module Layout Prompt
 > Suggest a backend module layout that separates HTTP routes, Pydantic schemas,
 > recommendation orchestration, and tests. Do not introduce abstractions that
 > are not needed by the current endpoint.
+
 ### 9.3 Testing Strategy Prompt
 > Write focused FastAPI tests for the health route, a valid recommendation
 > request, missing required input, wrong input type, and response shape. Keep
 > tests deterministic and independent of a deployed service.
+
 ### 9.4 Logging Prompt
 > Add minimal useful logging around request handling and failures without
 > logging secrets or full sensitive payloads. Use stable event names and include
 > enough context to diagnose a production API error.
+
 ### 9.5 Rule Engine Integration Prompt
 > Connect the FastAPI endpoint to a plain Python recommendation function. Keep
 > the web layer responsible for validation and the data layer responsible for
 > recommendation logic. Return serializable results and preserve the API
 > response contract.
+
 ## 10. Data/Model Prompts
+
 ### 10.1 Rule Engine Structure Prompt
 > Design a deterministic rule engine with input normalization, candidate
 > generation, scoring, ordering, and a serializable result. Include examples
 > and tests for default and alternate inputs.
+
 ### 10.2 Dataset Preparation Prompt
 > Prepare a small documented dataset for recommendation experiments. Describe
 > each column, identify missing values, preserve a source or fixture version,
 > and avoid using personal or secret data.
+
 ### 10.3 Transition to ML Prompt
 > Propose a gradual transition from rules to an ML baseline. Define features,
 > labels, train and validation splits, metrics, confidence thresholds, and a
 > deterministic fallback when the model cannot make a reliable prediction.
+
 ### 10.4 Backend Data-Layer Prompt
 > Define a narrow data-layer function that accepts validated plain data and
 > returns plain dictionaries. Keep imports one-way from the backend into the
 > data layer and make the function easy to replace with a model adapter later.
+
 ## 11. Integration Guide
+
 ### 11.1 Local End-to-End Test
 Use two terminals from the repository root.
 Terminal one:
@@ -563,6 +623,7 @@ npm run dev
 Open the Vite URL, submit the form, and confirm a successful response. If the
 frontend calls the wrong origin, configure the existing Vite proxy or use the
 same local deployment arrangement documented by the team.
+
 ### 11.2 Direct API Test
 With Uvicorn running, use a request tool such as curl:
 ```bash
@@ -571,6 +632,7 @@ curl -X POST http://127.0.0.1:8000/api/recommend ^
 	-d "{\"user\":\"sample\"}"
 ```
 On macOS or Linux, use backslashes for line continuation instead of carets.
+
 ### 11.3 Debugging API Calls
 1. Open browser developer tools.
 2. Select the Network tab.
@@ -579,6 +641,7 @@ On macOS or Linux, use backslashes for line continuation instead of carets.
 5. Inspect method, URL, request body, status, and response body.
 6. Compare each value with the API contract.
 7. Check the Uvicorn terminal for traceback or validation output.
+
 ### 11.4 Common Errors and Fixes
 | Symptom | Likely cause | Fix |
 |---|---|---|
@@ -590,6 +653,7 @@ On macOS or Linux, use backslashes for line continuation instead of carets.
 | blank page | missing root element or entry import | inspect `index.html` and `src/main.jsx` |
 | empty results | rule condition excludes input | test the rule function directly |
 | production-only failure | environment or route drift | compare deployed paths with local paths |
+
 ### 11.5 Production Test
 1. Open the deployed root URL in a private browser window.
 2. Confirm the initial HTML and static assets load.
@@ -598,7 +662,9 @@ On macOS or Linux, use backslashes for line continuation instead of carets.
 5. Confirm the response status and recommendation list.
 6. Test an invalid request through the UI if the UI supports it.
 7. Record the URL, commit, timestamp, and result.
+
 ## 12. Deployment Guide
+
 ### 12.1 Vercel Configuration
 The repository root contains `vercel.json`. The configuration uses the frontend
 package as the static build source and sends API requests to the FastAPI entry
@@ -609,6 +675,7 @@ Required deployment facts:
 - static output: `dist`
 - API destination: `backend/main.py`
 - frontend destination: `frontend/dist/index.html`
+
 ### 12.2 Build Steps
 Run the same build locally before deployment:
 ```bash
@@ -618,6 +685,7 @@ npm run build
 ```
 Review the generated `dist/` directory and ensure the JavaScript asset paths
 resolve from the deployed site.
+
 ### 12.3 Troubleshooting 404 Errors
 Check the following in order:
 1. `vercel.json` is at the repository root.
@@ -629,10 +697,12 @@ Check the following in order:
 7. Browser cache is not hiding a newer deployment.
 Do not fix a 404 by changing backend code. First inspect the deployment build
 logs and the generated output path.
+
 ### 12.4 Verify Production
 Use the production URL to check the root page, a nested frontend path if one
 exists, and the API request. Capture a screenshot or response evidence for the
 Acceptance record.
+
 ### 12.5 Test API in Production
 ```bash
 curl -X POST https://YOUR-DOMAIN.example/api/recommend ^
@@ -641,8 +711,10 @@ curl -X POST https://YOUR-DOMAIN.example/api/recommend ^
 ```
 Replace the placeholder domain with the actual deployment URL. Never put API
 keys or private data in this command or in committed documentation.
+
 ## 13. VS Code Workflow
-### 14.1 Recommended Extensions
+
+### 13.1 Recommended Extensions
 Use extensions that match the project and team environment:
 - Python language support
 - Pylance or the team's selected Python analyzer
@@ -653,7 +725,8 @@ Use extensions that match the project and team environment:
 - REST Client or an API testing extension
 The team should document exact required extensions separately from optional
 personal tooling. Do not make a build depend on an editor extension.
-### 14.2 Run Frontend and Backend in VS Code
+
+### 13.2 Run Frontend and Backend in VS Code
 Open two integrated terminals.
 Backend terminal:
 ```bash
@@ -666,13 +739,15 @@ npm run dev
 ```
 Use the terminal selector to identify each process. Stop both processes before
 switching branches or installing dependencies.
-### 14.3 Integrated Terminal Practices
+
+### 13.3 Integrated Terminal Practices
 - Start commands from the documented directory.
 - Keep the API and frontend logs visible in separate terminals.
 - Use a third terminal for tests and Git commands.
 - Record the first meaningful error, not only the final stack line.
 - Avoid committing virtual environments, `node_modules`, or build output.
-### 14.4 Effective Copilot Use
+
+### 13.4 Effective Copilot Use
 Give Copilot the relevant file, contract, acceptance criteria, and constraints.
 Ask for a small change and a focused test. Review generated code line by line,
 especially imports, error paths, file paths, and dependency changes.
@@ -682,7 +757,8 @@ Useful prompt pattern:
 > focused tests for valid and invalid input. Do not modify frontend or data code.
 Ask Copilot to explain a failing test before accepting a broad rewrite. Keep
 the human owner responsible for architecture and acceptance decisions.
-### 14.5 Test API Inside VS Code
+
+### 13.5 Test API Inside VS Code
 Use the REST Client extension or a terminal request. A minimal request file can
 contain:
 ```http
@@ -693,8 +769,10 @@ Content-Type: application/json
 }
 ```
 Compare the returned status, headers, and JSON with the API contract.
+
 ## 14. Final Presentation Plan (Week 12)
-### 15.1 Demo Flow
+
+### 14.1 Demo Flow
 1. Introduce the problem and the recommendation goal.
 2. Show the three-layer architecture diagram.
 3. Open the deployed frontend.
@@ -705,7 +783,8 @@ Compare the returned status, headers, and JSON with the API contract.
 8. Show a validation or error case.
 9. Summarize testing and deployment evidence.
 10. Discuss the future ML pathway and limitations.
-### 15.2 Slide Structure
+
+### 14.2 Slide Structure
 | Slide | Topic | Speaker |
 |---|---|---|
 | 1 | project goal and team | Member 6 |
@@ -716,7 +795,8 @@ Compare the returned status, headers, and JSON with the API contract.
 | 6 | data and future ML | Aarjan |
 | 7 | testing and deployment | Jerome or Member 4 |
 | 8 | live demo and conclusion | all as assigned |
-### 15.3 Talking Points
+
+### 14.3 Talking Points
 - The system demonstrates a complete request path.
 - The API contract keeps frontend and data concerns separate.
 - The baseline is deterministic and explainable.
@@ -725,14 +805,16 @@ Compare the returned status, headers, and JSON with the API contract.
 - Vercel serves the built frontend and routes API calls to FastAPI.
 - The design supports a future model without requiring a new frontend contract.
 - Current limitations are acknowledged rather than hidden.
-### 15.4 Roles During Presentation
+
+### 14.4 Roles During Presentation
 The primary presenter introduces the product and controls the slides. The
 frontend presenter operates the browser demo. The backend presenter explains
 the request and response. The data presenter explains rules and future ML.
 One member should monitor the deployed URL and be ready with a prepared
 response or screenshot if the live service is unavailable. Another member
 should answer implementation and testing questions.
-### 15.5 Live Demo Instructions
+
+### 14.5 Live Demo Instructions
 Before presenting:
 1. Open the production URL in a private window.
 2. Confirm static assets load.
@@ -744,7 +826,8 @@ Before presenting:
 During the demo, narrate the request flow while the result is loading. Do not
 edit source files or install dependencies live. If the network fails, use the
 prepared evidence and explain the intended production check honestly.
-### 15.6 Final Release Checklist
+
+### 14.6 Final Release Checklist
 - [ ] Frontend build succeeds from a clean install.
 - [ ] Backend tests pass.
 - [ ] Rule engine output is deterministic.
@@ -756,7 +839,9 @@ prepared evidence and explain the intended production check honestly.
 - [ ] Presentation slides match the deployed implementation.
 - [ ] Demo fallback evidence is ready.
 ---
+
 ## Reference Files
+
 ### `frontend/package.json`
 ```json
 {
@@ -777,6 +862,7 @@ prepared evidence and explain the intended production check honestly.
 	}
 }
 ```
+
 ### `frontend/index.html`
 ```html
 <!doctype html>
@@ -792,6 +878,7 @@ prepared evidence and explain the intended production check honestly.
 	</body>
 </html>
 ```
+
 ### `frontend/vite.config.js`
 ```js
 import { defineConfig } from "vite";
@@ -803,6 +890,7 @@ export default defineConfig({
 	}
 });
 ```
+
 ### `frontend/src/main.jsx`
 ```jsx
 import React from "react";
@@ -810,6 +898,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 createRoot(document.getElementById("root")).render(<App />);
 ```
+
 ### `frontend/src/App.jsx`
 ```jsx
 import React, { useState } from "react";
@@ -847,6 +936,7 @@ export default function App() {
 	);
 }
 ```
+
 ### `frontend/src/api.js`
 ```js
 export async function getRecommendation() {
@@ -859,6 +949,7 @@ export async function getRecommendation() {
 	return resp.json();
 }
 ```
+
 ### `backend/main.py`
 ```python
 from fastapi import FastAPI
@@ -875,12 +966,14 @@ def recommend_endpoint(payload: Input):
 		result = recommend(payload.dict())
 		return {"recommendations": result}
 ```
+
 ### `backend/requirements.txt`
 ```text
 fastapi
 uvicorn
 python-dotenv
 ```
+
 ### `backend/tests/test_api.py`
 ```python
 from fastapi.testclient import TestClient
@@ -897,6 +990,7 @@ def test_recommend():
 		assert "recommendations" in data
 		assert isinstance(data["recommendations"], list)
 ```
+
 ### `data/rule_engine.py`
 ```python
 # Minimal deterministic rule engine
@@ -913,12 +1007,14 @@ def recommend(payload):
 		]
 		return base
 ```
+
 ### `data/sample_input.json`
 ```json
 {
 	"user": "sample"
 }
 ```
+
 ### `docs/README.md`
 ```markdown
 # Group 5 Rule Recommendation Engine
@@ -948,6 +1044,7 @@ def recommend(payload):
 - Create PRs and assign reviewers
 - Add issues for tasks and assign owners
 ```
+
 ### `.github/ISSUE_TEMPLATE.md`
 ```markdown
 ---
@@ -970,6 +1067,7 @@ A short summary of the task.
 **Notes**
 Any additional context or links
 ```
+
 ### `.github/workflows/ci.yml`
 ```yaml
 name: CI
