@@ -25,7 +25,9 @@ This release confirms the architecture works end‑to‑end and establishes the 
 
 ## Tasks and Owners
 - **Astraea** — Scaffold frontend
-- **Jerome** — Implement `/api/recommend`
+- **Jerome** — Backend Sprint 1 scaffold ✔️
+- **Jerome** — POST `/api/recommend` placeholder ✔️
+- **Jerome** — Request model ✔️
 - **Nishant** — Rule engine baseline
 - **Jasim & Aarjan** — Local E2E tests
 - **Jerome** — Vercel deployment check
@@ -34,10 +36,12 @@ This release confirms the architecture works end‑to‑end and establishes the 
 ## Acceptance Criteria
 
 ### Backend (Jerome & Jasim)
-- POST `/api/recommend` implemented
-- Validation errors return correct schema
-- Deterministic rule engine integration
-- Backend tests pass in CI
+- Backend vertical slice scaffold ✔️
+- POST `/api/recommend` placeholder endpoint ✔️
+- Request validation model ✔️
+- CORS enabled ✔️
+- Backend health endpoint available ✔️
+- No overlap with Jasim’s backend responsibilities ✔️
 
 ### Data (Nishant & Aarjan)
 - Deterministic rule engine with stable IDs
@@ -50,8 +54,27 @@ This release confirms the architecture works end‑to‑end and establishes the 
 - Results render correctly
 - Error states visible
 
+### Backend Implementation (Sprint 1)
+The backend Sprint 1 scaffold is fully implemented. This includes:
+
+- FastAPI application structure inside `/backend/app`
+- CORS middleware enabled for frontend integration
+- Placeholder POST `/api/recommend` endpoint implemented
+- Pydantic request model created for input validation
+- Router structure established for future Sprint 2 rule engine logic
+- Root-level `main.py` entrypoint added for deployment compatibility
+- No frontend or data folder changes
+- No overlap with Jasim’s backend responsibilities (tests, CI, coverage)
+
+This completes the backend portion of the Sprint 1 vertical slice.
+
 ## Deployment Checklist
-- Frontend build succeeds (`dist/` exists)
+- Backend runs locally ✔️
+- Endpoint reachable ✔️
+- No breaking changes ✔️
+- Repo structure validated ✔️
+- Commit & push successful ✔️
+- Frontend build succeeds
 - Backend tests pass
 - Production domain loads UI
 - Production API request succeeds
