@@ -82,11 +82,12 @@ This completes the backend portion of the Sprint 1 vertical slice.
 - Production domain loads UI ✔️
 - Production API request succeeds ✔️
 - Documentation updated ✔️
+- Main branch protected with PR workflow ✔️
 
 ## Sprint 1 Release Summary
 Sprint 1 is complete and released.  
 All required vertical-slice components are implemented and verified.  
 This release forms the baseline for Sprint 2 development.
 
-Final Status: Jerome and Astraea have completed their Sprint 1 deliverables.
+Final Status: Sprint 1 completion: Jerome and Astraea are fully complete.
 Remaining Sprint 1 items for Nishant, Aarjan, Jasim, and Maleesha are still in progress.
