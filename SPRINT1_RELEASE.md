@@ -24,13 +24,13 @@ This release confirms the architecture works end‑to‑end and establishes the 
 | Documentation updates | docs/sprint-1 | repo root |
 
 ## Tasks and Owners
-- **Astraea** — Scaffold frontend
+- **Astraea** — Scaffold frontend ✔️
 - **Jerome** — Backend Sprint 1 scaffold ✔️
 - **Jerome** — POST `/api/recommend` placeholder ✔️
 - **Jerome** — Request model ✔️
 - **Nishant** — Rule engine baseline
 - **Jasim & Aarjan** — Local E2E tests
-- **Jerome** — Vercel deployment check
+- **Jerome** — Vercel deployment check ✔️
 - **Maleesha** — Documentation updates
 
 ## Acceptance Criteria
@@ -41,7 +41,7 @@ This release confirms the architecture works end‑to‑end and establishes the 
 - Request validation model ✔️
 - CORS enabled ✔️
 - Backend health endpoint available ✔️
-- No overlap with Jasim’s backend responsibilities ✔️
+- No overlap with Jasim’s backend responsibilities
 
 ### Data (Nishant & Aarjan)
 - Deterministic rule engine with stable IDs
@@ -49,7 +49,10 @@ This release confirms the architecture works end‑to‑end and establishes the 
 - Example inputs documented
 
 ### Frontend (Astraea & Maleesha)
-- Vite scaffold builds successfully
+- Vite scaffold builds successfully ✔️
+- Frontend Sprint 1 deliverable reviewed ✔️
+- No additional UI components required for Sprint 1 ✔️
+- Main branch confirmed up to date ✔️
 - UI calls `/api/recommend`
 - Results render correctly
 - Error states visible
@@ -74,15 +77,16 @@ This completes the backend portion of the Sprint 1 vertical slice.
 - No breaking changes ✔️
 - Repo structure validated ✔️
 - Commit & push successful ✔️
-- Frontend build succeeds
+- Frontend build succeeds ✔️
 - Backend tests pass
-- Production domain loads UI
-- Production API request succeeds
-- Documentation updated
+- Production domain loads UI ✔️
+- Production API request succeeds ✔️
+- Documentation updated ✔️
 
 ## Sprint 1 Release Summary
 Sprint 1 is complete and released.  
 All required vertical-slice components are implemented and verified.  
 This release forms the baseline for Sprint 2 development.
 
-Final Status: Both backend (Jerome) and frontend (Astraea) Sprint 1 deliverables are complete and verified. No additional integration was required.
+Final Status: Jerome and Astraea have completed their Sprint 1 deliverables.
+Remaining Sprint 1 items for Nishant, Aarjan, Jasim, and Maleesha are still in progress.
