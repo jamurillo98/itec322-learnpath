@@ -5,41 +5,36 @@ This module intentionally contains no ML code — only deterministic rules.
 
 What goes inside:
 - `RuleEngine` class: loads resources, evaluates rules, returns ranked
-  results (same public interface as the Sprint 1 scaffold: __init__,
-  recommend()).
-- Extended in Sprint 1 with: hard filters (max_duration, min_rating),
-  weighted scoring (title/topic/tag keyword match, level/difficulty
-  match, rating bonus, duration headroom), and human-readable reasons
-  for each recommendation.
+  results.
+- `recommend(query, user_profile, limit)` — the original Sprint 1
+  interface (query string + optional level/max_duration/min_rating
+  profile). Unchanged, already reviewed and merged — kept for backward
+  compatibility with anything already using it.
+- `recommend_from_request(project_type, budget, priorities, notes, limit)`
+  — NEW. Matches the exact field names used by the frontend form
+  (InputForm.jsx) and the backend's RecommendRequest model, so the
+  backend can call this directly with no translation layer needed.
 
-Backward compatibility notes:
-- recommend(query, user_profile, limit) keeps the same signature and
-  return shape as the original scaffold: a list of dicts with keys
-  id, title, score, url, reason.
-- user_profile['level'] still works exactly as before (soft scoring
-  bonus). Two new OPTIONAL user_profile keys were added:
-    - 'max_duration': int minutes — hard filter, excludes anything longer
-    - 'min_rating': float — hard filter, excludes anything rated lower
-  Both are optional; existing calls with just {'level': 'beginner'}
-  behave the same as the original scaffold.
-- The CSV can now optionally include 'duration_minutes' and 'rating'
-  columns. If a row doesn't have them, those rules simply contribute 0
-  to the score rather than erroring.
-
-See README.md in this folder for documented example inputs and outputs.
+See README.md in this folder for documented example inputs and outputs
+for both methods.
 """
 
 import csv
 import os
 from typing import Any, Dict, List, Optional
 
-# --- Rule weights (tune these during Sprint 3 evaluation) -----------------
+# --- Rule weights for recommend() (tune during Sprint 3 evaluation) -------
 TITLE_MATCH_WEIGHT = 3
 TOPIC_MATCH_WEIGHT = 2
 TAG_MATCH_WEIGHT = 1
 LEVEL_MATCH_WEIGHT = 1
-RATING_BONUS_WEIGHT = 1.0        # multiplied by (rating - min_rating), if both present
-DURATION_HEADROOM_WEIGHT = 1.0   # rewards items comfortably under max_duration, if present
+RATING_BONUS_WEIGHT = 1.0
+DURATION_HEADROOM_WEIGHT = 1.0
+
+# --- Rule weights for recommend_from_request() -----------------------------
+PROJECT_TYPE_MATCH_WEIGHT = 3      # project_type matching a resource's topic
+PRIORITY_MATCH_WEIGHT = 2          # per matching priority/tag
+BUDGET_HEADROOM_WEIGHT = 1.0       # rewards resources comfortably under budget
 
 
 class RuleEngine:
@@ -67,45 +62,25 @@ class RuleEngine:
         except (TypeError, ValueError):
             return default
 
+    # --- Original Sprint 1 interface (unchanged, merged, reviewed) --------
+
     def _passes_hard_filters(self, resource: Dict[str, Any], user_profile: Optional[Dict[str, Any]]) -> bool:
-        """Optional hard filters: max_duration and min_rating. Both are
-        skipped gracefully if the profile or the CSV row doesn't have
-        the relevant field, so this never breaks the original scaffold."""
         if not user_profile:
             return True
-
         max_duration = user_profile.get('max_duration')
         if max_duration is not None:
             duration = self._to_float(resource.get('duration_minutes'))
             if duration is not None and duration > float(max_duration):
                 return False
-
         min_rating = user_profile.get('min_rating')
         if min_rating is not None:
             rating = self._to_float(resource.get('rating'))
             if rating is not None and rating < float(min_rating):
                 return False
-
         return True
 
     def recommend(self, query: str, user_profile: Dict[str, Any] = None, limit: int = 10) -> List[Dict[str, Any]]:
-        """Return ranked, explainable recommendations.
-
-        Rules implemented:
-        - Keyword match: query tokens appearing in title/topic/tags boost score
-          (title=3, topic=2, tags=1) — unchanged from the original scaffold.
-        - Level/difficulty match: user_profile['level'] matching the resource's
-          level adds +1 — unchanged from the original scaffold.
-        - Hard filters (only applied if present in user_profile and the CSV
-          row): max_duration, min_rating — resources failing these are excluded
-          entirely, not just down-ranked.
-        - Rating bonus: resources rated above user_profile['min_rating']
-          get extra score proportional to the gap (only if both are present).
-        - Duration headroom bonus: resources well under user_profile
-          ['max_duration'] score slightly higher (only if both are present).
-
-        See README.md for worked examples of this method's input/output.
-        """
+        """Original Sprint 1 method. See README.md for documented examples."""
         if not query:
             return []
 
@@ -171,10 +146,84 @@ class RuleEngine:
         results.sort(key=lambda x: (-x['score'], x['id'] or ''))
         return results[:limit]
 
+    # --- NEW: matches frontend/backend field names directly ----------------
+
+    def recommend_from_request(
+        self,
+        project_type: str,
+        budget: float = None,
+        priorities: List[str] = None,
+        notes: Optional[str] = None,
+        limit: int = 10,
+    ) -> List[Dict[str, Any]]:
+        """
+        Recommend resources using the exact field names the frontend
+        form (InputForm.jsx) and backend (RecommendRequest) already use
+        — no translation layer needed to call this from the API.
+
+        Rules:
+        - Hard filter: resources costing more than `budget` are excluded
+          entirely (only applied if the CSV row has a 'cost' value and
+          budget is provided).
+        - project_type match: compared against each resource's `topic`
+          field (soft bonus).
+        - priorities match: each priority string is compared against the
+          resource's `tags` (soft bonus per match).
+        - budget headroom: resources well under budget score slightly
+          higher, same idea as the duration headroom rule.
+        - notes: not currently used by any rule (free text, no
+          established mapping yet) — accepted for API compatibility and
+          future use, but does not affect scoring.
+
+        Returns the same shape as recommend(): id, title, score, url, reason.
+        """
+        priorities = priorities or []
+        results = []
+
+        for r in self.resources:
+            cost = self._to_float(r.get('cost'))
+            if budget is not None and cost is not None and cost > float(budget):
+                continue  # hard filter: over budget
+
+            score = 0.0
+            reasons = []
+
+            topic = r.get('topic', '').lower()
+            tags = r.get('tags', '').lower()
+
+            if project_type and project_type.strip().lower() in topic:
+                score += PROJECT_TYPE_MATCH_WEIGHT
+                reasons.append(f"project_type '{project_type}' matches topic (+{PROJECT_TYPE_MATCH_WEIGHT})")
+
+            matched_priorities = [p for p in priorities if p and p.strip().lower() in tags]
+            if matched_priorities:
+                bonus = PRIORITY_MATCH_WEIGHT * len(matched_priorities)
+                score += bonus
+                reasons.append(f"{len(matched_priorities)} matching priorit{'y' if len(matched_priorities)==1 else 'ies'}: {matched_priorities} (+{bonus})")
+
+            if budget is not None and cost is not None and float(budget) > 0:
+                headroom = max(0.0, (float(budget) - cost) / float(budget))
+                bonus = BUDGET_HEADROOM_WEIGHT * headroom
+                if bonus > 0:
+                    score += bonus
+                    reasons.append(f"cost {cost} has headroom under budget {budget} (+{round(bonus, 2)})")
+
+            if score > 0:
+                results.append({
+                    "id": r.get('id'),
+                    "title": r.get('title'),
+                    "score": round(score, 3),
+                    "url": r.get('url'),
+                    "reason": "; ".join(reasons) if reasons else f"Matched with score {score}",
+                })
+
+        results.sort(key=lambda x: (-x['score'], x['id'] or ''))
+        return results[:limit]
+
 
 if __name__ == '__main__':
-    # Quick local demo — see README.md for the documented version of these examples
     engine = RuleEngine()
     print(engine.recommend('python'))
-    print(engine.recommend('python', user_profile={'level': 'beginner', 'max_duration': 60, 'min_rating': 4.0}))
-            
+    print(engine.recommend_from_request(
+        project_type='programming', budget=50, priorities=['hands-on', 'self-paced']
+    ))
