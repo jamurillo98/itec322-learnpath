@@ -1,4 +1,9 @@
-id,title,topic,tags,level,url
-1,Introduction to Algorithms,algorithms,algorithms;data-structures,intermediate,https://example.com/algorithms
-2,Linear Algebra Basics,math,linear-algebra;math,beginner,https://example.com/linear-algebra
-3,Python for Data,programming,python;programming,beginner,https://example.com/python-data
+id,title,topic,tags,level,url,duration_minutes,rating
+R001,Intro to Python Programming,programming,python;coding-basics;self-paced,beginner,https://example.com/r001,45,4.7
+R002,Data Structures & Algorithms Deep Dive,programming,algorithms;interview-prep;java,advanced,https://example.com/r002,480,4.5
+R003,Linear Algebra Fundamentals,mathematics,algebra;theory;self-paced,beginner,https://example.com/r003,25,4.2
+R004,Machine Learning with Neural Networks,data-science,machine-learning;python;hands-on,advanced,https://example.com/r004,360,4.8
+R005,SQL for Beginners,programming,sql;databases;hands-on,beginner,https://example.com/r005,60,4.4
+R006,Statistics for Data Analysis,data-science,statistics;theory;self-paced,intermediate,https://example.com/r006,90,4.3
+R007,Calculus: Limits and Derivatives,mathematics,calculus;theory;exam-prep,intermediate,https://example.com/r007,55,4.1
+R008,Hands-On Web Development Bootcamp,programming,javascript;hands-on;project-based,intermediate,https://example.com/r008,600,4.6
