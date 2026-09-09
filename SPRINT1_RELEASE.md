@@ -44,9 +44,9 @@ This release confirms the architecture works end‑to‑end and establishes the 
 - No overlap with Jasim’s backend responsibilities
 
 ### Data (Nishant & Aarjan)
-- Deterministic rule engine with stable IDs
-- Sample fixtures created
-- Example inputs documented
+- Deterministic rule engine with stable IDs✔️
+- Sample fixtures created✔️
+- Example inputs documented✔️
 
 ### Frontend (Astraea & Maleesha)
 - Vite scaffold builds successfully ✔️
@@ -89,4 +89,5 @@ All required vertical-slice components are implemented and verified.
 This release forms the baseline for Sprint 2 development.
 
 Final Status: Jerome and Astraea have completed their Sprint 1 deliverables.
-Remaining Sprint 1 items for Nishant, Aarjan, Jasim, and Maleesha are still in progress.
+Nishant and Aarjan's Data & Model deliverables (rule engine, fixtures, documented examples) are complete and merged. Local E2E tests (Jasim & Aarjan) remain blocked pending backend integration and Vercel deployment fixes
+Remaining Sprint 1 items for Jasim, and Maleesha are still in progress.
