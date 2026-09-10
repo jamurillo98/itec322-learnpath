@@ -1,17 +1,20 @@
-# Sprint 1 Release — Polished, Clear, Role‑Specific
+# Sprint 1 Release
+
+This file is the authoritative Sprint 1 release record.
+All long-term planning is maintained in docs/Sprint_Document.md.
 
 ## Overview
 Sprint 1 delivered the first working vertical slice of the system:<br>
 **frontend → backend → rule engine → deployment**.<br>
 This release confirms the architecture works end‑to‑end and establishes the baseline for Sprint 2.
 
-## Roles and Responsibilities
-- **Jerome** — Backend Lead (API, deployment)
-- **Jasim** — Backend Support (tests, CI)
-- **Nishant** — Data/Model Lead (rule engine)
-- **Aarjan** — Data Support (fixtures, evaluation)
-- **Astraea** — Frontend Lead (Vite scaffold, UI)
-- **Maleesha** — Docs & UX Support (README, sprint notes)
+## Sprint 1 Roles and Responsibilities
+- **Jerome** — Backend scaffold, API endpoint, request model, deployment
+- **Jasim** — Backend tests and CI support
+- **Nishant** — Rule engine baseline
+- **Aarjan** — Fixtures, evaluation, and local E2E support
+- **Astraea** — Vite frontend scaffold
+- **Maleesha** — Sprint documentation and UX support
 
 ## Sprint 1 Branches
 | Purpose | Branch | Folder |
@@ -21,7 +24,7 @@ This release confirms the architecture works end‑to‑end and establishes the 
 | Rule engine baseline | feature/rule-baseline | data/ |
 | Local E2E smoke tests | test/local-e2e | backend/, frontend/ |
 | Vercel routing fixes | fix/vercel-routing | repo root |
-| Documentation updates | docs/sprint-1 | repo root |
+| Documentation updates | docs/sprint-document | docs/ |
 
 ## Tasks and Owners
 - **Astraea** — Scaffold frontend ✔️
@@ -56,20 +59,6 @@ This release confirms the architecture works end‑to‑end and establishes the 
 - UI calls `/api/recommend`
 - Results render correctly
 - Error states visible
-
-### Backend Implementation (Sprint 1)
-The backend Sprint 1 scaffold is fully implemented. This includes:
-
-- FastAPI application structure inside `/backend/app`
-- CORS middleware enabled for frontend integration
-- Placeholder POST `/api/recommend` endpoint implemented
-- Pydantic request model created for input validation
-- Router structure established for future Sprint 2 rule engine logic
-- Root-level `main.py` entrypoint added for deployment compatibility
-- No frontend or data folder changes
-- No overlap with Jasim’s backend responsibilities (tests, CI, coverage)
-
-This completes the backend portion of the Sprint 1 vertical slice.
 
 ## Deployment Checklist
 - Backend runs locally ✔️

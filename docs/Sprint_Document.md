@@ -30,7 +30,7 @@ Sprint 1 delivered the first working vertical slice of the system:<br>
 
 All detailed Sprint 1 tasks, acceptance criteria, execution plan, and release notes are documented in:
 
-**SPRINT1_RELEASE.md**
+**docs/SPRINT1_RELEASE.md**
 
 ## Quick Start for Developers
 
@@ -361,7 +361,7 @@ Describe changed inputs, outputs, and compatibility.
 
 ## 5. Sprint Breakdown (Week 4–12)
 
-See SPRINT1_RELEASE.md for Sprint 1 details.
+See docs/SPRINT1_RELEASE.md for Sprint 1 details.
 
 ### 5.2 Sprint 2: Feature Build, Weeks 6–8
 **Goal:** Turn the skeleton into a usable input and results workflow.
