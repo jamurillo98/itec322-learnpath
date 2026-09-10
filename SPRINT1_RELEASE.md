@@ -92,3 +92,73 @@ This release forms the baseline for Sprint 2 development.
 Final Status: Jerome and Astraea have completed their Sprint 1 deliverables.
 Nishant and Aarjan's Data & Model deliverables (rule engine, fixtures, documented examples) are complete and merged. Local E2E tests (Jasim & Aarjan) remain blocked pending backend integration and Vercel deployment fixes
 Remaining Sprint 1 items for Jasim and Maleesha are still in progress.
+
+---
+
+# 📌 Additional Sprint 1 Finalisation Items — Project Identity, Purpose & Frontend Direction
+
+To support Sprint 2 planning and ensure consistency across backend, data, and frontend teams, the following foundational items have been raised during team discussions (Jerome & Aarjan) and are now formally included as part of Sprint 1 documentation. These items do **not** modify any completed tasks or outstanding responsibilities.
+
+### **Project Name (Team Decision Required)**
+Aarjan highlighted that the system is fundamentally a:
+
+> **Rule‑Based Learning Resource Recommendation Engine**
+> (suggests study materials — videos, articles, exercises — based on predefined rules)
+
+To prepare for Sprint 2 UI work and documentation, the team must decide on a final project name.
+
+Reference list (from Aarjan’s earlier suggestions):
+- LearnPath
+- PathFinder
+- Sensei
+- EduMatch
+- Lernly
+- LogicLearn
+- StudyBuddy
+
+Team members may propose **additional names** outside this list.
+A shortlist will be finalised and voted on at the start of Sprint 2.
+
+---
+
+### **Project Purpose (Documentation Alignment)**
+The project purpose must be consistently reflected across:
+
+- README
+- API documentation
+- Frontend landing text
+- Sprint 2 planning notes
+- Vercel deployment description
+
+Canonical purpose (as echoed by Aarjan):
+
+> **“A rule‑based learning‑resource recommendation engine that suggests study materials (videos, articles, exercises) based on predefined rules.”**
+
+This purpose statement will be used as the baseline for all Sprint 2 documentation.
+
+---
+
+### **Colour Theme Selection (Frontend Direction)**
+To unblock Astraea and Maleesha for Sprint 2 UI development, the team must choose a unified colour theme.
+
+Recommended options:
+- **Ocean Blue + White** — clean, academic, modern
+- **Indigo + Soft Grey** — professional, minimal
+- **Emerald + Charcoal** — fresh, tech‑oriented
+- **Purple + Silver** — creative, student‑friendly
+
+The selected theme will guide:
+- buttons
+- backgrounds
+- accent colours
+- typography
+- component styling
+
+Decision to be finalised before Sprint 2 begins.
+
+---
+
+### **Summary**
+These additions reflect ongoing team discussions and ensure Sprint 2 begins with a clear identity, purpose, and visual direction.
+All existing Sprint 1 ticks remain unchanged.
+Outstanding tasks for Jasim and Maleesha remain untouched and clearly marked.
