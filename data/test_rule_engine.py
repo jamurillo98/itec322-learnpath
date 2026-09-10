@@ -1,10 +1,7 @@
 """
 test_rule_engine.py
 --------------------
-Tests for RuleEngine — covers the original recommend() method
-(keyword matching, level bonus, hard filters) plus the new
-recommend_from_request() method that matches frontend/backend fields
-directly (project_type, budget, priorities, notes).
+Tests for the Rule-Based Learning Resource Recommendation Engine.
 
 Run with:  pytest test_rule_engine.py -v
 """
@@ -19,78 +16,77 @@ def engine():
     return RuleEngine()
 
 
-# --- Original method (must not regress) --------------------------------
+# --- Determinism -------------------------------------------------------
 
-def test_empty_query_returns_empty_list(engine):
-    assert engine.recommend('') == []
-
-
-def test_keyword_match_on_title(engine):
-    results = engine.recommend('python')
-    assert any(r['id'] == 'R001' for r in results)
-
-
-def test_max_duration_hard_filter_excludes_long_resources(engine):
-    results = engine.recommend('hands-on', user_profile={'max_duration': 60})
-    for r in results:
-        resource = next(row for row in engine.resources if row['id'] == r['id'])
-        assert float(resource['duration_minutes']) <= 60
-
-
-def test_original_recommend_is_deterministic(engine):
-    r1 = engine.recommend('python', user_profile={'level': 'beginner'})
-    r2 = engine.recommend('python', user_profile={'level': 'beginner'})
-    assert [r['id'] for r in r1] == [r['id'] for r in r2]
-
-
-# --- New: recommend_from_request() (matches frontend/backend fields) ----
-
-def test_recommend_from_request_returns_results(engine):
-    results = engine.recommend_from_request(project_type='programming', budget=100, priorities=[])
-    assert len(results) > 0
-
-
-def test_budget_hard_filter_excludes_over_budget_resources(engine):
-    results = engine.recommend_from_request(project_type='', budget=10, priorities=[])
-    for r in results:
-        resource = next(row for row in engine.resources if row['id'] == r['id'])
-        assert float(resource['cost']) <= 10
-
-
-def test_priorities_matching_boosts_score(engine):
-    with_priority = {
-        r['id']: r['score']
-        for r in engine.recommend_from_request(project_type='programming', budget=100, priorities=['hands-on'])
-    }
-    without_priority = {
-        r['id']: r['score']
-        for r in engine.recommend_from_request(project_type='programming', budget=100, priorities=[])
-    }
-    assert with_priority.get('R005', 0) > without_priority.get('R005', 0)
-
-
-def test_recommend_from_request_is_deterministic(engine):
-    r1 = engine.recommend_from_request(project_type='programming', budget=50, priorities=['hands-on'])
-    r2 = engine.recommend_from_request(project_type='programming', budget=50, priorities=['hands-on'])
+def test_recommend_is_deterministic(engine):
+    r1 = engine.recommend_learning_resources(subject='mathematics', difficulty='intermediate', keywords=['theory'])
+    r2 = engine.recommend_learning_resources(subject='mathematics', difficulty='intermediate', keywords=['theory'])
     assert [r['id'] for r in r1] == [r['id'] for r in r2]
     assert [r['score'] for r in r1] == [r['score'] for r in r2]
 
 
-def test_no_budget_means_no_budget_filter(engine):
-    """If budget is None, nothing should be excluded on cost grounds."""
-    results = engine.recommend_from_request(project_type='programming', budget=None, priorities=[])
-    result_ids = {r['id'] for r in results}
-    assert 'R008' in result_ids or len(results) == len(
-        [r for r in engine.resources if 'programming' in r['topic'].lower()]
-    )
+def test_output_independent_of_input_order(engine):
+    original = engine.recommend_learning_resources(subject='programming', difficulty='beginner')
+    engine.resources = list(reversed(engine.resources))
+    shuffled = engine.recommend_learning_resources(subject='programming', difficulty='beginner')
+    assert [r['id'] for r in original] == [r['id'] for r in shuffled]
 
 
-def test_notes_field_accepted_but_does_not_error(engine):
-    """notes has no scoring rule yet, but the method should accept it without breaking."""
-    results = engine.recommend_from_request(
-        project_type='programming', budget=100, priorities=[], notes="just exploring options"
+# --- Hard filters --------------------------------------------------------
+
+def test_max_duration_minutes_excludes_long_resources(engine):
+    results = engine.recommend_learning_resources(subject='', max_duration_minutes=50)
+    for r in results:
+        resource = next(x for x in engine.resources if x['id'] == r['id'])
+        assert float(resource['duration_minutes']) <= 50
+
+
+def test_min_rating_excludes_low_rated_resources(engine):
+    results = engine.recommend_learning_resources(subject='', min_rating=4.5)
+    for r in results:
+        resource = next(x for x in engine.resources if x['id'] == r['id'])
+        assert float(resource['rating']) >= 4.5
+
+
+# --- Scoring rules ---------------------------------------------------------
+
+def test_subject_match_increases_score(engine):
+    programming_score = next(
+        r['score'] for r in engine.recommend_learning_resources(subject='programming', keywords=[])
+        if r['id'] == 'R001'
     )
-    assert isinstance(results, list)
+    no_subject_score = next(
+        (r['score'] for r in engine.recommend_learning_resources(subject='', keywords=[]) if r['id'] == 'R001'),
+        0
+    )
+    assert programming_score > no_subject_score
+
+
+def test_exact_difficulty_scores_higher_than_adjacent(engine):
+    results = engine.recommend_learning_resources(subject='', difficulty='intermediate', keywords=[])
+    exact_match = next(r for r in results if r['id'] == 'R006')  # intermediate
+    adjacent_match = next(r for r in results if r['id'] == 'R001')  # beginner
+    assert exact_match['score'] > adjacent_match['score']
+
+
+def test_keyword_match_reflected_in_reason(engine):
+    results = engine.recommend_learning_resources(subject='programming', keywords=['hands-on'])
+    assert any('matching keyword' in r['reason'] for r in results)
+
+
+def test_recommend_returns_at_most_limit(engine):
+    results = engine.recommend_learning_resources(subject='programming', limit=2)
+    assert len(results) <= 2
+
+
+def test_no_criteria_returns_empty(engine):
+    """With no subject, difficulty, keywords, or filters, nothing should score > 0."""
+    assert engine.recommend_learning_resources(subject='') == []
+
+
+def test_impossible_duration_filter_returns_empty(engine):
+    results = engine.recommend_learning_resources(subject='programming', max_duration_minutes=1)
+    assert results == []
 
 
 if __name__ == '__main__':

@@ -1,119 +1,122 @@
-# Data & Model — Rule-Based Recommendation Engine
+# Data & Model — Rule-Based Learning Resource Recommendation Engine
 
-Deterministic, rule-based recommender. No ML — every score is produced
-by explicit, explainable rules so results are reproducible and easy to
-justify in the project report.
+Deterministic, rule-based recommender for learning resources. No ML —
+every score is produced by explicit, explainable rules so results are
+reproducible and easy to justify in the project report.
 
 ## Files in this folder
 
 | File | Purpose |
 |---|---|
-| `rule_engine.py` | `RuleEngine` class — two interfaces: the original `recommend()` and the new `recommend_from_request()` |
-| `sample_resources.csv` | Sample dataset of 8 learning resources, now including a `cost` column |
-| `test_rule_engine.py` | Unit tests covering both interfaces |
+| `rule_engine.py` | `RuleEngine` class — loads resources from CSV, scores and ranks them via `recommend_learning_resources()` |
+| `sample_resources.csv` | Sample dataset of 8 learning resources across programming, mathematics, and data-science |
+| `test_rule_engine.py` | Unit tests covering determinism, hard filters, and scoring rules |
 
-## Two ways to call this engine
+## For whoever wires this into the backend/frontend
 
-### 1. `recommend(query, user_profile, limit)` — original Sprint 1 interface
-
-Unchanged from what's already merged. See git history / previous README
-version for full docs. Kept for backward compatibility.
-
-### 2. `recommend_from_request(project_type, budget, priorities, notes, limit)` — NEW
-
-Matches the exact field names the frontend form (`InputForm.jsx`) and
-backend (`RecommendRequest` model) already use — **the backend can call
-this directly, no translation layer required.**
+This is the engine's only interface — `recommend_learning_resources()`.
+Field names are explicit and self-descriptive (`subject`, `difficulty`,
+`max_duration_minutes`, `min_rating`, `keywords`), matching the actual
+domain of a learning resource recommender. No web framework dependency
+— this can be called directly from a FastAPI route, a script, or tests.
 
 ```python
 from rule_engine import RuleEngine
 
 engine = RuleEngine()
-results = engine.recommend_from_request(
-    project_type="programming",
-    budget=50,
-    priorities=["hands-on"],
-    notes=None,   # accepted, not currently used by any rule
+results = engine.recommend_learning_resources(
+    subject="programming",       # required
+    difficulty="beginner",       # optional
+    max_duration_minutes=60,     # optional, hard filter
+    min_rating=4.0,              # optional, hard filter
+    keywords=["hands-on"],       # optional
     limit=10,
 )
 ```
 
-**Rules:**
-- **Hard filter — budget:** resources costing more than `budget` are excluded entirely (only applied where the CSV has a `cost` value and `budget` is provided)
-- **project_type match:** compared against each resource's `topic` — soft bonus
-- **priorities match:** each priority string compared against `tags` — soft bonus per match
-- **budget headroom:** resources well under budget score slightly higher
-- **notes:** accepted for API compatibility, not currently used by any rule — free text with no established mapping yet
+Returns a list of dicts, each with `id`, `title`, `score`, `url`,
+`reason` (human-readable explanation of the score), sorted by score
+descending.
 
-Returns the same shape either way: `id`, `title`, `score`, `url`, `reason`.
+## Rules implemented
+
+- **Hard filters** (resources failing these are excluded entirely, not down-ranked):
+  - `max_duration_minutes` — resources longer than this are excluded
+  - `min_rating` — resources rated lower than this are excluded
+- **Subject match** (+5): `subject` compared against the resource's topic
+- **Difficulty match**: exact match (+3), one level off — e.g. beginner↔intermediate (+1), otherwise (+0)
+- **Keyword match** (+1.5 per match): each keyword compared against the resource's tags
+- **Rating bonus**: resources rated above `min_rating` score proportionally higher
+- **Duration headroom**: resources well under `max_duration_minutes` score slightly higher
+
+All weights are named constants at the top of `rule_engine.py`, easy to
+tune and justify during evaluation.
 
 ## Data schema (`sample_resources.csv`)
 
-| Column | Type | Required? | Used by |
+| Column | Type | Required? | Description |
 |---|---|---|---|
-| `id` | string | yes | both |
-| `title` | string | yes | both |
-| `topic` | string | yes | both (`recommend`'s topic match; `recommend_from_request`'s project_type match) |
-| `tags` | string (semicolon-separated) | yes | both (`recommend`'s tag match; `recommend_from_request`'s priorities match) |
-| `level` | string | yes | `recommend()` only |
-| `url` | string | yes | both |
-| `duration_minutes` | number | optional | `recommend()` only |
-| `rating` | number | optional | `recommend()` only |
-| `cost` | number | optional | `recommend_from_request()` only — enables the `budget` filter |
+| `id` | string | yes | Unique resource ID |
+| `title` | string | yes | Resource title |
+| `topic` | string | yes | Subject area (e.g. `programming`, `mathematics`) |
+| `tags` | string (semicolon-separated) | yes | Keywords (e.g. `python;hands-on`) |
+| `level` | string | yes | Difficulty: `beginner`, `intermediate`, or `advanced` |
+| `url` | string | yes | Link to the resource |
+| `duration_minutes` | number | optional | Length in minutes — enables the duration filter |
+| `rating` | number | optional | Average rating — enables the rating filter |
 
-## Documented example inputs and outputs — `recommend_from_request()`
+## Documented example inputs and outputs
 
-These were generated by running the exact code in this folder.
+Generated by running the exact code in this folder.
 
-### Example 1 — project_type + budget + priorities
+### Example 1 — subject + difficulty + hard filters + keywords
 
 ```python
-engine.recommend_from_request(project_type='programming', budget=50, priorities=['hands-on'])
+engine.recommend_learning_resources(
+    subject='programming', difficulty='beginner',
+    max_duration_minutes=60, min_rating=4.0, keywords=['hands-on']
+)
 ```
 
 ```python
 [
-  {'id': 'R005', 'title': 'SQL for Beginners', 'score': 6.0,
-   'reason': "project_type 'programming' matches topic (+3); "
-             "1 matching priority: ['hands-on'] (+2); "
-             "cost 0.0 has headroom under budget 50 (+1.0)"},
-  {'id': 'R001', 'score': 4.0, ...},
-  {'id': 'R002', 'score': 3.02, ...},
-  {'id': 'R003', 'score': 1.0, ...},
-  {'id': 'R007', 'score': 1.0, ...},
-  {'id': 'R006', 'score': 0.42, ...}
+  {'id': 'R005', 'title': 'SQL for Beginners', 'score': 9.9,
+   'reason': "subject 'programming' matches topic (+5.0); difficulty 'beginner' matches exactly (+3.0); "
+             "1 matching keyword(s): ['hands-on'] (+1.5); rating 4.4 exceeds minimum 4.0 (+0.4)"},
+  {'id': 'R001', 'score': 8.95, ...},
+  {'id': 'R003', 'score': 3.783, ...},
+  {'id': 'R007', 'score': 1.183, ...}
 ]
 ```
 
-### Example 2 — tight budget (hard filter excludes paid resources)
+### Example 2 — no matching subject/keywords
 
 ```python
-engine.recommend_from_request(project_type='', budget=10, priorities=[])
+engine.recommend_learning_resources(subject='')
+```
+
+```python
+[]
+```
+
+Confirms the engine doesn't return arbitrary/irrelevant results when
+there's nothing to actually match against.
+
+### Example 3 — subject + difficulty + keywords, no hard filters
+
+```python
+engine.recommend_learning_resources(subject='mathematics', difficulty='intermediate', keywords=['theory'])
 ```
 
 ```python
 [
-  {'id': 'R001', 'score': 1.0, ...},
-  {'id': 'R003', 'score': 1.0, ...},
-  {'id': 'R005', 'score': 1.0, ...},
-  {'id': 'R007', 'score': 1.0, ...}
-]
-```
-
-Note: `R002` (cost 49), `R004` (99), `R006` (29), `R008` (149) are all
-excluded — they exceed the $10 budget.
-
-### Example 3 — no budget provided (no cost filtering applied)
-
-```python
-engine.recommend_from_request(project_type='mathematics', budget=None, priorities=['theory'])
-```
-
-```python
-[
-  {'id': 'R003', 'score': 5.0, ...},
-  {'id': 'R007', 'score': 5.0, ...},
-  {'id': 'R006', 'score': 2.0, ...}
+  {'id': 'R007', 'title': 'Calculus: Limits and Derivatives', 'score': 9.5,
+   'reason': "subject 'mathematics' matches topic (+5.0); difficulty 'intermediate' matches exactly (+3.0); "
+             "1 matching keyword(s): ['theory'] (+1.5)"},
+  {'id': 'R003', 'score': 7.5, ...},
+  {'id': 'R006', 'score': 4.5, ...},
+  {'id': 'R008', 'score': 3.0, ...},
+  # remaining resources score 1.0 from adjacent-difficulty credit only
 ]
 ```
 
