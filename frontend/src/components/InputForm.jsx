@@ -1,126 +1,34 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-export default function InputForm({ onResults = () => {} }) {
-  const [projectType, setProjectType] = useState("");
-  const [budget, setBudget] = useState("");
-  const [priorities, setPriorities] = useState("");
-  const [notes, setNotes] = useState("");
+export default function InputForm({ onSubmit }) {
+  const [subject, setSubject] = useState("");
+  const [difficulty, setDifficulty] = useState("");
+  const [maxDurationMinutes, setMaxDurationMinutes] = useState("");
+  const [minRating, setMinRating] = useState("");
+  const [keywords, setKeywords] = useState("");
+  const [limit, setLimit] = useState(5);
 
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const submit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    setLoading(true);
-    setError("");
-    setMessage("");
-
-    const payload = {
-      project_type: projectType,
-      budget: Number(budget),
-      priorities: priorities
-        .split(",")
-        .map((item) => item.trim())
-        .filter(Boolean),
-      notes: notes || null,
-    };
-
-    try {
-      const response = await fetch("/api/recommend", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        throw new Error("Request failed");
-      }
-
-      const data = await response.json();
-
-      onResults(data.recommendations || []);
-      setMessage(data.message || "Request accepted.");
-    } catch (err) {
-      onResults([]);
-      setError("Unable to get recommendations. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+    onSubmit({
+      subject,
+      difficulty,
+      max_duration_minutes: Number(maxDurationMinutes),
+      min_rating: Number(minRating),
+      keywords: keywords.split(",").map((keyword) => keyword.trim()).filter(Boolean),
+      limit: Number(limit),
+    });
   };
 
   return (
-    <form onSubmit={submit} style={{ marginBottom: 16 }}>
-      <div style={{ marginBottom: 10 }}>
-        <label>
-          Project type:
-          <input
-            type="text"
-            value={projectType}
-            onChange={(e) => setProjectType(e.target.value)}
-            required
-            style={{ marginLeft: 8, padding: 8 }}
-          />
-        </label>
-      </div>
-
-      <div style={{ marginBottom: 10 }}>
-        <label>
-          Budget:
-          <input
-            type="number"
-            min="0"
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
-            required
-            style={{ marginLeft: 8, padding: 8 }}
-          />
-        </label>
-      </div>
-
-      <div style={{ marginBottom: 10 }}>
-        <label>
-          Priorities:
-          <input
-            type="text"
-            value={priorities}
-            onChange={(e) => setPriorities(e.target.value)}
-            placeholder="speed, simplicity"
-            style={{ marginLeft: 8, padding: 8 }}
-          />
-        </label>
-      </div>
-
-      <div style={{ marginBottom: 10 }}>
-        <label>
-          Notes:
-          <input
-            type="text"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            style={{ marginLeft: 8, padding: 8 }}
-          />
-        </label>
-      </div>
-
-      <button type="submit" disabled={loading}>
-        {loading ? "Loading..." : "Recommend"}
-      </button>
-
-      {message && (
-        <p style={{ marginTop: 10 }}>
-          {message}
-        </p>
-      )}
-
-      {error && (
-        <p style={{ marginTop: 10 }}>
-          {error}
-        </p>
-      )}
+    <form onSubmit={handleSubmit}>
+      <input placeholder="Subject" value={subject} onChange={(e) => setSubject(e.target.value)} required />
+      <input placeholder="Difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value)} required />
+      <input type="number" min="0" placeholder="Max Duration (minutes)" value={maxDurationMinutes} onChange={(e) => setMaxDurationMinutes(e.target.value)} required />
+      <input type="number" min="0" max="5" step="0.1" placeholder="Minimum Rating" value={minRating} onChange={(e) => setMinRating(e.target.value)} required />
+      <input placeholder="Keywords (comma separated)" value={keywords} onChange={(e) => setKeywords(e.target.value)} />
+      <input type="number" min="1" placeholder="Limit" value={limit} onChange={(e) => setLimit(e.target.value)} />
+      <button type="submit">Recommend</button>
     </form>
   );
 }

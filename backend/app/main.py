@@ -3,11 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.routers.recommend import router as recommend_router
 
-app = FastAPI(
-    title="ITEC322 Backend",
-    version="0.1.0",
-    description="Sprint 1 backend scaffold with placeholder recommendation endpoint.",
-)
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -17,7 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(recommend_router)
+app.include_router(recommend_router, prefix="/api")
 
 
 @app.get("/api/health")

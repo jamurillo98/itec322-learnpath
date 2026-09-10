@@ -1,23 +1,19 @@
-import React from "react";
-
-// Placeholder Results component. Render a simple list of recommendations.
-
 export default function Results({ items = [] }) {
-  if (!items || items.length === 0) {
-    return <div>No recommendations yet.</div>;
-  }
+  if (!items || items.length === 0) return <p>No results yet.</p>;
 
   return (
-    <div>
-      <h2>Recommendations</h2>
-      <ul>
-        {items.map((it) => (
-          <li key={it.id}>
-            <strong>{it.title}</strong>
-            <div style={{ fontSize: 12, color: "#555" }}>{it.reason}</div>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {items.map((item, index) => (
+        <li key={item.id || index}>
+          <strong>{item.subject}</strong> - {item.difficulty}
+          <br />
+          Duration: {item.duration_minutes} mins
+          <br />
+          Rating: {item.rating}
+          <br />
+          Keywords: {item.keywords.join(", ")}
+        </li>
+      ))}
+    </ul>
   );
 }

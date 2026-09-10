@@ -1,20 +1,18 @@
 from fastapi import APIRouter
 
-from app.models.request_model import RecommendRequest
+from app.engine import recommend_learning_resources
+from app.models.request_model import LearningResourceRequest
 
-router = APIRouter(prefix="/api", tags=["recommendations"])
+router = APIRouter()
 
 
 @router.post("/recommend")
-async def create_recommendation(payload: RecommendRequest):
-    """Placeholder endpoint for Sprint 1.
-
-    This endpoint simply validates the incoming JSON payload and returns a stub
-    response. Sprint 2 will add the rule-engine-based recommendation logic here.
-    """
-    return {
-        "status": "accepted",
-        "message": "Recommendation request received. Sprint 2 will add rule evaluation and recommendation generation.",
-        "request": payload.model_dump(),
-        "recommendations": [],
-    }
+def recommend(request: LearningResourceRequest):
+    return recommend_learning_resources(
+        request.subject,
+        request.difficulty,
+        request.max_duration_minutes,
+        request.min_rating,
+        request.keywords,
+        request.limit,
+    )
