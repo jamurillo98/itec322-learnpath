@@ -31,10 +31,10 @@ This release confirms the architecture works end‑to‑end and establishes the 
 - **Jerome** — Backend Sprint 1 scaffold ✔️
 - **Jerome** — POST `/api/recommend` placeholder ✔️
 - **Jerome** — Request model ✔️
-- **Nishant** — Rule engine baseline
+- **Nishant** — Rule engine baseline ✔️
 - **Jasim & Aarjan** — Local E2E tests
 - **Jerome** — Vercel deployment check ✔️
-- **Maleesha** — Documentation updates
+- **Maleesha** — Documentation updates ✔️
 
 ## Acceptance Criteria
 
@@ -44,21 +44,21 @@ This release confirms the architecture works end‑to‑end and establishes the 
 - Request validation model ✔️
 - CORS enabled ✔️
 - Backend health endpoint available ✔️
-- No overlap with Jasim’s backend responsibilities
+- Backend tests pass
 
 ### Data (Nishant & Aarjan)
-- Deterministic rule engine with stable IDs✔️
-- Sample fixtures created✔️
-- Example inputs documented✔️
+- Deterministic rule engine with stable IDs ✔️
+- Sample fixtures created ✔️
+- Example inputs documented ✔️
 
 ### Frontend (Astraea & Maleesha)
 - Vite scaffold builds successfully ✔️
 - Frontend Sprint 1 deliverable reviewed ✔️
 - No additional UI components required for Sprint 1 ✔️
 - Main branch confirmed up to date ✔️
-- UI calls `/api/recommend`
-- Results render correctly
-- Error states visible
+- UI calls `/api/recommend` ✔️
+- Results render correctly ✔️
+- Error states visible ✔️
 
 ## Deployment Checklist
 - Backend runs locally ✔️
@@ -78,15 +78,14 @@ Sprint 1 is complete and released.
 All required vertical-slice components are implemented and verified.  
 This release forms the baseline for Sprint 2 development.
 
-Final Status: Jerome and Astraea have completed their Sprint 1 deliverables.
-Nishant and Aarjan's Data & Model deliverables (rule engine, fixtures, documented examples) are complete and merged. Local E2E tests (Jasim & Aarjan) remain blocked pending backend integration and Vercel deployment fixes
-Remaining Sprint 1 items for Jasim and Maleesha are still in progress.
+Final Status: Jerome, Astraea, Nishant, Aarjan, and Maleesha have completed their Sprint 1 deliverables. 
+Only Jasim remains outstanding: Backend tests and CI support integration pending.
 
 ---
 
 # 📌 Additional Sprint 1 Finalisation Items — Project Identity, Purpose & Frontend Direction
 
-To support Sprint 2 planning and ensure consistency across backend, data, and frontend teams, the following foundational items have been raised during team discussions (Jerome & Aarjan) and are now formally included as part of Sprint 1 documentation. These items do **not** modify any completed tasks or outstanding responsibilities.
+To support Sprint 2 planning and ensure consistency across backend, data, and frontend teams, the following foundational items have been raised during team discussions (Jerome & Aarjan) and are now fo[...]
 
 ### **Project Name (Team Decision Required)**
 Aarjan highlighted that the system is fundamentally a:
@@ -96,7 +95,7 @@ Aarjan highlighted that the system is fundamentally a:
 
 To prepare for Sprint 2 UI work and documentation, the team must decide on a final project name.
 
-Reference list (from Aarjan’s earlier suggestions):
+Reference list (from Aarjan's earlier suggestions):
 - LearnPath
 - PathFinder
 - Sensei
@@ -121,7 +120,7 @@ The project purpose must be consistently reflected across:
 
 Canonical purpose (as echoed by Aarjan):
 
-> **“A rule‑based learning‑resource recommendation engine that suggests study materials (videos, articles, exercises) based on predefined rules.”**
+> **"A rule‑based learning‑resource recommendation engine that suggests study materials (videos, articles, exercises) based on predefined rules."**
 
 This purpose statement will be used as the baseline for all Sprint 2 documentation.
 
@@ -150,4 +149,4 @@ Decision to be finalised before Sprint 2 begins.
 ### **Summary**
 These additions reflect ongoing team discussions and ensure Sprint 2 begins with a clear identity, purpose, and visual direction.
 All existing Sprint 1 ticks remain unchanged.
-Outstanding tasks for Jasim and Maleesha remain untouched and clearly marked.
+Outstanding task for Jasim remains untouched and clearly marked.
