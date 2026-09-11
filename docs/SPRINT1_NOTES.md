@@ -38,8 +38,8 @@ architecture works end-to-end and establishes the baseline for Sprint 2.
 - [x] Frontend: UI calls `/api/recommend`
 - [x] Frontend: results render correctly
 - [x] Frontend: error states are visible
-- [ ] Backend tests pass (Jasim)
-- [ ] Local end-to-end smoke tests (Jasim & Aarjan) — blocked pending backend
+- [x] Backend tests pass (Jasim)
+- [x] Local end-to-end smoke tests (Jasim & Aarjan) — previously blocked pending backend
       integration and Vercel deployment fixes
 - [x] Documentation updates (Maleesha)
 
