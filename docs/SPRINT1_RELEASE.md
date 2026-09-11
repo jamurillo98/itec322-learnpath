@@ -32,7 +32,7 @@ This release confirms the architecture works end‑to‑end and establishes the 
 - **Jerome** — POST `/api/recommend` placeholder ✔️
 - **Jerome** — Request model ✔️
 - **Nishant** — Rule engine baseline ✔️
-- **Jasim & Aarjan** — Local E2E tests
+- **Jasim & Aarjan** — Local E2E tests ✔️
 - **Jerome** — Vercel deployment check ✔️
 - **Maleesha** — Documentation updates ✔️
 
@@ -44,7 +44,7 @@ This release confirms the architecture works end‑to‑end and establishes the 
 - Request validation model ✔️
 - CORS enabled ✔️
 - Backend health endpoint available ✔️
-- Backend tests pass
+- Backend tests pass ✔️
 
 ### Data (Nishant & Aarjan)
 - Deterministic rule engine with stable IDs ✔️
@@ -67,7 +67,7 @@ This release confirms the architecture works end‑to‑end and establishes the 
 - Repo structure validated ✔️
 - Commit & push successful ✔️
 - Frontend build succeeds ✔️
-- Backend tests pass
+- Backend tests pass ✔️
 - Production domain loads UI ✔️
 - Production API request succeeds ✔️
 - Documentation updated ✔️
@@ -78,8 +78,7 @@ Sprint 1 is complete and released.
 All required vertical-slice components are implemented and verified.  
 This release forms the baseline for Sprint 2 development.
 
-Final Status: Jerome, Astraea, Nishant, Aarjan, and Maleesha have completed their Sprint 1 deliverables. 
-Only Jasim remains outstanding: Backend tests and CI support integration pending.
+Final Status: All team members have completed their Sprint 1 deliverables.
 
 ---
 
@@ -149,4 +148,3 @@ Decision to be finalised before Sprint 2 begins.
 ### **Summary**
 These additions reflect ongoing team discussions and ensure Sprint 2 begins with a clear identity, purpose, and visual direction.
 All existing Sprint 1 ticks remain unchanged.
-Outstanding task for Jasim remains untouched and clearly marked.
