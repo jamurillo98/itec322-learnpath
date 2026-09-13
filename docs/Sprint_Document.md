@@ -28,6 +28,26 @@ Maleesha — Frontend Support (styling, state)
 Sprint 1 delivered the first working vertical slice of the system:<br>
 **frontend → backend → rule engine → deployment**.
 
+**Status:** Complete and released.
+
+### Sprint 1 Tasks
+- [x] Scaffold frontend
+- [x] Build backend scaffold and `POST /api/recommend` placeholder
+- [x] Add request model
+- [x] Implement the rule engine baseline
+- [x] Add local end-to-end tests
+- [x] Verify Vercel deployment
+- [x] Update documentation
+
+### Sprint 1 Acceptance Criteria
+- [x] Backend vertical slice, validation model, CORS, health endpoint, and tests
+- [x] Deterministic rule engine with stable IDs, fixtures, and documented examples
+- [x] Frontend builds, calls `/api/recommend`, renders results, and shows errors
+- [x] Production frontend and API checks pass
+- [x] Main branch and repository structure are up to date
+
+**Sprint 1 is complete and released.**
+
 All detailed Sprint 1 tasks, acceptance criteria, execution plan, and release notes are documented in:
 
 **docs/SPRINT1_RELEASE.md**
@@ -364,6 +384,10 @@ Describe changed inputs, outputs, and compatibility.
 See docs/SPRINT1_RELEASE.md for Sprint 1 details.
 
 ### 5.2 Sprint 2: Feature Build, Weeks 6–8
+**Status:** In Progress
+
+**Sprint 2 has officially commenced. All Sprint 1 deliverables have been completed and verified.**
+
 **Goal:** Turn the skeleton into a usable input and results workflow.
 **Deliverables:** User input form, results view, expanded schema, richer rules,
 and a first data or model prototype.
