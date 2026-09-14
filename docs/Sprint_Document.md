@@ -24,29 +24,155 @@ Maleesha — Frontend Support (styling, state)
 **Sprint 4 Week 11–12:** Final polish and presentation
 - Deliverables: Final UI; final model; README and developer docs; presentation slides and demo script.
 
-## Sprint 1 Overview (Simplified)
-Sprint 1 delivered the first working vertical slice of the system:<br>
-**frontend → backend → rule engine → deployment**.
+## 🔵 Sprint 1 — Completed (Finalised)
 
-**Status:** Complete and released.
+### Sprint 1 Overview
+Sprint 1 delivered the first working vertical slice of the system:
+**frontend → backend → rule engine → deployment**
 
-### Sprint 1 Tasks
-- [x] Scaffold frontend
-- [x] Build backend scaffold and `POST /api/recommend` placeholder
-- [x] Add request model
-- [x] Implement the rule engine baseline
-- [x] Add local end-to-end tests
-- [x] Verify Vercel deployment
-- [x] Update documentation
+**Status:** ✔ Completed and released  
+**Modification:** ❌ No further changes allowed
 
-### Sprint 1 Acceptance Criteria
-- [x] Backend vertical slice, validation model, CORS, health endpoint, and tests
-- [x] Deterministic rule engine with stable IDs, fixtures, and documented examples
-- [x] Frontend builds, calls `/api/recommend`, renders results, and shows errors
-- [x] Production frontend and API checks pass
-- [x] Main branch and repository structure are up to date
+### Sprint 1 Completion Checklist
+- ✔ Frontend scaffold built  
+- ✔ Backend scaffold + `/api/recommend` placeholder  
+- ✔ Request model implemented  
+- ✔ Rule engine baseline implemented  
+- ✔ Local end-to-end tests completed  
+- ✔ Vercel deployment verified  
+- ✔ Documentation updated  
+- ✔ All acceptance criteria satisfied  
+- ✔ Release notes published in `docs/SPRINT1_RELEASE.md`
 
-**Sprint 1 is complete and released.**
+## 🟦 Sprint 2 — Active Sprint (Weeks 6–8)
+
+### Status: 🟢 In Progress
+Sprint 2 has officially commenced.  
+All Sprint 1 deliverables have been completed and verified.
+
+### Sprint 2 Goals
+- Expand rule engine with categories + scoring  
+- Integrate backend logic with frontend UI  
+- Add loading, error, and result states  
+- Strengthen validation and schema consistency  
+- Add E2E tests  
+- Update documentation  
+- Decide project name  
+- Decide colour theme  
+
+### Sprint 2 Deliverables
+- Updated rule engine with multiple categories  
+- Updated `/api/recommend` logic  
+- Updated frontend UI with state handling  
+- Updated API schema + validation  
+- Updated fixtures + example inputs  
+- Updated documentation  
+- Project name decision  
+- Colour theme decision  
+
+### Sprint 2 Tasks
+
+#### Backend (Jerome & Jasim)
+- Improve `/api/recommend` logic  
+- Add validation rules  
+- Add backend tests  
+- Integrate rule engine  
+- Update API documentation  
+
+#### Data/Model (Nishant & Aarjan)
+- Add rule categories  
+- Add scoring logic  
+- Update fixtures  
+- Document example inputs  
+- Ensure rules align with learning-resource theme  
+
+#### Frontend (Astraea & Maleesha)
+- Implement UI state handling  
+- Implement loading + error states  
+- Render categories + scores  
+- Apply chosen colour theme  
+- Ensure UI text aligns with chosen project name  
+
+#### Documentation (Maleesha)
+- Update README  
+- Update Sprint_Document.md  
+- Update API contract  
+- Add Sprint 2 release notes  
+
+### Sprint 2 Acceptance Criteria
+
+#### Backend
+- `/api/recommend` returns structured recommendations  
+- Validation errors follow updated schema  
+- Rule engine integrated with backend  
+- Backend tests pass in CI  
+
+#### Data
+- Rule engine supports multiple rule categories  
+- Scoring logic implemented  
+- Fixtures updated  
+- Example inputs documented  
+- Rules align with learning-resource theme  
+
+#### Frontend
+- UI calls updated `/api/recommend`  
+- Results render with categories + scores  
+- Error + loading states implemented  
+- Layout refined  
+- Colour theme applied  
+
+### Sprint 2 Decision Items
+
+#### 1. Project Name
+Each member proposes one name.  
+Vote before Sprint 2 ends.  
+Winning name updates:
+- README  
+- API documentation  
+- UI landing text  
+- Vercel project name  
+
+#### 2. Colour Theme
+Chosen theme must be applied to:
+- UI components  
+- Buttons  
+- Backgrounds  
+- Accent colours  
+- Documentation styling  
+
+#### 3. Alignment Requirements
+- **Frontend** must use the chosen colour theme  
+- **Data/Model** must ensure rules still align with learning-resource recommendations  
+- **Backend** must ensure API text matches the chosen project name  
+
+### Sprint 2 Checklist
+
+#### Backend
+- [ ] Updated `/api/recommend`  
+- [ ] Validation rules updated  
+- [ ] Tests added  
+- [ ] Rule engine integrated  
+
+#### Data
+- [ ] Categories added  
+- [ ] Scoring logic added  
+- [ ] Fixtures updated  
+- [ ] Example inputs documented  
+
+#### Frontend
+- [ ] Loading state  
+- [ ] Error state  
+- [ ] Results rendering  
+- [ ] Colour theme applied  
+
+#### Docs
+- [ ] Sprint_Document.md updated  
+- [ ] SPRINT2_RELEASE.md updated  
+- [ ] API contract updated  
+
+#### Decisions
+- [ ] Project name chosen  
+- [ ] Colour theme chosen  
 
 All detailed Sprint 1 tasks, acceptance criteria, execution plan, and release notes are documented in:
 
