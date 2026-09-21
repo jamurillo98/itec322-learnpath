@@ -5,7 +5,7 @@
 **Goal:** Deliver an end‑to‑end prototype (frontend → backend → rule engine) by Week 12.
 **Current week:** Week 4 (one week mid‑semester break remaining).
 **Team size:** 6 members.
-**Repo state:** `frontend/` empty; `backend/` minimal FastAPI; `data/` rule scaffold; `vercel.json` configured.
+**Repo state:** `frontend/` contains the working React/Vite client; `backend/` contains the FastAPI API; `data/` contains the canonical deterministic rule engine and sample CSV; `vercel.json` contains the existing Vercel routing metadata.
 
 ## Team Roles and Assignments
 
@@ -30,18 +30,18 @@ Maleesha — Frontend Support (styling, state)
 Sprint 1 delivered the first working vertical slice of the system:
 **frontend → backend → rule engine → deployment**
 
-**Status:** ✔ Completed and released  
-**Modification:** ❌ No further changes allowed
+**Status:** ✔ Completed and verified on `fix/sprint1-completion`
+**Evidence:** `data/test_rule_engine.py`, `tests/test_api.py`, `.github/workflows/ci.yml`, and the frontend production build.
 
 ### Sprint 1 Completion Checklist
 - ✔ Frontend scaffold built  
-- ✔ Backend scaffold + `/api/recommend` placeholder  
-- ✔ Request model implemented  
-- ✔ Rule engine baseline implemented  
-- ✔ Local end-to-end tests completed  
-- ✔ Vercel deployment verified  
-- ✔ Documentation updated  
-- ✔ All acceptance criteria satisfied  
+- ✔ FastAPI `/api/recommend` and `/api/health` endpoints implemented
+- ✔ Validated request model and HTTP 422 behavior implemented
+- ✔ Backend delegates to the canonical `data/rule_engine.py` implementation
+- ✔ Self-contained API and rule-engine tests pass
+- ✔ Frontend request, error, loading, empty, and result states implemented
+- ✔ CI runs Python tests and the frontend build
+- ✔ Documentation reflects the current contract and limitations
 - ✔ Release notes published in `docs/SPRINT1_RELEASE.md`
 
 ## 🟦 Sprint 2 — Active Sprint (Weeks 6–8)
@@ -187,6 +187,39 @@ npm install
 npm run dev
 npm run build
 ```
+
+### Backend and API contract
+From the repository root, run `uvicorn backend.main:app --reload`. The API accepts the request shown below and returns the exact top-level response shape shown below:
+
+```json
+{
+	"subject": "python",
+	"difficulty": "beginner",
+	"max_duration_minutes": 60,
+	"min_rating": 4,
+	"keywords": ["python"],
+	"limit": 5
+}
+```
+
+```json
+{
+	"recommendations": [
+		{
+			"id": "R001",
+			"title": "Intro to Python Programming",
+			"score": 8.5,
+			"url": "https://example.com/r001",
+			"reason": "..."
+		}
+	]
+}
+```
+
+The engine may include `duration_minutes`, `rating`, and `keywords` when those values exist in the CSV. Recommendations are sorted by descending score and ascending ID. `GET /api/health` returns `{ "status": "ok", "message": "Backend is running" }`. No deployment URL is present in repository metadata.
+
+### Verification
+Run `python -m pytest data/test_rule_engine.py tests/test_api.py -q` and `cd frontend && npm run build`. Known limitations are the small sample dataset, no authentication or persistence, and a project name that remains TBD.
 
 ## 1. Extended Project Overview
 

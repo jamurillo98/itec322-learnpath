@@ -160,6 +160,9 @@ class RuleEngine:
                     "score": round(score, 3),
                     "url": r.get('url'),
                     "reason": "; ".join(reasons) if reasons else f"Matched with score {score}",
+                    "duration_minutes": duration,
+                    "rating": rating,
+                    "keywords": [tag.strip() for tag in r.get('tags', '').split(';') if tag.strip()],
                 })
 
         results.sort(key=lambda x: (-x['score'], x['id'] or ''))
