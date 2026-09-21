@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers.recommend import router as recommend_router
+from .routers.recommend import router as recommend_router
 
 app = FastAPI()
 

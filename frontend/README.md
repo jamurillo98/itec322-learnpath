@@ -1,17 +1,17 @@
-# Frontend (Sprint 1)
+# Frontend
 
-This is a minimal React + Vite frontend service scaffold for Sprint 1 and Vercel.
+The React/Vite frontend collects learning preferences, calls `POST /api/recommend`, and renders deterministic scored recommendations. It includes idle, loading, HTTP/network/JSON error, empty-results, and success states.
 
-What goes inside:
-- `src/`: React source files
-- `vite.config.js`: Vite configuration
-- `package.json`: npm scripts and dependencies
+## Run locally
 
-How to run locally:
+Start the backend from the repository root with `uvicorn backend.main:app --reload`, then run:
 
-1. `cd frontend`
-2. `npm install` (or `pnpm install` / `yarn`)
-3. `npm run dev`
+```text
+cd frontend
+npm install
+npm run dev
+```
 
-Notes:
-- Components are minimal placeholders. Expand them to connect to the backend `/api/recommend` endpoint.
+The Vite development server proxies `/api` to `http://127.0.0.1:8000`. Build the production assets with `npm run build`.
+
+The form values are controlled in `src/components/InputForm.jsx`; results are rendered by `src/components/Results.jsx` from the API's `{ "recommendations": [] }` response envelope.

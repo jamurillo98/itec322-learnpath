@@ -1,150 +1,49 @@
 # Sprint 1 Release
 
-This file is the authoritative Sprint 1 release record.
-All long-term planning is maintained in docs/Sprint_Document.md.
+## Status
 
-## Overview
-Sprint 1 delivered the first working vertical slice of the system:<br>
-**frontend → backend → rule engine → deployment**.<br>
-This release confirms the architecture works end‑to‑end and establishes the baseline for Sprint 2.
+Sprint 1 is complete on the `fix/sprint1-completion` branch, pending review. The repository contains a working frontend-to-backend-to-rule-engine vertical slice, self-contained automated tests, a production frontend build, and CI configuration.
 
-## Sprint 1 Roles and Responsibilities
-- **Jerome** — Backend scaffold, API endpoint, request model, deployment
-- **Jasim** — Backend tests and CI support
-- **Nishant** — Rule engine baseline
-- **Aarjan** — Fixtures, evaluation, and local E2E support
-- **Astraea** — Vite frontend scaffold
-- **Maleesha** — Sprint documentation and UX support
+The project name remains **TBD**. No deployment URL is claimed because none is present in repository metadata.
 
-## Sprint 1 Branches
-| Purpose | Branch | Folder |
-|---------|--------|--------|
-| Frontend scaffold | feature/frontend-scaffold | frontend/ |
-| API endpoint | feature/api-recommend | backend/ |
-| Rule engine baseline | feature/rule-baseline | data/ |
-| Local E2E smoke tests | test/local-e2e | backend/, frontend/ |
-| Vercel routing fixes | fix/vercel-routing | repo root |
-| Documentation updates | docs/sprint-document | docs/ |
+## Delivered behavior
 
-## Tasks and Owners
-- **Astraea** — Scaffold frontend ✔️
-- **Jerome** — Backend Sprint 1 scaffold ✔️
-- **Jerome** — POST `/api/recommend` placeholder ✔️
-- **Jerome** — Request model ✔️
-- **Nishant** — Rule engine baseline ✔️
-- **Jasim & Aarjan** — Local E2E tests ✔️
-- **Jerome** — Vercel deployment check ✔️
-- **Maleesha** — Documentation updates ✔️
+- `GET /api/health` returns a service status response.
+- `POST /api/recommend` validates learning preferences and returns `{ "recommendations": [...] }`.
+- Recommendation logic is implemented only in `data/rule_engine.py`; `backend/app/engine.py` is a compatibility wrapper.
+- Recommendations contain `id`, `title`, `score`, `url`, and `reason`, with duration, rating, and keyword metadata when available.
+- Results are deterministic, scored, and sorted by descending score followed by ascending ID.
+- The frontend supports idle, loading, HTTP error, network error, invalid JSON, empty-results, and successful result states.
+- `.github/workflows/ci.yml` runs backend tests and the frontend build for pushes and pull requests.
 
-## Acceptance Criteria
+## Evidence and commands
 
-### Backend (Jerome & Jasim)
-- Backend vertical slice scaffold ✔️
-- POST `/api/recommend` placeholder endpoint ✔️
-- Request validation model ✔️
-- CORS enabled ✔️
-- Backend health endpoint available ✔️
-- Backend tests pass ✔️
+From the repository root:
 
-### Data (Nishant & Aarjan)
-- Deterministic rule engine with stable IDs ✔️
-- Sample fixtures created ✔️
-- Example inputs documented ✔️
+```text
+python -m pytest data/test_rule_engine.py tests/test_api.py -q
+```
 
-### Frontend (Astraea & Maleesha)
-- Vite scaffold builds successfully ✔️
-- Frontend Sprint 1 deliverable reviewed ✔️
-- No additional UI components required for Sprint 1 ✔️
-- Main branch confirmed up to date ✔️
-- UI calls `/api/recommend` ✔️
-- Results render correctly ✔️
-- Error states visible ✔️
+Expected result: all rule-engine and API tests pass without starting Uvicorn.
 
-## Deployment Checklist
-- Backend runs locally ✔️
-- Endpoint reachable ✔️
-- No breaking changes ✔️
-- Repo structure validated ✔️
-- Commit & push successful ✔️
-- Frontend build succeeds ✔️
-- Backend tests pass ✔️
-- Production domain loads UI ✔️
-- Production API request succeeds ✔️
-- Documentation updated ✔️
-- Main branch protected with PR workflow ✔️
+```text
+cd frontend
+npm ci
+npm run build
+```
 
-## Sprint 1 Release Summary
-Sprint 1 is complete and released.  
-All required vertical-slice components are implemented and verified.  
-This release forms the baseline for Sprint 2 development.
+Expected result: Vite creates the production bundle in the ignored `frontend/dist/` directory.
 
-Final Status: All team members have completed their Sprint 1 deliverables.
+For local use, start the API with `uvicorn backend.main:app --reload`, then start the frontend with `cd frontend && npm run dev`. Vite proxies `/api` to the local API.
 
----
+## Repository evidence
 
-# 📌 Additional Sprint 1 Finalisation Items — Project Identity, Purpose & Frontend Direction
+- Canonical rules and CSV loading: `data/rule_engine.py`, `data/sample_resources.csv`
+- API implementation: `backend/app/main.py`, `backend/app/routers/recommend.py`, `backend/app/models/request_model.py`
+- Automated tests: `data/test_rule_engine.py`, `tests/test_api.py`
+- Frontend behavior: `frontend/src/App.jsx`, `frontend/src/components/InputForm.jsx`, `frontend/src/components/Results.jsx`
+- CI: `.github/workflows/ci.yml`
 
-To support Sprint 2 planning and ensure consistency across backend, data, and frontend teams, the following foundational items have been raised during team discussions (Jerome & Aarjan) and are now fo[...]
+## Remaining limitations
 
-### **Project Name (Team Decision Required)**
-Aarjan highlighted that the system is fundamentally a:
-
-> **Rule‑Based Learning Resource Recommendation Engine**
-> (suggests study materials — videos, articles, exercises — based on predefined rules)
-
-To prepare for Sprint 2 UI work and documentation, the team must decide on a final project name.
-
-Reference list (from Aarjan's earlier suggestions):
-- LearnPath
-- PathFinder
-- Sensei
-- EduMatch
-- Lernly
-- LogicLearn
-- StudyBuddy
-
-Team members may propose **additional names** outside this list.
-A shortlist will be finalised and voted on at the start of Sprint 2.
-
----
-
-### **Project Purpose (Documentation Alignment)**
-The project purpose must be consistently reflected across:
-
-- README
-- API documentation
-- Frontend landing text
-- Sprint 2 planning notes
-- Vercel deployment description
-
-Canonical purpose (as echoed by Aarjan):
-
-> **"A rule‑based learning‑resource recommendation engine that suggests study materials (videos, articles, exercises) based on predefined rules."**
-
-This purpose statement will be used as the baseline for all Sprint 2 documentation.
-
----
-
-### **Colour Theme Selection (Frontend Direction)**
-To unblock Astraea and Maleesha for Sprint 2 UI development, the team must choose a unified colour theme.
-
-Recommended options:
-- **Ocean Blue + White** — clean, academic, modern
-- **Indigo + Soft Grey** — professional, minimal
-- **Emerald + Charcoal** — fresh, tech‑oriented
-- **Purple + Silver** — creative, student‑friendly
-
-The selected theme will guide:
-- buttons
-- backgrounds
-- accent colours
-- typography
-- component styling
-
-Decision to be finalised before Sprint 2 begins.
-
----
-
-### **Summary**
-These additions reflect ongoing team discussions and ensure Sprint 2 begins with a clear identity, purpose, and visual direction.
-All existing Sprint 1 ticks remain unchanged.
+The recommendation catalogue is a small sample CSV and there is no authentication, persistence, user history, or external resource verification. The Vercel configuration is retained, but deployment has not been asserted because the repository does not record a live URL. Sprint 2 may expand the dataset, UI styling, and recommendation rules without changing this documented response envelope.
