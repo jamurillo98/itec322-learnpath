@@ -1,5 +1,11 @@
 # Sprint 2 Release — Rule Engine Expansion + UI Integration
 
+## Release Status
+Sprint 2 is still in progress. Jerome's independent backend contribution is
+complete on this branch; frontend, data/model, testing, project-name, and
+colour-theme work remain separate team responsibilities unless their evidence
+is recorded elsewhere in the repository.
+
 ## Overview
 Sprint 2 builds directly on the completed vertical slice from Sprint 1.  
 The focus of this sprint is to expand the rule engine, integrate backend logic with the frontend UI, refine user-facing behaviour, and strengthen validation and testing across the stack.
@@ -19,11 +25,14 @@ This sprint also finalises **project identity decisions** (name + colour theme) 
 ## Tasks
 
 ### Backend (Jerome & Jasim)
-- Improve `/api/recommend` logic  
-- Add validation rules  
-- Add backend tests  
-- Integrate rule engine  
-- Update API documentation  
+- [x] Confirmed `POST /api/recommend` uses the validated request model
+- [x] Confirmed the route delegates to the canonical `data/rule_engine.py`
+- [x] Preserved the `{"recommendations": [...]}` response envelope and
+	data-layer recommendation fields
+- [x] Added FastAPI metadata and route-level OpenAPI documentation
+- [x] Documented the request/response contract, validation behavior, local run
+	command, and Swagger URL
+- [ ] Jasim's detailed validation/regression test assignment remains separate
 
 ### Data/Model (Nishant & Aarjan)
 - Add rule categories  
@@ -94,10 +103,10 @@ Chosen theme must be applied to:
 ## Sprint 2 Checklists
 
 ### Backend
-- [ ] Updated `/api/recommend`  
-- [ ] Validation rules updated  
-- [ ] Tests added  
-- [ ] Rule engine integrated  
+- [x] `/api/recommend` integration and API documentation updated by Jerome
+- [x] Existing request validation and HTTP 422 behavior retained
+- [x] Canonical rule engine integration retained
+- [ ] Jasim's detailed backend testing work is not claimed here
 
 ### Data
 - [ ] Categories added  
@@ -120,7 +129,9 @@ Chosen theme must be applied to:
 - [ ] Project name chosen  
 - [ ] Colour theme chosen  
 
-## Sprint 2 Release Summary
-Sprint 2 is complete and released.  
-All required components for rule engine expansion and UI integration have been implemented and verified.  
-The project now supports structured recommendations, multi-category rule evaluation, and a functional user interface capable of rendering results and handling errors gracefully.
+## Sprint 2 Summary
+The backend API contribution described above is complete and verified with the
+existing backend checks. Sprint 2 as a whole is not claimed complete: the
+repository still requires evidence for the data/model categories and scoring,
+frontend work, Jasim's testing assignment, documentation ownership items, and
+the project-name and colour-theme decisions.
