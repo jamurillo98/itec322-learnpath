@@ -148,10 +148,10 @@ Chosen theme must be applied to:
 ### Sprint 2 Checklist
 
 #### Backend
-- [ ] Updated `/api/recommend`  
-- [ ] Validation rules updated  
-- [ ] Tests added  
-- [ ] Rule engine integrated  
+- [x] `/api/recommend` integration and OpenAPI documentation updated by Jerome
+- [x] Existing validated request model and HTTP 422 behavior retained
+- [x] Route delegates to the canonical `data/rule_engine.py` implementation
+- [ ] Jasim's detailed validation/regression testing remains separate
 
 #### Data
 - [ ] Categories added  
@@ -166,9 +166,9 @@ Chosen theme must be applied to:
 - [ ] Colour theme applied  
 
 #### Docs
-- [ ] Sprint_Document.md updated  
-- [ ] SPRINT2_RELEASE.md updated  
-- [ ] API contract updated  
+- [x] Sprint_Document.md updated with Jerome's backend contribution
+- [x] SPRINT2_RELEASE.md updated with factual backend status
+- [x] API contract documents request/response schemas and validation behavior
 
 #### Decisions
 - [ ] Project name chosen  
@@ -189,7 +189,12 @@ npm run build
 ```
 
 ### Backend and API contract
-From the repository root, run `uvicorn backend.main:app --reload`. The API accepts the request shown below and returns the exact top-level response shape shown below:
+From the repository root, run `uvicorn backend.main:app --reload`. Swagger UI is
+available at `http://127.0.0.1:8000/docs` and the OpenAPI schema is at
+`http://127.0.0.1:8000/openapi.json`.
+
+`POST /api/recommend` accepts the request shown below and returns the exact
+top-level response shape shown below:
 
 ```json
 {
@@ -201,6 +206,12 @@ From the repository root, run `uvicorn backend.main:app --reload`. The API accep
 	"limit": 5
 }
 ```
+
+Validation is performed by `LearningResourceRequest`: `subject` must be a
+non-blank string; `difficulty` must be `beginner`, `intermediate`, or
+`advanced`; `max_duration_minutes` must be non-negative; `min_rating` must be
+between 0 and 5; `keywords` must be a list of strings; and `limit` defaults to
+5 and must be between 1 and 50. Invalid or malformed requests return HTTP 422.
 
 ```json
 {
@@ -216,7 +227,13 @@ From the repository root, run `uvicorn backend.main:app --reload`. The API accep
 }
 ```
 
-The engine may include `duration_minutes`, `rating`, and `keywords` when those values exist in the CSV. Recommendations are sorted by descending score and ascending ID. `GET /api/health` returns `{ "status": "ok", "message": "Backend is running" }`. No deployment URL is present in repository metadata.
+The engine currently returns `id`, `title`, `score`, `url`, `reason`,
+`duration_minutes`, `rating`, and `keywords` where values exist in the CSV.
+The API passes recommendation dictionaries through without applying scoring or
+category logic; any additional structured fields supplied by the data layer are
+preserved. Recommendations are sorted by descending score and ascending ID.
+`GET /api/health` returns `{ "status": "ok", "message": "Backend is running" }`.
+No deployment URL is present in repository metadata.
 
 ### Verification
 Run `python -m pytest data/test_rule_engine.py tests/test_api.py -q` and `cd frontend && npm run build`. Known limitations are the small sample dataset, no authentication or persistence, and a project name that remains TBD.
