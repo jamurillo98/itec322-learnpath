@@ -29,6 +29,7 @@ def request_payload(**overrides):
 
 def test_health():
     response = client.get("/api/health")
+
     assert response.status_code == 200
     assert response.json()["status"] == "ok"
 
@@ -36,22 +37,48 @@ def test_health():
 def test_valid_recommendation_response_shape_and_scores():
     response = client.post("/api/recommend", json=request_payload())
     body = response.json()
+
     assert response.status_code == 200
     assert set(body) == {"recommendations"}
     assert body["recommendations"]
-    assert {"id", "title", "score", "url", "reason"}.issubset(body["recommendations"][0])
-    assert all(isinstance(item["score"], (int, float)) for item in body["recommendations"])
+
+    assert {
+        "id",
+        "title",
+        "score",
+        "url",
+        "reason",
+    }.issubset(body["recommendations"][0])
+
+    assert all(
+        isinstance(item["score"], (int, float))
+        for item in body["recommendations"]
+    )
 
 
 def test_recommendations_are_deterministically_sorted():
-    payload = request_payload(subject="programming", difficulty="beginner", keywords=[])
+    payload = request_payload(
+        subject="programming",
+        difficulty="beginner",
+        keywords=[],
+    )
+
     first = client.post("/api/recommend", json=payload).json()
     second = client.post("/api/recommend", json=payload).json()
+
     assert first == second
-    assert [(item["score"], item["id"]) for item in first["recommendations"]] == sorted(
-        [(item["score"], item["id"]) for item in first["recommendations"]],
+
+    actual_order = [
+        (item["score"], item["id"])
+        for item in first["recommendations"]
+    ]
+
+    expected_order = sorted(
+        actual_order,
         key=lambda item: (-item[0], item[1]),
     )
+
+    assert actual_order == expected_order
 
 
 def test_invalid_requests_return_422():
@@ -65,19 +92,38 @@ def test_invalid_requests_return_422():
         {"limit": 51},
         {"keywords": ["python", 3]},
     ]
+
     for invalid in invalid_payloads:
-        response = client.post("/api/recommend", json=request_payload(**invalid))
+        response = client.post(
+            "/api/recommend",
+            json=request_payload(**invalid),
+        )
+
         assert response.status_code == 422, invalid
 
 
+def test_missing_subject_returns_422():
+    payload = request_payload()
+    del payload["subject"]
+
+    response = client.post("/api/recommend", json=payload)
+
+    assert response.status_code == 422
+
+
 def test_empty_recommendations():
-    response = client.post("/api/recommend", json=request_payload(max_duration_minutes=0))
+    response = client.post(
+        "/api/recommend",
+        json=request_payload(max_duration_minutes=0),
+    )
+
     assert response.status_code == 200
     assert response.json() == {"recommendations": []}
 
 
 def test_api_uses_canonical_rule_engine():
     payload = request_payload()
+
     expected = RuleEngine().recommend_learning_resources(
         subject=payload["subject"],
         difficulty=payload["difficulty"],
@@ -86,5 +132,10 @@ def test_api_uses_canonical_rule_engine():
         keywords=payload["keywords"],
         limit=payload["limit"],
     )
-    actual = client.post("/api/recommend", json=payload).json()["recommendations"]
+
+    response = client.post("/api/recommend", json=payload)
+
+    assert response.status_code == 200
+    actual = response.json()["recommendations"]
+
     assert actual == expected
