@@ -79,3 +79,11 @@ Team members may propose additional names before the vote. Add them here:
 4. Winning name gets updated across: root `README.md`, `frontend/README.md`,
    `backend/README.md`, Vercel project name/description, and any UI landing
    text.
+
+## Vote Results
+
+**Team Decision: LearnPath** ✓
+
+LearnPath has been selected as the project's official name. The team has
+confirmed this as the preferred project name for Sprint 2 and all related
+documentation and UI references.
