@@ -2,15 +2,15 @@
 
 ## Release Status
 Sprint 2 is still in progress. Jerome's independent backend contribution is
-complete on this branch; frontend, data/model, testing, project-name, and
-colour-theme work remain separate team responsibilities unless their evidence
-is recorded elsewhere in the repository.
+complete on this branch; frontend, data/model, project-name, and colour-theme
+work remain separate team responsibilities unless their evidence is recorded
+elsewhere in the repository.
 
 ## Overview
 Sprint 2 builds directly on the completed vertical slice from Sprint 1.  
 The focus of this sprint is to expand the rule engine, integrate backend logic with the frontend UI, refine user-facing behaviour, and strengthen validation and testing across the stack.
 
-This sprint also finalises **project identity decisions** (name + colour theme) to ensure consistent UI and documentation.
+This sprint also finalises the selected project identity (**LearnPath**) and the colour theme decision to ensure consistent UI and documentation.
 
 ## Objectives
 - Expand rule engine with categories + scoring  
@@ -19,8 +19,8 @@ This sprint also finalises **project identity decisions** (name + colour theme) 
 - Strengthen validation  
 - Add E2E tests  
 - Update documentation  
-- Decide project name  
-- Decide colour theme  
+- Finalise project name  
+- Finalise colour theme  
 
 ## Tasks
 
@@ -32,7 +32,7 @@ This sprint also finalises **project identity decisions** (name + colour theme) 
 - [x] Added FastAPI metadata and route-level OpenAPI documentation
 - [x] Documented the request/response contract, validation behavior, local run
 	command, and Swagger URL
-- [ ] Jasim's detailed validation/regression test assignment remains separate
+- [x] Jasim's regression/validation test is complete: missing `subject` now returns HTTP 422, and the full suite passes with 17 tests passing (PR #12)
 
 ### Data/Model (Nishant & Aarjan)
 - Add rule categories  
@@ -57,13 +57,13 @@ This sprint also finalises **project identity decisions** (name + colour theme) 
 ## Decision Items
 
 ### 1. Project Name
-Each member proposes one name.  
-Vote before Sprint 2 ends.  
 Winning name updates:
 - README  
 - API documentation  
 - UI landing text  
 - Vercel project name  
+
+**Status:** ✓ LearnPath selected as the preferred project name.
 
 ### 2. Colour Theme
 Chosen theme must be applied to:
@@ -72,6 +72,8 @@ Chosen theme must be applied to:
 - Backgrounds  
 - Accent colours  
 - Documentation styling  
+
+**Status:** Pending
 
 ### 3. Alignment Requirements
 - **Frontend** must use the chosen colour theme  
@@ -106,7 +108,7 @@ Chosen theme must be applied to:
 - [x] `/api/recommend` integration and API documentation updated by Jerome
 - [x] Existing request validation and HTTP 422 behavior retained
 - [x] Canonical rule engine integration retained
-- [ ] Jasim's detailed backend testing work is not claimed here
+- [x] Jasim's regression/validation work is complete
 
 ### Data
 - [ ] Categories added  
@@ -126,12 +128,13 @@ Chosen theme must be applied to:
 - [ ] API contract updated  
 
 ### Decisions
-- [ ] Project name chosen  
+- [x] Project name chosen (LearnPath)
 - [ ] Colour theme chosen  
 
 ## Sprint 2 Summary
 The backend API contribution described above is complete and verified with the
-existing backend checks. Sprint 2 as a whole is not claimed complete: the
-repository still requires evidence for the data/model categories and scoring,
-frontend work, Jasim's testing assignment, documentation ownership items, and
-the project-name and colour-theme decisions.
+existing backend checks. Jasim's validation and regression testing work is also
+complete and documented in PR #12. Sprint 2 as a whole is not claimed complete:
+the repository still requires evidence for the data/model categories and
+scoring, frontend work, documentation ownership items, and the colour-theme
+decision.
