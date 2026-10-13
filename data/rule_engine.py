@@ -33,8 +33,24 @@ DIFFICULTY_ADJACENT_MATCH_WEIGHT = 1.0   # one level off (e.g. beginner vs inter
 KEYWORD_MATCH_WEIGHT = 1.5               # per matching keyword
 RATING_BONUS_WEIGHT = 1.0                # multiplied by (rating - min_rating)
 DURATION_HEADROOM_WEIGHT = 1.0           # rewards resources comfortably under time budget
+FORMAT_MATCH_WEIGHT = 2.0                # resource format matches the learner's preferred format
 
 DIFFICULTY_ORDER = {"beginner": 0, "intermediate": 1, "advanced": 2}
+
+# --- Resource categories (Sprint 2) ----------------------------------------
+# Every resource has a `format` category in the CSV.
+VALID_FORMATS = ("video", "article", "exercise")
+
+# --- Rule categories (Sprint 2) --------------------------------------------
+# Each scoring rule belongs to exactly one category. The engine returns a
+# per-category `score_breakdown` so the UI and report can show *why* a
+# resource ranked where it did, not just its total score.
+#
+#   relevance    -> subject match + keyword match
+#   level_fit    -> difficulty match
+#   quality      -> rating bonus
+#   practicality -> duration headroom + format match
+RULE_CATEGORIES = ("relevance", "level_fit", "quality", "practicality")
 
 
 class RuleEngine:
@@ -82,6 +98,7 @@ class RuleEngine:
         min_rating: Optional[float] = None,
         keywords: Optional[List[str]] = None,
         limit: int = 10,
+        preferred_format: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
         """
         Recommend learning resources based on subject, difficulty,
@@ -100,12 +117,21 @@ class RuleEngine:
         - rating bonus: resources rated above min_rating score higher
         - duration headroom: resources well under max_duration_minutes
           score slightly higher
+        - format match (optional `preferred_format`: video, article or
+          exercise): matching resources get a bonus
 
-        Returns a list of dicts (id, title, score, url, reason), sorted
-        by score descending, then by id ascending as a stable tiebreaker
-        so output never depends on input ordering.
+        Rules are grouped into RULE_CATEGORIES and each result carries a
+        `score_breakdown` dict; its values always add up to `score`.
+
+        Returns a list of dicts (id, title, score, score_breakdown, url,
+        reason, format, topic, level, ...), sorted by score descending,
+        then by id ascending as a stable tiebreaker so output never
+        depends on input ordering.
         """
         keywords = keywords or []
+        fmt_pref = (preferred_format or "").strip().lower()
+        if fmt_pref and fmt_pref not in VALID_FORMATS:
+            raise ValueError(f"preferred_format must be one of {VALID_FORMATS}")
         results = []
 
         for r in self.resources:
@@ -117,49 +143,67 @@ class RuleEngine:
             if min_rating is not None and rating is not None and rating < float(min_rating):
                 continue  # hard filter: rated too low
 
-            score = 0.0
+            breakdown = {category: 0.0 for category in RULE_CATEGORIES}
             reasons: List[str] = []
 
             topic = r.get('topic', '').lower()
             tags = r.get('tags', '').lower()
             level = r.get('level', '').lower()
+            fmt = (r.get('format') or '').strip().lower()
 
+            # relevance: subject
             if subject and subject.strip().lower() in topic:
-                score += SUBJECT_MATCH_WEIGHT
+                breakdown["relevance"] += SUBJECT_MATCH_WEIGHT
                 reasons.append(f"subject '{subject}' matches topic (+{SUBJECT_MATCH_WEIGHT})")
 
+            # level_fit: difficulty
             if difficulty:
                 diff_score, diff_reason = self._difficulty_score(difficulty.strip().lower(), level)
                 if diff_score > 0:
-                    score += diff_score
+                    breakdown["level_fit"] += diff_score
                     reasons.append(f"{diff_reason} (+{diff_score})")
 
+            # relevance: keywords
             matched_keywords = [k for k in keywords if k and k.strip().lower() in tags]
             if matched_keywords:
                 bonus = KEYWORD_MATCH_WEIGHT * len(matched_keywords)
-                score += bonus
+                breakdown["relevance"] += bonus
                 reasons.append(f"{len(matched_keywords)} matching keyword(s): {matched_keywords} (+{bonus})")
 
+            # quality: rating above the minimum
             if min_rating is not None and rating is not None:
                 bonus = RATING_BONUS_WEIGHT * max(0.0, rating - float(min_rating))
                 if bonus > 0:
-                    score += bonus
+                    breakdown["quality"] += bonus
                     reasons.append(f"rating {rating} exceeds minimum {min_rating} (+{round(bonus, 2)})")
 
+            # practicality: time headroom
             if max_duration_minutes is not None and duration is not None and float(max_duration_minutes) > 0:
                 headroom = max(0.0, (float(max_duration_minutes) - duration) / float(max_duration_minutes))
                 bonus = DURATION_HEADROOM_WEIGHT * headroom
                 if bonus > 0:
-                    score += bonus
+                    breakdown["practicality"] += bonus
                     reasons.append(f"duration {duration}min has headroom under {max_duration_minutes}min (+{round(bonus, 2)})")
+
+            # practicality: preferred format
+            if fmt_pref and fmt == fmt_pref:
+                breakdown["practicality"] += FORMAT_MATCH_WEIGHT
+                reasons.append(f"format '{fmt}' matches preferred format (+{FORMAT_MATCH_WEIGHT})")
+
+            breakdown = {k: round(v, 3) for k, v in breakdown.items()}
+            score = round(sum(breakdown.values()), 3)
 
             if score > 0:
                 results.append({
                     "id": r.get('id'),
                     "title": r.get('title'),
-                    "score": round(score, 3),
+                    "score": score,
+                    "score_breakdown": breakdown,
                     "url": r.get('url'),
                     "reason": "; ".join(reasons) if reasons else f"Matched with score {score}",
+                    "format": fmt or None,
+                    "topic": topic or None,
+                    "level": level or None,
                     "duration_minutes": duration,
                     "rating": rating,
                     "keywords": [tag.strip() for tag in r.get('tags', '').split(';') if tag.strip()],
