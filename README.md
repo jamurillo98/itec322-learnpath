@@ -1,6 +1,11 @@
-# Rule-Based Learning Resource Recommendation Engine (TBD)
+# LearnPath — A rule-based learning-resource recommendation platform for students
 
-A deterministic learning-resource recommender for videos, articles, and exercises. The current Sprint 1 implementation uses a React/Vite frontend, a FastAPI backend, and one canonical rule engine in `data/rule_engine.py` backed by `data/sample_resources.csv`.
+LearnPath is a deterministic learning-resource recommender for videos, articles, and exercises. The current Sprint 1/Sprint 2 implementation uses a React/Vite frontend, a FastAPI backend, and one canonical rule engine implemented in the `data` package.
+
+This repository contains the backend rule engine, example data/fixtures, API routes, and a frontend UI for collecting learning preferences and rendering scored recommendations.
+
+## Branding / Colour theme
+We recommend a short-list of accessible colour themes in `docs/colour-theme-shortlist.md`. The frontend team should apply the chosen palette to the UI components and documentation (see Sprint 2 release notes in `docs/SPRINT2_RELEASE.md`).
 
 ## Setup
 
@@ -70,7 +75,7 @@ The response is deterministic and sorted by descending score, then ascending ID:
 }
 ```
 
-Invalid requests return FastAPI's standard HTTP 422 validation response. `subject` must be non-blank, `difficulty` must be `beginner`, `intermediate`, or `advanced`, duration must be non-negative, rating must be 0 through 5, keywords must be strings, and limit must be 1 through 50.
+Invalid requests return FastAPI's standard HTTP 422 validation response. `subject` must be non-blank, `difficulty` must be `beginner`, `intermediate`, or `advanced`, duration must be non-negative, and numeric fields must be valid numbers.
 
 ## Verification
 
@@ -84,4 +89,4 @@ The API tests use FastAPI's in-process test client and do not require Uvicorn to
 
 ## Deployment and limitations
 
-`vercel.json` contains the existing Vercel routing metadata for the frontend and `backend/main.py`; no deployment URL is recorded in the repository, so none is claimed here. The sample CSV is intentionally small, the rules are not personalized by user history, and the frontend has no authentication or persistence. Project naming remains TBD until the team records a final decision.
+`vercel.json` contains the existing Vercel routing metadata for the frontend and `backend/main.py`; no deployment URL is recorded in the repository, so none is claimed here. The sample CSV is intended for local testing and demonstration only.
