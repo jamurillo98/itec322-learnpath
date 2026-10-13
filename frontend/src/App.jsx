@@ -35,7 +35,8 @@ export default function App() {
 
   return (
     <div style={{ padding: 20, fontFamily: "Arial, sans-serif" }}>
-      <h1>Learning Resource Recommendations</h1>
+      <h1>LearnPath</h1>
+<p>Discover learning resources tailored to your subjects and preferences.</p>
       <InputForm onSubmit={handleSubmit} disabled={status === "loading"} />
       {status === "idle" && <p>Enter your learning preferences to get recommendations.</p>}
       {status === "loading" && <p role="status">Loading recommendations...</p>}
