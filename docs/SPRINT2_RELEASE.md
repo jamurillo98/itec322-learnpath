@@ -35,24 +35,24 @@ This sprint also finalises the selected project identity (**LearnPath**) and the
 - [x] Jasim's regression/validation test is complete: missing `subject` now returns HTTP 422, and the full suite passes with 17 tests passing (PR #12)
 
 ### Data/Model (Nishant & Aarjan)
-- Add rule categories  
-- Add scoring logic  
-- Update fixtures  
-- Document example inputs  
-- Ensure rules align with learning-resource theme  
+- [x] Add rule categories
+- [x] Add scoring logic
+- [x] Update fixtures
+- [x] Document example inputs
+- [x] Ensure rules align with learning-resource theme
 
 ### Frontend (Astraea & Maleesha)
-- Implement UI state handling  
-- Implement loading + error states  
-- Render categories + scores  
-- Apply chosen colour theme  
-- Ensure UI text aligns with chosen project name  
+- [x] Implement UI state handling
+- [x] Implement loading + error states
+- [x] Render categories + scores
+- [ ] Apply chosen colour theme
+- [x] Ensure UI text aligns with chosen project name
 
 ### Documentation (Maleesha)
-- Update README  
-- Update Sprint_Document.md  
-- Update API contract  
-- Add Sprint 2 release notes  
+- [ ] Update README
+- [ ] Update Sprint_Document.md
+- [x] Update SPRINT2_RELEASE.md
+- [ ] Update API contract
 
 ## Decision Items
 
@@ -73,7 +73,7 @@ Chosen theme must be applied to:
 - Accent colours  
 - Documentation styling  
 
-**Status:** Pending
+**Status:** Pending — decision requested from Maleesha; frontend work completed apart from applying the theme so this should be carried into the next sprint if needed.
 
 ### 3. Alignment Requirements
 - **Frontend** must use the chosen colour theme  
@@ -111,20 +111,20 @@ Chosen theme must be applied to:
 - [x] Jasim's regression/validation work is complete
 
 ### Data
-- [ ] Categories added  
-- [ ] Scoring logic added  
-- [ ] Fixtures updated  
-- [ ] Example inputs documented  
+- [x] Categories added  
+- [x] Scoring logic added  
+- [x] Fixtures updated  
+- [x] Example inputs documented  
 
 ### Frontend
-- [ ] Loading state  
-- [ ] Error state  
-- [ ] Results rendering  
+- [x] Loading state  
+- [x] Error state  
+- [x] Results rendering  
 - [ ] Colour theme applied  
 
 ### Docs
 - [ ] Sprint_Document.md updated  
-- [ ] SPRINT2_RELEASE.md updated  
+- [x] SPRINT2_RELEASE.md updated  
 - [ ] API contract updated  
 
 ### Decisions
@@ -134,7 +134,8 @@ Chosen theme must be applied to:
 ## Sprint 2 Summary
 The backend API contribution described above is complete and verified with the
 existing backend checks. Jasim's validation and regression testing work is also
-complete and documented in PR #12. Sprint 2 as a whole is not claimed complete:
-the repository still requires evidence for the data/model categories and
-scoring, frontend work, documentation ownership items, and the colour-theme
-decision.
+complete and documented in PR #12. Data/Model work has been completed and the
+frontend implementation is complete aside from applying the final colour theme.
+Documentation updates and the final colour-theme decision are assigned to
+Maleesha and should be completed in the next sprint (or before merge if the
+team prefers).
