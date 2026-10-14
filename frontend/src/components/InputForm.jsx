@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 export default function InputForm({ onSubmit, disabled = false }) {
@@ -25,15 +24,12 @@ export default function InputForm({ onSubmit, disabled = false }) {
     });
   };
 
+  // Colours, border and focus ring come from theme.css
   const fieldStyle = {
     width: "100%",
     padding: "12px",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
     fontSize: "15px",
     boxSizing: "border-box",
-    backgroundColor: "#fff",
-    color: "#222",
   };
 
   const labelStyle = {
@@ -49,26 +45,30 @@ export default function InputForm({ onSubmit, disabled = false }) {
       style={{
         maxWidth: "800px",
         padding: "24px",
-        border: "1px solid #ddd",
+        border: "1px solid var(--lp-border)",
         borderRadius: "12px",
-        backgroundColor: "#f8f9fa",
+        backgroundColor: "var(--lp-surface)",
+        boxShadow: "var(--lp-shadow)",
       }}
     >
       <h2 style={{ marginTop: 0 }}>Find Your Learning Resources</h2>
 
-      <p style={{ color: "#555" }}>
+      <p style={{ color: "var(--lp-muted)" }}>
         Enter your learning preferences to discover suitable resources.
       </p>
 
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
+          gridTemplateColumns:
+            "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
           gap: "20px",
         }}
       >
         <div>
-          <label htmlFor="subject" style={labelStyle}>Subject</label>
+          <label htmlFor="subject" style={labelStyle}>
+            Subject
+          </label>
           <input
             id="subject"
             style={fieldStyle}
@@ -81,7 +81,9 @@ export default function InputForm({ onSubmit, disabled = false }) {
         </div>
 
         <div>
-          <label htmlFor="difficulty" style={labelStyle}>Difficulty Level</label>
+          <label htmlFor="difficulty" style={labelStyle}>
+            Difficulty Level
+          </label>
           <select
             id="difficulty"
             style={fieldStyle}
@@ -90,7 +92,9 @@ export default function InputForm({ onSubmit, disabled = false }) {
             required
             disabled={disabled}
           >
-            <option value="" disabled>Select difficulty</option>
+            <option value="" disabled>
+              Select difficulty
+            </option>
             <option value="beginner">Beginner</option>
             <option value="intermediate">Intermediate</option>
             <option value="advanced">Advanced</option>
@@ -98,7 +102,9 @@ export default function InputForm({ onSubmit, disabled = false }) {
         </div>
 
         <div>
-          <label htmlFor="duration" style={labelStyle}>Maximum Duration (minutes)</label>
+          <label htmlFor="duration" style={labelStyle}>
+            Maximum Duration (minutes)
+          </label>
           <input
             id="duration"
             type="number"
@@ -113,7 +119,9 @@ export default function InputForm({ onSubmit, disabled = false }) {
         </div>
 
         <div>
-          <label htmlFor="rating" style={labelStyle}>Minimum Rating</label>
+          <label htmlFor="rating" style={labelStyle}>
+            Minimum Rating
+          </label>
           <input
             id="rating"
             type="number"
@@ -130,7 +138,9 @@ export default function InputForm({ onSubmit, disabled = false }) {
         </div>
 
         <div>
-          <label htmlFor="keywords" style={labelStyle}>Keywords (Optional)</label>
+          <label htmlFor="keywords" style={labelStyle}>
+            Keywords (Optional)
+          </label>
           <input
             id="keywords"
             style={fieldStyle}
@@ -142,7 +152,9 @@ export default function InputForm({ onSubmit, disabled = false }) {
         </div>
 
         <div>
-          <label htmlFor="limit" style={labelStyle}>Number of Results</label>
+          <label htmlFor="limit" style={labelStyle}>
+            Number of Results
+          </label>
           <input
             id="limit"
             type="number"
@@ -163,13 +175,7 @@ export default function InputForm({ onSubmit, disabled = false }) {
         style={{
           marginTop: "24px",
           padding: "12px 24px",
-          backgroundColor: disabled ? "#aaa" : "#333",
-          color: "#fff",
-          border: "none",
-          borderRadius: "8px",
           fontSize: "16px",
-          fontWeight: "600",
-          cursor: disabled ? "not-allowed" : "pointer",
         }}
       >
         {disabled ? "Loading Recommendations..." : "Find Recommendations"}

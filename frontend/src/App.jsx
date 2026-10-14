@@ -1,6 +1,8 @@
 import { useState } from "react";
 import InputForm from "./components/InputForm";
 import Results from "./components/Results";
+import LoadingSpinner from "./components/LoadingSpinner";
+import "./theme.css";
 
 export default function App() {
   const [results, setResults] = useState([]);
@@ -20,7 +22,9 @@ export default function App() {
       });
       const data = await response.json().catch(() => null);
       if (!response.ok) {
-        throw new Error(data?.detail?.[0]?.msg || `Request failed (${response.status})`);
+        throw new Error(
+          data?.detail?.[0]?.msg || `Request failed (${response.status})`
+        );
       }
       if (!data || !Array.isArray(data.recommendations)) {
         throw new Error("The server returned an invalid response.");
@@ -28,20 +32,41 @@ export default function App() {
       setResults(data.recommendations);
       setStatus("success");
     } catch (requestError) {
-      setError(requestError instanceof Error ? requestError.message : "Unable to load recommendations.");
+      setError(
+        requestError instanceof Error
+          ? requestError.message
+          : "Unable to load recommendations."
+      );
       setStatus("error");
     }
   };
 
   return (
-    <div style={{ padding: 20, fontFamily: "Arial, sans-serif" }}>
-      <h1>LearnPath</h1>
-<p>Discover learning resources tailored to your subjects and preferences.</p>
-      <InputForm onSubmit={handleSubmit} disabled={status === "loading"} />
-      {status === "idle" && <p>Enter your learning preferences to get recommendations.</p>}
-      {status === "loading" && <p role="status">Loading recommendations...</p>}
-      {error && <p role="alert">{error}</p>}
-      {status === "success" && <Results items={results} />}
+    <div className="app">
+      <header className="app-header">
+        <h1>LearnPath</h1>
+        <p>
+          Discover learning resources tailored to your subjects and preferences.
+        </p>
+      </header>
+
+      <main className="app-main">
+        <InputForm onSubmit={handleSubmit} disabled={status === "loading"} />
+        {status === "idle" && (
+          <p className="text-muted">
+            Enter your learning preferences to get recommendations.
+          </p>
+        )}
+        {status === "loading" && (
+          <LoadingSpinner message="Finding the best resources for you..." />
+        )}
+        {error && (
+          <p className="error-message" role="alert">
+            {error}
+          </p>
+        )}
+        {status === "success" && <Results items={results} />}
+      </main>
     </div>
   );
 }
