@@ -1,10 +1,9 @@
 # Sprint 2 Release — Rule Engine Expansion + UI Integration
 
 ## Release Status
-Sprint 2 is still in progress. Jerome's independent backend contribution is
+Sprint 2 is complete. Jerome's independent backend contribution is
 complete on this branch; frontend, data/model, project-name, and colour-theme
-work remain separate team responsibilities unless their evidence is recorded
-elsewhere in the repository.
+work have been completed and recorded in recent commits (Maleesha: colour theme, documentation updates).
 
 ## Overview
 Sprint 2 builds directly on the completed vertical slice from Sprint 1.  
@@ -45,14 +44,14 @@ This sprint also finalises the selected project identity (**LearnPath**) and the
 - [x] Implement UI state handling
 - [x] Implement loading + error states
 - [x] Render categories + scores
-- [ ] Apply chosen colour theme
+- [x] Apply chosen colour theme
 - [x] Ensure UI text aligns with chosen project name
 
 ### Documentation (Maleesha)
-- [ ] Update README
-- [ ] Update Sprint_Document.md
+- [x] Update README
+- [x] Update Sprint_Document.md
 - [x] Update SPRINT2_RELEASE.md
-- [ ] Update API contract
+- [x] Update API contract
 
 ## Decision Items
 
@@ -73,7 +72,7 @@ Chosen theme must be applied to:
 - Accent colours  
 - Documentation styling  
 
-**Status:** Pending — decision requested from Maleesha; frontend work completed apart from applying the theme so this should be carried into the next sprint if needed.
+**Status:** ✓ Colour theme chosen and applied by Maleesha (see recent commits).
 
 ### 3. Alignment Requirements
 - **Frontend** must use the chosen colour theme  
@@ -120,22 +119,19 @@ Chosen theme must be applied to:
 - [x] Loading state  
 - [x] Error state  
 - [x] Results rendering  
-- [ ] Colour theme applied  
+- [x] Colour theme applied  
 
 ### Docs
-- [ ] Sprint_Document.md updated  
+- [x] Sprint_Document.md updated  
 - [x] SPRINT2_RELEASE.md updated  
-- [ ] API contract updated  
+- [x] API contract updated  
 
 ### Decisions
 - [x] Project name chosen (LearnPath)
-- [ ] Colour theme chosen  
+- [x] Colour theme chosen  
 
 ## Sprint 2 Summary
 The backend API contribution described above is complete and verified with the
 existing backend checks. Jasim's validation and regression testing work is also
 complete and documented in PR #12. Data/Model work has been completed and the
-frontend implementation is complete aside from applying the final colour theme.
-Documentation updates and the final colour-theme decision are assigned to
-Maleesha and should be completed in the next sprint (or before merge if the
-team prefers).
+frontend implementation is complete with the final colour theme applied. Documentation updates and the final colour-theme decision were completed by Maleesha and are recorded in the repository.
