@@ -5,7 +5,9 @@ LearnPath is a deterministic learning-resource recommender for videos, articles,
 This repository contains the backend rule engine, example data/fixtures, API routes, and a frontend UI for collecting learning preferences and rendering scored recommendations.
 
 ## Branding / Colour theme
-We recommend a short-list of accessible colour themes in `docs/colour-theme-shortlist.md`. The frontend team should apply the chosen palette to the UI components and documentation (see Sprint 2 release notes in `docs/SPRINT2_RELEASE.md`).
+The approved LearnPath colour theme is **Calm Teal & Navy**. Its palette,
+accessibility notes, and implementation reference are recorded in
+`docs/colour-theme-shortlist.md` and `frontend/src/theme.css`.
 
 ## Setup
 

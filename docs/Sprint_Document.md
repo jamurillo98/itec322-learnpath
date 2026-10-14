@@ -1,11 +1,11 @@
-# Sprint Document — Group 5 Rule Recommendation Engine
+# Sprint Document — LearnPath
 
 ## Project Summary
-**Project name:** Rule‑based Recommendation Engine (TBD)
+**Project name:** LearnPath
 **Goal:** Deliver an end‑to‑end prototype (frontend → backend → rule engine) by Week 12.
-**Current week:** Week 4 (one week mid‑semester break remaining).
+**Current status:** Sprint 1 and Sprint 2 are complete; Sprint 3 is the next planned phase.
 **Team size:** 6 members.
-**Repo state:** `frontend/` contains the working React/Vite client; `backend/` contains the FastAPI API; `data/` contains the canonical deterministic rule engine and sample CSV; `vercel.json` contains the existing Vercel routing metadata.
+**Repo state:** `frontend/` contains the React/Vite client; `backend/` contains the FastAPI API; `data/` contains the canonical deterministic rule engine and sample CSV; `vercel.json` contains the frontend/API routing configuration.
 
 ## Team Roles and Assignments
 
@@ -17,11 +17,11 @@ Astraea — Frontend Lead (Vite scaffold, UI)
 Maleesha — Frontend Support (styling, state)
 
 ## Timeline and Sprints
-**Sprint 2 Week 6–8:** Feature build and model prototype
-- Deliverables: User input form; results page; baseline ML prototype or improved rule logic; expanded endpoints.
-**Sprint 3 Week 9–10:** Improve accuracy and stability
+**Sprint 1:** Complete — end-to-end frontend, API, and rule-engine baseline.
+**Sprint 2 Week 6–8:** Complete — integrated recommendation workflow, expanded rule categories and scoring, validation, UI states, and approved branding.
+**Sprint 3 Week 9–10:** Planned — improve recommendation quality and stability.
 - Deliverables: Model tuning; caching/preprocessing; unit tests; UI polish.
-**Sprint 4 Week 11–12:** Final polish and presentation
+**Sprint 4 Week 11–12:** Planned — final polish and presentation.
 - Deliverables: Final UI; final model; README and developer docs; presentation slides and demo script.
 
 ## 🔵 Sprint 1 — Completed (Finalised)
@@ -30,7 +30,7 @@ Maleesha — Frontend Support (styling, state)
 Sprint 1 delivered the first working vertical slice of the system:
 **frontend → backend → rule engine → deployment**
 
-**Status:** ✔ Completed and verified on `fix/sprint1-completion`
+**Status:** ✔ Completed and verified; see `docs/SPRINT1_RELEASE.md`.
 **Evidence:** `data/test_rule_engine.py`, `tests/test_api.py`, `.github/workflows/ci.yml`, and the frontend production build.
 
 ### Sprint 1 Completion Checklist
@@ -44,106 +44,95 @@ Sprint 1 delivered the first working vertical slice of the system:
 - ✔ Documentation reflects the current contract and limitations
 - ✔ Release notes published in `docs/SPRINT1_RELEASE.md`
 
-## 🟦 Sprint 2 — Active Sprint (Weeks 6–8)
+## 🟦 Sprint 2 — Completed (Weeks 6–8)
 
-### Status: 🟢 In Progress
-Sprint 2 has officially commenced.  
-All Sprint 1 deliverables have been completed and verified.
+### Status: ✔ Completed
+Sprint 2 is complete. Its backend, data/model, frontend, validation, and
+documentation deliverables are recorded in `docs/SPRINT2_RELEASE.md`.
+The integrated workflow retains the documented API response envelope and
+uses the canonical rule engine.
 
 ### Sprint 2 Goals
-- Expand rule engine with categories + scoring  
-- Integrate backend logic with frontend UI  
-- Add loading, error, and result states  
-- Strengthen validation and schema consistency  
-- Add E2E tests  
-- Update documentation  
-- Decide project name  
-- Decide colour theme  
+- [x] Expand rule engine with categories and score breakdowns
+- [x] Integrate the backend recommendation API with the frontend
+- [x] Implement loading, error, empty, and result states
+- [x] Strengthen validation and schema consistency
+- [x] Validate the integrated workflow and automated test suite
+- [x] Update project documentation
+- [x] Confirm the project name: **LearnPath**
+- [x] Approve the colour theme: **Calm Teal & Navy**
 
 ### Sprint 2 Deliverables
-- Updated rule engine with multiple categories  
-- Updated `/api/recommend` logic  
-- Updated frontend UI with state handling  
-- Updated API schema + validation  
-- Updated fixtures + example inputs  
-- Updated documentation  
-- Project name decision  
-- Colour theme decision  
+- [x] Rule engine with multiple scoring categories and score breakdowns
+- [x] `/api/recommend` integrated with the canonical rule engine
+- [x] Frontend recommendation flow with loading, error, and result states
+- [x] Validated API schema and documented request/response behavior
+- [x] Expanded sample resources and documented example inputs
+- [x] Sprint and API documentation updated
+- [x] Official project name selected: **LearnPath**
+- [x] Final colour theme approved and applied: **Calm Teal & Navy**
 
 ### Sprint 2 Tasks
 
 #### Backend (Jerome & Jasim)
-- Improve `/api/recommend` logic  
-- Add validation rules  
-- Add backend tests  
-- Integrate rule engine  
-- Update API documentation  
+- [x] Improve and document `/api/recommend`
+- [x] Preserve request validation and HTTP 422 behavior
+- [x] Add regression/validation coverage
+- [x] Integrate the canonical rule engine
+- [x] Update API documentation
 
 #### Data/Model (Nishant & Aarjan)
-- Add rule categories  
-- Add scoring logic  
-- Update fixtures  
-- Document example inputs  
-- Ensure rules align with learning-resource theme  
+- [x] Add rule categories and scoring logic
+- [x] Update fixtures and document example inputs
+- [x] Keep recommendations aligned with learning resources
 
 #### Frontend (Astraea & Maleesha)
-- Implement UI state handling  
-- Implement loading + error states  
-- Render categories + scores  
-- Apply chosen colour theme  
-- Ensure UI text aligns with chosen project name  
+- [x] Implement UI state, loading, and error handling
+- [x] Render recommendation categories and scores
+- [x] Apply the approved colour theme
+- [x] Align user-facing text with the project name
 
 #### Documentation (Maleesha)
-- Update README  
-- Update Sprint_Document.md  
-- Update API contract  
-- Add Sprint 2 release notes  
+- [x] Update README and API contract
+- [x] Update Sprint_Document.md and SPRINT2_RELEASE.md
+- [x] Record the Sprint 2 release outcomes
 
 ### Sprint 2 Acceptance Criteria
 
 #### Backend
-- `/api/recommend` returns structured recommendations  
-- Validation errors follow updated schema  
-- Rule engine integrated with backend  
-- Backend tests pass in CI  
+- [x] `/api/recommend` returns structured recommendations
+- [x] Validation errors follow the request schema
+- [x] Rule engine integrated with backend
+- [x] Backend tests pass
 
 #### Data
-- Rule engine supports multiple rule categories  
-- Scoring logic implemented  
-- Fixtures updated  
-- Example inputs documented  
-- Rules align with learning-resource theme  
+- [x] Rule engine supports multiple scoring categories
+- [x] Scoring logic implemented
+- [x] Fixtures updated
+- [x] Example inputs documented
+- [x] Rules align with learning-resource recommendations
 
 #### Frontend
-- UI calls updated `/api/recommend`  
-- Results render with categories + scores  
-- Error + loading states implemented  
-- Layout refined  
-- Colour theme applied  
+- [x] UI calls `/api/recommend`
+- [x] Results render with categories and scores
+- [x] Error and loading states implemented
+- [x] Layout refined
+- [x] Approved colour theme applied
 
 ### Sprint 2 Decision Items
 
 #### 1. Project Name
-Each member proposes one name.  
-Vote before Sprint 2 ends.  
-Winning name updates:
-- README  
-- API documentation  
-- UI landing text  
-- Vercel project name  
+**Decision:** **LearnPath** is the official project name. Repository README and
+UI references use the selected name.
 
 #### 2. Colour Theme
-Chosen theme must be applied to:
-- UI components  
-- Buttons  
-- Backgrounds  
-- Accent colours  
-- Documentation styling  
+**Decision:** **Calm Teal & Navy**, selected from
+`docs/colour-theme-shortlist.md` and applied in the frontend.
 
 #### 3. Alignment Requirements
-- **Frontend** must use the chosen colour theme  
-- **Data/Model** must ensure rules still align with learning-resource recommendations  
-- **Backend** must ensure API text matches the chosen project name  
+- [x] Frontend uses the approved colour theme
+- [x] Data/model rules recommend learning resources
+- [x] Project-facing documentation and UI use LearnPath
 
 ### Sprint 2 Checklist
 
@@ -151,28 +140,34 @@ Chosen theme must be applied to:
 - [x] `/api/recommend` integration and OpenAPI documentation updated by Jerome
 - [x] Existing validated request model and HTTP 422 behavior retained
 - [x] Route delegates to the canonical `data/rule_engine.py` implementation
-- [ ] Jasim's detailed validation/regression testing remains separate
+- [x] Jasim's validation/regression testing completed; the release records 17 passing tests
 
 #### Data
-- [ ] Categories added  
-- [ ] Scoring logic added  
-- [ ] Fixtures updated  
-- [ ] Example inputs documented  
+- [x] Categories added
+- [x] Scoring logic added
+- [x] Fixtures updated
+- [x] Example inputs documented
 
 #### Frontend
-- [ ] Loading state  
-- [ ] Error state  
-- [ ] Results rendering  
-- [ ] Colour theme applied  
+- [x] Loading state
+- [x] Error state
+- [x] Results rendering
+- [x] Calm Teal & Navy theme applied
 
 #### Docs
-- [x] Sprint_Document.md updated with Jerome's backend contribution
-- [x] SPRINT2_RELEASE.md updated with factual backend status
+- [x] Sprint_Document.md and SPRINT2_RELEASE.md record completed work
 - [x] API contract documents request/response schemas and validation behavior
+- [x] LearnPath project identity and final theme are recorded
 
 #### Decisions
-- [ ] Project name chosen  
-- [ ] Colour theme chosen  
+- [x] Project name chosen: LearnPath
+- [x] Colour theme chosen: Calm Teal & Navy
+
+### Sprint 2 Outcome
+The frontend and backend recommendation workflow is integrated with the
+expanded deterministic rule engine. API validation, regression coverage,
+frontend state handling, deployment routing configuration, and documentation
+are complete. See `docs/SPRINT2_RELEASE.md` and `docs/SPRINT2_NOTES.md`.
 
 All detailed Sprint 1 tasks, acceptance criteria, execution plan, and release notes are documented in:
 
@@ -560,35 +555,31 @@ Describe changed inputs, outputs, and compatibility.
 See docs/SPRINT1_RELEASE.md for Sprint 1 details.
 
 ### 5.2 Sprint 2: Feature Build, Weeks 6–8
-**Status:** In Progress
+**Status:** Completed
 
-**Sprint 2 has officially commenced. All Sprint 1 deliverables have been completed and verified.**
+Sprint 2 is complete. Sprint 1 and Sprint 2 release records are available in
+`docs/SPRINT1_RELEASE.md` and `docs/SPRINT2_RELEASE.md`.
 
-**Goal:** Turn the skeleton into a usable input and results workflow.
-**Deliverables:** User input form, results view, expanded schema, richer rules,
-and a first data or model prototype.
-**Tasks:**
-1. Agree on the input fields and validation rules.
-2. Build reusable form components.
-3. Add field-level and request-level errors.
-4. Expand the backend models and endpoint tests.
-5. Add rule categories or feature preparation.
-6. Capture representative fixtures.
-7. Update API and user documentation.
-**Acceptance criteria:**
-- A user can submit valid inputs without editing JSON.
-- Invalid inputs are explained near the relevant control.
-- Results show titles, scores, and stable ordering.
-- The backend rejects malformed requests consistently.
-- New rules have tests or documented fixtures.
-**Dependencies:** The contract and deployment must be stable enough to
-extend. The team must agree on field names before parallel implementation.
-**Risks:** Scope expansion, inconsistent names, and rules that are hard to
-explain.
-**Mitigation:** Freeze a small schema, review examples first, and keep a
-deterministic fallback for every path.
+**Goal:** Turn the skeleton into an integrated input and results workflow.
+**Completed deliverables:** User input form, results view, validated API
+contract, categorized and scored deterministic rules, representative fixtures,
+and updated API and user documentation.
+**Completed outcomes:**
+- The frontend calls the backend recommendation endpoint and renders results.
+- Loading, error, and empty-result behavior are implemented.
+- Backend validation and rule-engine regression tests are recorded in the
+  Sprint 2 release, which reports 17 passing tests.
+- The official project name and approved colour theme are LearnPath and Calm
+  Teal & Navy.
+- Deployment routing configuration directs API requests to the backend and
+  other requests to the frontend; this records configuration, not a claim of
+  a newly verified production deployment.
+**Release record:** See `docs/SPRINT2_RELEASE.md` for the full task checklist
+and validation evidence.
 
 ### 5.3 Sprint 3: Accuracy and Stability, Weeks 9–10
+**Status:** Planned — next phase after completed Sprint 2.
+
 **Goal:** Improve recommendation quality and operational confidence.
 **Deliverables:** Tuned rules or baseline model comparison, regression tests,
 better loading and error states, and a repeatable verification checklist.

@@ -1,7 +1,7 @@
-# Project Name Shortlist — Sprint 2 Vote
+# Project Name Shortlist — Sprint 2 Decision
 
-**Purpose:** finalise the project name before Sprint 2 UI and documentation
-work begins. Vote to be held at the start of Sprint 2.
+**Purpose:** record the candidates considered and the final Sprint 2 decision.
+**Official project name:** **LearnPath**.
 
 ## What we're naming
 
@@ -20,14 +20,15 @@ work begins. Vote to be held at the start of Sprint 2.
 | LogicLearn | Nods to the rule-based logic under the hood           |
 | StudyBuddy | Friendly, approachable, student-facing                |
 
-## Recommended shortlist
+## Shortlist considered before the vote
 
-### 1. EduMatch — recommended first choice
+### 1. EduMatch — initial recommendation
 
 EduMatch most clearly communicates the product's core value: matching learners
 with relevant educational resources. It is concise, memorable, user-focused,
 and broad enough to support videos, articles, exercises, and future
-recommendation features.
+recommendation features. The team considered this proposal and selected
+LearnPath instead.
 
 ### 2. LearnPath — strong alternative
 
@@ -41,10 +42,9 @@ StudyBuddy feels friendly, accessible, and student-focused. It may appeal to
 users who want supportive guidance, although it is less distinctive than
 EduMatch.
 
-## Names to deprioritise
+## Other names considered
 
-The following four names should remain available for discussion but are
-recommended as lower-priority options:
+The following names were also considered:
 
 - **PathFinder** — Somewhat generic and potentially associated with navigation,
   travel, or unrelated search products. It communicates direction but not the
@@ -70,20 +70,14 @@ Team members may propose additional names before the vote. Add them here:
 |      |             |       |
 |      |             |       |
 
-## Voting process
+## Voting process (completed)
 
-1. Shortlist finalised in team channel before Sprint 2 kickoff.
-2. Each member casts one vote.
-3. Tie-break: Frontend Lead (Astraea) and Data/Model Lead (Nishant) decide
-   jointly, since the name affects both UI branding and documentation.
-4. Winning name gets updated across: root `README.md`, `frontend/README.md`,
-   `backend/README.md`, Vercel project name/description, and any UI landing
-   text.
+The team reviewed the shortlist and selected LearnPath. The selected identity
+is reflected in the repository README and frontend UI.
 
 ## Vote Results
 
 **Team Decision: LearnPath** ✓
 
-LearnPath has been selected as the project's official name. The team has
-confirmed this as the preferred project name for Sprint 2 and all related
-documentation and UI references.
+LearnPath is the official project name and supersedes the preliminary
+recommendations recorded above.

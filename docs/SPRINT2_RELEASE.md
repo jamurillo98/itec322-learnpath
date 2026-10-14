@@ -1,22 +1,23 @@
 # Sprint 2 Release — Rule Engine Expansion + UI Integration
 
 ## Release Status
-Sprint 2 is complete. Jerome's independent backend contribution is
-complete on this branch; frontend, data/model, project-name, and colour-theme
-work have been completed and recorded in recent commits (Maleesha: colour theme, documentation updates).
+Sprint 2 is complete on `main`. Backend, data/model, frontend, validation,
+project identity, colour theme, and documentation work are complete and
+recorded in the repository.
 
 ## Overview
 Sprint 2 builds directly on the completed vertical slice from Sprint 1.  
 The focus of this sprint is to expand the rule engine, integrate backend logic with the frontend UI, refine user-facing behaviour, and strengthen validation and testing across the stack.
 
-This sprint also finalises the selected project identity (**LearnPath**) and the colour theme decision to ensure consistent UI and documentation.
+This sprint also confirmed **LearnPath** as the official project name and
+**Calm Teal & Navy** as the final approved colour theme.
 
 ## Objectives
 - Expand rule engine with categories + scoring  
 - Integrate backend logic with frontend  
 - Add loading, error, and result states  
 - Strengthen validation  
-- Add E2E tests  
+- Complete regression testing and validate the integrated workflow
 - Update documentation  
 - Finalise project name  
 - Finalise colour theme  
@@ -65,14 +66,8 @@ Winning name updates:
 **Status:** ✓ LearnPath selected as the preferred project name.
 
 ### 2. Colour Theme
-Chosen theme must be applied to:
-- UI components  
-- Buttons  
-- Backgrounds  
-- Accent colours  
-- Documentation styling  
-
-**Status:** ✓ Colour theme chosen and applied by Maleesha (see recent commits).
+**Status:** ✓ **Calm Teal & Navy** approved and applied in the frontend
+(see `docs/colour-theme-shortlist.md` and `frontend/src/theme.css`).
 
 ### 3. Alignment Requirements
 - **Frontend** must use the chosen colour theme  

@@ -1,11 +1,13 @@
 # Colour Theme Shortlist — LearnPath
 
-This document presents a short, practical shortlist of accessible colour themes for the LearnPath UI so Maleesha can make a quick decision. Each option includes hex tokens, short usage notes, and a recommended role for the palette.
+This document records the colour themes considered for the LearnPath UI and
+the final team decision.
 
 ---
 
-## Recommendation (My pick)
-Calm Teal & Navy — trustworthy, modern, and friendly. Works well for educational products where clarity, calm, and approachability matter.
+## Final approved theme — Calm Teal & Navy
+Calm Teal & Navy is the team's approved theme: trustworthy, modern, and
+friendly. It supports clarity and approachability in an educational product.
 
 - Primary (brand): #0EA5A4
 - Dark / header: #05445E
@@ -82,8 +84,8 @@ Notes: cohesive and contemporary — test small text contrast for accessibility.
 
 ---
 
-## Suggested next steps for Maleesha
-1. Pick one palette from this shortlist and reply in PR or this doc.
-2. If desired, ask me to: a) add the CSS variables into `frontend/src/styles` (or a theme file) and a small theme preview page; or b) generate a short accessibility report with contrast ratios and fixes.
-
-If you want, I can open a small PR that adds these variables and a preview component so the team can review the theme in context.
+## Decision and implementation
+The team approved Calm Teal & Navy in Sprint 2. The frontend applies the
+palette in `frontend/src/theme.css`; navy is used for buttons and the header,
+while teal and cyan provide accents. The implementation uses the accessibility
+guidance above, including sufficient contrast for button text.

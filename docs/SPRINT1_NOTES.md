@@ -1,8 +1,8 @@
 # Sprint 1 Notes
 
-**Team:** Verifai — ITEC322 Group 5
+**Team:** ITEC322 Group 5
 **Sprint:** 1
-**Status:** Complete (see outstanding items below)
+**Status:** Complete
 
 ## What Sprint 1 delivered
 
@@ -48,8 +48,9 @@ architecture works end-to-end and establishes the baseline for Sprint 2.
 - **Purpose statement finalised:** _"A rule-based learning-resource
   recommendation engine that suggests study materials (videos, articles,
   exercises) based on predefined rules."_
-- **Colour theme finalised:** Ocean Blue + White (clean, academic, modern) —
-  guides buttons, backgrounds, accents, and typography from Sprint 2 on.
+- **Initial colour-theme proposal:** Ocean Blue + White was proposed during
+  Sprint 1 planning. The team later approved **Calm Teal & Navy** in Sprint 2;
+  see `docs/colour-theme-shortlist.md`.
 - **Project name:** not yet finalised — shortlist in progress, vote to be
   held at the start of Sprint 2 (see `docs/PROJECT_NAME_SHORTLIST.md`).
 
