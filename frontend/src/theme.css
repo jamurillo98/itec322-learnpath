@@ -1,0 +1,179 @@
+/* =========================================================
+   LearnPath colour theme: "Calm Teal & Navy"
+   Chosen from docs/colour-theme-shortlist.md (Sprint 2)
+
+   Accessibility: white text on #0EA5A4 is only 3.0:1, which fails
+   WCAG AA for normal text. So buttons use the navy (#05445E, 10.5:1)
+   and the teal is used for accents, borders, focus rings and the spinner.
+   ========================================================= */
+
+:root {
+  /* Palette from the shortlist */
+  --lp-primary: #0ea5a4; /* teal: accents, highlights, spinner */
+  --lp-primary-dark: #05445e; /* navy: buttons, header */
+  --lp-accent: #06b6d4; /* cyan: small highlights only */
+  --lp-bg: #f8fafc;
+  --lp-surface: #ffffff;
+  --lp-text: #0f172a;
+  --lp-muted: #64748b;
+
+  /* Supporting tokens */
+  --lp-primary-hover: #033347; /* darker navy for button hover */
+  --lp-primary-soft: #e6f6f6; /* light teal tint: focus rings, badges */
+  --lp-link: #0f766e; /* darker teal for links (5.5:1 on white) */
+  --lp-border: #e2e8f0;
+  --lp-on-primary: #ffffff;
+
+  /* Score / status colours */
+  --lp-success: #16a34a;
+  --lp-warning: #d97706;
+  --lp-error: #dc2626;
+  --lp-error-soft: #fef2f2;
+
+  /* Shape */
+  --lp-radius: 10px;
+  --lp-shadow: 0 1px 3px rgba(15, 23, 42, 0.08),
+    0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+/* ---------- Base ---------- */
+body {
+  margin: 0;
+  background: var(--lp-bg);
+  color: var(--lp-text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--lp-primary-dark);
+  line-height: 1.25;
+}
+
+a {
+  color: var(--lp-link);
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- App layout ---------- */
+.app-header {
+  background: var(--lp-primary-dark);
+  color: var(--lp-on-primary);
+  padding: 1.5rem 1rem;
+  border-bottom: 4px solid var(--lp-primary);
+}
+.app-header h1 {
+  color: var(--lp-on-primary);
+  margin: 0 0 0.25rem;
+  max-width: 960px;
+  margin-inline: auto;
+}
+.app-header p {
+  margin: 0 auto;
+  max-width: 960px;
+  opacity: 0.9;
+}
+
+.app-main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+/* ---------- Form controls ---------- */
+label {
+  font-weight: 600;
+  color: var(--lp-text);
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: var(--lp-text);
+  background: var(--lp-surface);
+  border: 1px solid var(--lp-border);
+  border-radius: var(--lp-radius);
+  padding: 0.55rem 0.75rem;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--lp-primary);
+  box-shadow: 0 0 0 3px var(--lp-primary-soft);
+}
+
+button {
+  font: inherit;
+  font-weight: 600;
+  color: var(--lp-on-primary);
+  background: var(--lp-primary-dark);
+  border: none;
+  border-radius: var(--lp-radius);
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+button:hover:not(:disabled) {
+  background: var(--lp-primary-hover);
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+button:focus-visible {
+  outline: 3px solid var(--lp-primary);
+  outline-offset: 2px;
+}
+
+/* ---------- Reusable classes ---------- */
+.card {
+  background: var(--lp-surface);
+  border: 1px solid var(--lp-border);
+  border-top: 4px solid var(--lp-primary);
+  border-radius: var(--lp-radius);
+  box-shadow: var(--lp-shadow);
+  padding: 1.25rem;
+}
+
+.text-muted {
+  color: var(--lp-muted);
+}
+
+.error-message {
+  color: var(--lp-error);
+  background: var(--lp-error-soft);
+  border: 1px solid var(--lp-error);
+  border-radius: var(--lp-radius);
+  padding: 0.75rem 1rem;
+}
+
+/* Score colours: use on score numbers or score-breakdown bars */
+.score-high {
+  color: var(--lp-success);
+}
+.score-medium {
+  color: var(--lp-warning);
+}
+.score-low {
+  color: var(--lp-error);
+}
+
+.score-bar {
+  height: 8px;
+  background: var(--lp-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.score-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--lp-primary);
+}

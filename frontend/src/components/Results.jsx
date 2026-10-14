@@ -1,8 +1,7 @@
-
 export default function Results({ items = [] }) {
   if (!items || items.length === 0) {
     return (
-      <p role="status" style={{ marginTop: "24px" }}>
+      <p role="status" className="text-muted" style={{ marginTop: "24px" }}>
         No matching learning resources were found.
       </p>
     );
@@ -15,20 +14,18 @@ export default function Results({ items = [] }) {
     practicality: "Practicality",
   };
 
+  // Background, border, teal top line and shadow come from the .card class in theme.css
   const cardStyle = {
-    backgroundColor: "#ffffff",
-    border: "1px solid #dddddd",
-    borderRadius: "12px",
     padding: "24px",
     marginBottom: "20px",
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
     overflowWrap: "anywhere",
   };
 
   const tagStyle = {
     display: "inline-block",
     padding: "6px 10px",
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "var(--lp-primary-soft)",
+    color: "var(--lp-primary-dark)",
     borderRadius: "6px",
     fontSize: "13px",
     textTransform: "capitalize",
@@ -44,17 +41,14 @@ export default function Results({ items = [] }) {
     >
       <h2>Recommended Learning Resources</h2>
 
-      <p style={{ color: "#555" }}>
+      <p style={{ color: "var(--lp-muted)" }}>
         Found {items.length} learning resource
         {items.length !== 1 ? "s" : ""} matching your preferences.
       </p>
 
       <div>
         {items.map((item, index) => (
-          <article
-            key={item.id || index}
-            style={cardStyle}
-          >
+          <article key={item.id || index} className="card" style={cardStyle}>
             <div
               style={{
                 display: "flex",
@@ -76,13 +70,9 @@ export default function Results({ items = [] }) {
                     flexWrap: "wrap",
                   }}
                 >
-                  {item.format && (
-                    <span style={tagStyle}>{item.format}</span>
-                  )}
+                  {item.format && <span style={tagStyle}>{item.format}</span>}
 
-                  {item.level && (
-                    <span style={tagStyle}>{item.level}</span>
-                  )}
+                  {item.level && <span style={tagStyle}>{item.level}</span>}
 
                   {item.duration_minutes != null && (
                     <span style={tagStyle}>
@@ -97,25 +87,30 @@ export default function Results({ items = [] }) {
                   style={{
                     display: "block",
                     fontSize: "25px",
+                    color: "var(--lp-primary-dark)",
                   }}
                 >
-                  {typeof item.score === "number"
-                    ? item.score
-                    : "N/A"}
+                  {typeof item.score === "number" ? item.score : "N/A"}
                 </strong>
-                <small>Total Score</small>
+                <small className="text-muted">Total Score</small>
               </div>
             </div>
 
             <div style={{ marginTop: "20px" }}>
-              <p><strong>Resource ID:</strong> {item.id || "Unavailable"}</p>
+              <p>
+                <strong>Resource ID:</strong> {item.id || "Unavailable"}
+              </p>
 
               {item.topic && (
-                <p><strong>Topic:</strong> {item.topic}</p>
+                <p>
+                  <strong>Topic:</strong> {item.topic}
+                </p>
               )}
 
               {item.rating != null && (
-                <p><strong>Rating:</strong> {item.rating} / 5</p>
+                <p>
+                  <strong>Rating:</strong> {item.rating} / 5
+                </p>
               )}
             </div>
 
@@ -132,35 +127,38 @@ export default function Results({ items = [] }) {
                       gap: "12px",
                     }}
                   >
-                    {Object.entries(categoryLabels).map(
-                      ([key, label]) => (
+                    {Object.entries(categoryLabels).map(([key, label]) => (
+                      <div
+                        key={key}
+                        style={{
+                          padding: "12px",
+                          backgroundColor: "var(--lp-bg)",
+                          border: "1px solid var(--lp-border)",
+                          borderRadius: "8px",
+                        }}
+                      >
                         <div
-                          key={key}
                           style={{
-                            padding: "12px",
-                            backgroundColor: "#f8f9fa",
-                            border: "1px solid #e5e5e5",
-                            borderRadius: "8px",
+                            fontSize: "13px",
+                            color: "var(--lp-muted)",
+                            marginBottom: "6px",
                           }}
                         >
-                          <div
-                            style={{
-                              fontSize: "13px",
-                              color: "#555",
-                              marginBottom: "6px",
-                            }}
-                          >
-                            {label}
-                          </div>
-
-                          <strong style={{ fontSize: "18px" }}>
-                            {typeof item.score_breakdown[key] === "number"
-                              ? item.score_breakdown[key]
-                              : "N/A"}
-                          </strong>
+                          {label}
                         </div>
-                      )
-                    )}
+
+                        <strong
+                          style={{
+                            fontSize: "18px",
+                            color: "var(--lp-primary-dark)",
+                          }}
+                        >
+                          {typeof item.score_breakdown[key] === "number"
+                            ? item.score_breakdown[key]
+                            : "N/A"}
+                        </strong>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
@@ -171,13 +169,11 @@ export default function Results({ items = [] }) {
               </p>
             )}
 
-            {Array.isArray(item.keywords) &&
-              item.keywords.length > 0 && (
-                <p>
-                  <strong>Keywords:</strong>{" "}
-                  {item.keywords.join(", ")}
-                </p>
-              )}
+            {Array.isArray(item.keywords) && item.keywords.length > 0 && (
+              <p>
+                <strong>Keywords:</strong> {item.keywords.join(", ")}
+              </p>
+            )}
 
             {item.url && (
               <a
@@ -188,8 +184,8 @@ export default function Results({ items = [] }) {
                   display: "inline-block",
                   marginTop: "12px",
                   padding: "10px 16px",
-                  backgroundColor: "#333333",
-                  color: "#ffffff",
+                  backgroundColor: "var(--lp-primary-dark)",
+                  color: "var(--lp-on-primary)",
                   borderRadius: "8px",
                   textDecoration: "none",
                   fontWeight: "600",
