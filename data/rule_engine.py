@@ -37,6 +37,25 @@ FORMAT_MATCH_WEIGHT = 2.0                # resource format matches the learner's
 
 DIFFICULTY_ORDER = {"beginner": 0, "intermediate": 1, "advanced": 2}
 
+# --- Subject matching (Sprint 3) -------------------------------------------
+# Learners type free text ("data science", "maths", "python"), but the CSV
+# stores hyphenated topics ("data-science") and tags. Subject text is
+# therefore normalised (case, hyphens, spacing), a few common short forms
+# are expanded, and every word of the subject must appear in the resource's
+# topic, tags or title.
+SUBJECT_ALIASES = {
+    "maths": "mathematics",
+    "math": "mathematics",
+    "ml": "machine learning",
+    "js": "javascript",
+    "stats": "statistics",
+}
+
+# When the learner supplies a subject or keywords, a resource must match at
+# least one of them to be recommended. Difficulty, rating, duration and format
+# only *rank* relevant resources; they must not make unrelated ones appear.
+REQUIRE_RELEVANCE_SIGNAL = True
+
 # --- Resource categories (Sprint 2) ----------------------------------------
 # Every resource has a `format` category in the CSV.
 VALID_FORMATS = ("video", "article", "exercise")
@@ -77,6 +96,23 @@ class RuleEngine:
             return float(value)
         except (TypeError, ValueError):
             return default
+
+    @staticmethod
+    def _normalise(text: str) -> str:
+        """Lower-case and treat hyphens/underscores/semicolons as spaces."""
+        for ch in "-_;":
+            text = text.replace(ch, " ")
+        return " ".join(text.lower().split())
+
+    @classmethod
+    def _subject_matches(cls, subject: str, topic: str, tags: str, title: str) -> bool:
+        """True if every word of the (alias-expanded) subject appears in topic, tags or title."""
+        wanted = cls._normalise(subject)
+        wanted = SUBJECT_ALIASES.get(wanted, wanted)
+        if not wanted:
+            return False
+        haystack = cls._normalise(f"{topic} {tags} {title}")
+        return all(word in haystack for word in wanted.split())
 
     @staticmethod
     def _difficulty_score(preferred: str, actual: str):
@@ -147,12 +183,14 @@ class RuleEngine:
             reasons: List[str] = []
 
             topic = r.get('topic', '').lower()
+            title_text = r.get('title', '') or ''
             tags = r.get('tags', '').lower()
             level = r.get('level', '').lower()
             fmt = (r.get('format') or '').strip().lower()
 
             # relevance: subject
-            if subject and subject.strip().lower() in topic:
+            subject_matched = bool(subject) and self._subject_matches(subject, topic, tags, title_text)
+            if subject_matched:
                 breakdown["relevance"] += SUBJECT_MATCH_WEIGHT
                 reasons.append(f"subject '{subject}' matches topic (+{SUBJECT_MATCH_WEIGHT})")
 
@@ -165,6 +203,9 @@ class RuleEngine:
 
             # relevance: keywords
             matched_keywords = [k for k in keywords if k and k.strip().lower() in tags]
+            has_content_criteria = bool(subject and subject.strip()) or any(k and k.strip() for k in keywords)
+            if REQUIRE_RELEVANCE_SIGNAL and has_content_criteria and not (subject_matched or matched_keywords):
+                continue  # asked for a subject/keywords but this resource matches neither
             if matched_keywords:
                 bonus = KEYWORD_MATCH_WEIGHT * len(matched_keywords)
                 breakdown["relevance"] += bonus

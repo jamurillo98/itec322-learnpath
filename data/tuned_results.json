@@ -1,0 +1,292 @@
+{
+  "k": 5,
+  "resources": 30,
+  "summary": {
+    "hit_at_1": 1.0,
+    "mrr": 1.0,
+    "ndcg": 0.9928,
+    "ideal_at_k": 1.0,
+    "empty_cases_passed": "4/4",
+    "empty_pass_rate": 1.0,
+    "hard_filter_violations": 0,
+    "ranked_cases": 17,
+    "empty_cases": 4
+  },
+  "cases": [
+    {
+      "id": "E01",
+      "top": [
+        "R009",
+        "R001",
+        "R010",
+        "R012",
+        "R005"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E02",
+      "top": [
+        "R009",
+        "R001",
+        "R024",
+        "R010",
+        "R015"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 0.9864,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E03",
+      "top": [
+        "R024",
+        "R025",
+        "R026",
+        "R028",
+        "R029"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E04",
+      "top": [
+        "R020",
+        "R007",
+        "R022",
+        "R018",
+        "R019"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 0.8908,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E05",
+      "top": [
+        "R029",
+        "R004"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E06",
+      "top": [
+        "R010",
+        "R014"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E07",
+      "top": [
+        "R016",
+        "R017",
+        "R015",
+        "R011",
+        "R013"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E08",
+      "top": [
+        "R011",
+        "R015",
+        "R001",
+        "R009",
+        "R010"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E09",
+      "top": [
+        "R005"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E10",
+      "top": [
+        "R012"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E11",
+      "top": [
+        "R018",
+        "R003",
+        "R022",
+        "R007",
+        "R020"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E12",
+      "top": [
+        "R022",
+        "R018",
+        "R003",
+        "R025"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E13",
+      "top": [
+        "R007",
+        "R021"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E14",
+      "top": [
+        "R026",
+        "R006"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E15",
+      "top": [
+        "R014"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E16",
+      "top": [
+        "R013",
+        "R011",
+        "R012",
+        "R001",
+        "R009"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E17",
+      "top": [
+        "R018",
+        "R003",
+        "R022",
+        "R020",
+        "R019"
+      ],
+      "violations": 0,
+      "kind": "ranked",
+      "hit_at_1": 1.0,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "ideal_at_k": 1.0
+    },
+    {
+      "id": "E18",
+      "top": [],
+      "violations": 0,
+      "kind": "empty",
+      "pass": true
+    },
+    {
+      "id": "E19",
+      "top": [],
+      "violations": 0,
+      "kind": "empty",
+      "pass": true
+    },
+    {
+      "id": "E20",
+      "top": [],
+      "violations": 0,
+      "kind": "empty",
+      "pass": true
+    },
+    {
+      "id": "E21",
+      "top": [],
+      "violations": 0,
+      "kind": "empty",
+      "pass": true
+    }
+  ]
+}
