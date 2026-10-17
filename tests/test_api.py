@@ -102,6 +102,15 @@ def test_invalid_requests_return_422():
         assert response.status_code == 422, invalid
 
 
+def test_invalid_limit_returns_422():
+    response = client.post(
+        "/api/recommend",
+        json=request_payload(limit=1000),
+    )
+
+    assert response.status_code == 422
+
+
 def test_missing_subject_returns_422():
     payload = request_payload()
     del payload["subject"]
