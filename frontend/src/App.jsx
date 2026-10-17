@@ -4,6 +4,35 @@ import Results from "./components/Results";
 import LoadingSpinner from "./components/LoadingSpinner";
 import "./theme.css";
 
+// Friendly names for the API's field names, used in validation messages.
+const FIELD_LABELS = {
+  subject: "Subject",
+  difficulty: "Difficulty Level",
+  max_duration_minutes: "Maximum Duration",
+  min_rating: "Minimum Rating",
+  keywords: "Keywords",
+  limit: "Number of Results",
+};
+
+// Turn an unsuccessful HTTP response into a message a user can act on.
+function describeHttpError(status, data) {
+  if (status === 422) {
+    const first = Array.isArray(data?.detail) ? data.detail[0] : null;
+    if (first?.msg) {
+      const field = Array.isArray(first.loc)
+        ? first.loc[first.loc.length - 1]
+        : null;
+      const label = FIELD_LABELS[field];
+      return label ? `Please check "${label}": ${first.msg}.` : `${first.msg}.`;
+    }
+    return "Some of your inputs are not valid. Please check the form and try again.";
+  }
+  if (status >= 500) {
+    return "The recommendation service is unavailable right now. Please make sure the backend is running and try again.";
+  }
+  return `The request could not be completed (error ${status}). Please try again.`;
+}
+
 export default function App() {
   const [results, setResults] = useState([]);
   const [status, setStatus] = useState("idle");
@@ -14,31 +43,37 @@ export default function App() {
     setError("");
     setResults([]);
 
+    let response;
     try {
-      const response = await fetch("/api/recommend", {
+      response = await fetch("/api/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const data = await response.json().catch(() => null);
-      if (!response.ok) {
-        throw new Error(
-          data?.detail?.[0]?.msg || `Request failed (${response.status})`
-        );
-      }
-      if (!data || !Array.isArray(data.recommendations)) {
-        throw new Error("The server returned an invalid response.");
-      }
-      setResults(data.recommendations);
-      setStatus("success");
-    } catch (requestError) {
+    } catch {
       setError(
-        requestError instanceof Error
-          ? requestError.message
-          : "Unable to load recommendations."
+        "Could not reach the recommendation service. Check your connection and that the backend is running."
       );
       setStatus("error");
+      return;
     }
+
+    const data = await response.json().catch(() => null);
+
+    if (!response.ok) {
+      setError(describeHttpError(response.status, data));
+      setStatus("error");
+      return;
+    }
+
+    if (!data || !Array.isArray(data.recommendations)) {
+      setError("The server sent an unexpected response. Please try again.");
+      setStatus("error");
+      return;
+    }
+
+    setResults(data.recommendations);
+    setStatus("success");
   };
 
   return (
