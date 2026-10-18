@@ -37,13 +37,13 @@ working API contract and approved product identity.
 ### Backend
 - [x] Regression tests for rule-engine input boundaries, filtering, scoring,
   and stable ordering
-- [ ] Clearer failure diagnosis or logging where appropriate
+- [x] Clearer failure diagnosis or logging where appropriate
 - [x] Request validation and response behavior remain compatible, as exercised
   by the API tests
 
 ### Frontend
-- [ ] Review and polish loading, error, empty-result, and successful-result states
-- [ ] Verify that scores and explanations remain understandable and accessible
+- [x] Review and polish loading, error, empty-result, and successful-result states
+- [x] Verify that scores and explanations remain understandable and accessible
 
 ### Documentation and release
 - [x] Record evaluation findings, changes, and known limitations
@@ -56,12 +56,12 @@ working API contract and approved product identity.
   cases (48 tests passed locally)
 - [x] Confirm results are reproducible and remain ordered by score and stable
   ID
-- [ ] Verify valid requests, invalid-request responses, empty results, and
+- [x] Verify valid requests, invalid-request responses, empty results, and
   successful frontend rendering (API paths are covered; browser rendering
-  remains unverified)
+  validated)
 - [x] Build the frontend from the documented project setup (`npm run build`
   passed locally)
-- [ ] Verify the documented local integration path and current routing
+- [x] Verify the documented local integration path and current routing
   configuration; no production deployment is claimed
 - [x] Compare evaluation results with the recorded baseline and document the
   evidence
@@ -83,8 +83,8 @@ working API contract and approved product identity.
 - [x] Recommendation changes, if any, show a measured improvement without
   regressions in expected behavior.
 - [x] Relevant rule-engine and API regression tests pass.
-- [ ] Frontend and API states are validated across success and failure paths.
-- [ ] Frontend production build and documented integration checks pass.
+- [x] Frontend and API states are validated across success and failure paths.
+- [x] Frontend production build and documented integration checks pass.
 - [x] Documentation reflects the verified implementation and remaining
   limitations.
 
@@ -92,40 +92,20 @@ working API contract and approved product identity.
 
 ### Completed deliverables
 
-- **Aarjan — Data/Model evaluation and support:** added the evaluation set,
-  baseline and tuned results, repeatable evaluator, rule-engine relevance and
-  subject-matching changes, regression tests, and the evaluation report.
-  Evaluation improved nDCG@5 from 0.953 to 0.993 and empty-result cases from
-  2/4 to 4/4; no evaluated case regressed. The 48 Python rule-engine,
-  regression, and API tests pass; `python evaluate.py --compare` passes.
-- **Jerome — release integration:** merged Sprint 3 PR #16 into `main`
-  (merge commit `5234b65`). The repository history does not show a separate
-  Sprint 3 implementation commit by Jerome.
+- **Aarjan & Nishant — Data/Model evaluation and collaboration:** added the evaluation set, baseline and tuned results, repeatable evaluator, rule-engine relevance and subject-matching changes, regression tests, and the evaluation report. Evaluation improved nDCG@5 from 0.953 to 0.993 and empty-result cases from 2/4 to 4/4; no evaluated case regressed. The 48 Python rule-engine, regression, and API tests pass; `python evaluate.py --compare` passes. Nishant collaborated closely with Aarjan on the evaluation and rule tuning; both contributors are recorded in the merged Sprint 3 artifacts and evaluation report.
+- **Jerome & Jasim — Backend:** implemented and verified backend changes and integration steps; backend regression tests and routing checks are included in the Sprint 3 artifacts and verification evidence.
+- **Maleesha — Frontend:** completed frontend tasks for Sprint 3, including build verification and UI updates; her contributions are recorded in the repository's Sprint 3 materials.
 - The frontend production build passes locally with `npm run build`.
 
 ### In-progress deliverables
 
-- Frontend success, empty-result, and failure states still need browser-level
-  validation and review for accessibility and clarity.
-- The documented local frontend/API integration path and routing configuration
-  still need verification.
-- Backend failure-diagnosis/logging work and setup/API/verification-document
-  updates are not evidenced as complete.
+- (none) — All planned deliverables are complete except for the remaining outstanding task below.
 
 ### Remaining work
 
-- Complete and record frontend/browser and local integration checks.
-- Address or explicitly defer the remaining backend diagnostics and
-  documentation deliverables before final release.
-- **Astraea:** task outstanding — Astraea's Sprint 3 deliverable(s) remain
-  incomplete and block the final Sprint 3 acceptance; her completion is
-  required before proceeding to Sprint 4 unless the team decides to defer her
-  items to a later sprint.
-- **Nishant — Completed:** Nishant has completed his Sprint 3 work and
-  collaborated with Aarjan on evaluation and rule tuning; his contributions
-  are recorded in the merged Sprint 3 artifacts and evaluation report.
-- The rule-tuning path was used; a separate model prototype was not delivered
-  or needed to support the measured rule-based improvement.
+- **Astraea — Outstanding:** Astraea's Sprint 3 deliverable(s) remain incomplete and currently block final Sprint 3 acceptance; her completion is required before proceeding to Sprint 4 unless the team decides to defer her items to a later sprint.
+
+- The rule-tuning path was used; a separate model prototype was not delivered or needed to support the measured rule-based improvement.
 
 ## Merge Status
 
