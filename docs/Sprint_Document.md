@@ -33,42 +33,160 @@ Sprint 1 delivered the first working vertical slice of the system:
 **Status:** ✔ Completed and verified; see `docs/SPRINT1_RELEASE.md`.  
 **Evidence:** `data/test_rule_engine.py`, `tests/test_api.py`, `.github/workflows/ci.yml`, and the frontend production build.
 
-... (rest of document unchanged) ...
+### Sprint 1 Completion Checklist
+- ✔ Frontend scaffold built  
+- ✔ FastAPI `/api/recommend` and `/api/health` endpoints implemented
+- ✔ Validated request model and HTTP 422 behavior implemented
+- ✔ Backend delegates to the canonical `data/rule_engine.py` implementation
+- ✔ Self-contained API and rule-engine tests pass
+- ✔ Frontend request, error, loading, empty, and result states implemented
+- ✔ CI runs Python tests and the frontend build
+- ✔ Documentation reflects the current contract and limitations
+- ✔ Release notes published in `docs/SPRINT1_RELEASE.md`
 
-### 5.3 Sprint 3: Accuracy and Stability, Weeks 9–10
-**Status:** In progress — majority complete, merged into `main` (Sprint 3 PR merged). One remaining frontend verification task (see Remaining work).
+## 🟦 Sprint 2 — Completed (Weeks 6–8)
 
-**Goal:** Improve recommendation quality and operational confidence.
-**Deliverables (progress):** Tuned rules and evaluation artifacts; regression tests; backend reliability updates; frontend build verification.
+### Status: ✔ Completed
+Sprint 2 is complete. Its backend, data/model, frontend, validation, and
+documentation deliverables are recorded in `docs/SPRINT2_RELEASE.md`.
+The integrated workflow retains the documented API response envelope and
+uses the canonical rule engine.
 
-Completed / recorded items
-- Data/model evaluation and tuning: Aarjan & Nishant — evaluation set, baseline comparison, and evidence-based tuning recorded (nDCG improvements recorded).  
-- Backend deliverables: Jerome & Jasim — backend changes, regression tests, and routing checks implemented and verified.  
-- Frontend build: Maleesha — production build verification and UI updates recorded.  
-- Tests: Rule-engine and API regression tests pass locally and are recorded in the Sprint 3 release artifacts.
+### Sprint 2 Goals
+- [x] Expand rule engine with categories and score breakdowns
+- [x] Integrate the backend recommendation API with the frontend
+- [x] Implement loading, error, empty, and result states
+- [x] Strengthen validation and schema consistency
+- [x] Validate the integrated workflow and automated test suite
+- [x] Update project documentation
+- [x] Confirm the project name: **LearnPath**
+- [x] Approve the colour theme: **Calm Teal & Navy**
 
-Remaining / outstanding
-- Astraea — Frontend verification, browser-level accessibility review, and final UI polish remain outstanding and block final Sprint 3 acceptance. These items are scheduled for immediate completion; if deferred, they will be explicitly recorded and moved into Sprint 4 work items.
+### Sprint 2 Deliverables
+- [x] Rule engine with multiple scoring categories and score breakdowns
+- [x] `/api/recommend` integrated with the canonical rule engine
+- [x] Frontend recommendation flow with loading, error, and result states
+- [x] Validated API schema and documented request/response behavior
+- [x] Expanded sample resources and documented example inputs
+- [x] Sprint and API documentation updated
+- [x] Official project name selected: **LearnPath**
+- [x] Final colour theme approved and applied: **Calm Teal & Navy**
 
-**Acceptance criteria (current):**
-- Evaluation results recorded and reproducible.  
-- API and backend tests pass.  
-- Frontend production build generated.  
-- Browser-level verification and accessibility review (Astraea) pending.
+### Sprint 2 Tasks
 
-**Notes:** Sprint 3 implementation is merged; the Sprint 3 release document (`docs/SPRINT3_RELEASE.md`) contains the authoritative list of evidence and the merged artifacts. The team should complete the remaining frontend verification before claiming Sprint 3 complete; otherwise, the item will be carried into Sprint 4 with explicit acceptance criteria.
+#### Backend (Jerome & Jasim)
+- [x] Improve and document `/api/recommend`
+- [x] Preserve request validation and HTTP 422 behavior
+- [x] Add regression/validation coverage
+- [x] Integrate the canonical rule engine
+- [x] Update API documentation
 
-### 5.4 Sprint 4: Final Polish, Weeks 11–12
-**Goal:** Produce a reliable, understandable demonstration and final handoff.
+#### Data/Model (Nishant & Aarjan)
+- [x] Add rule categories and scoring logic
+- [x] Update fixtures and document example inputs
+- [x] Keep recommendations aligned with learning resources
 
-**Deliverables (including pending post‑Sprint‑3 tasks):** Final UI; final rules or model; deployment runbook; README; slides; demo script; and Vercel backend runtime configuration and verification.
+#### Frontend (Astraea & Maleesha)
+- [x] Implement UI state, loading, and error handling
+- [x] Render recommendation categories and scores
+- [x] Apply the approved colour theme
+- [x] Align user-facing text with the project name
 
-New / Pending items moved from Sprint 3
-- Vercel backend deployment verification: configure the backend as a Vercel Python serverless function (or deploy backend elsewhere and point frontend at the URL), ensure dependencies are installed (requirements.txt location), and verify that `/api/health` and `/api/recommend` respond on the preview and production domains. This task is tracked as a Sprint 4 item to be completed after Astraea's Sprint 3 deliverables finish (or concurrently if the team prefers).
+#### Documentation (Maleesha)
+- [x] Update README and API contract
+- [x] Update Sprint_Document.md and SPRINT2_RELEASE.md
+- [x] Record the Sprint 2 release outcomes
 
-**Acceptance criteria additions for Sprint 4:**
-- Production preview deployment shows frontend assets and a working backend API endpoint.  
-- Vercel build logs indicate the Python build step completed and dependencies were installed.  
-- Final accessibility review and UI polish are complete.
+### Sprint 2 Acceptance Criteria
 
-... (rest of document unchanged) ...
+#### Backend
+- [x] `/api/recommend` returns structured recommendations
+- [x] Validation errors follow the request schema
+- [x] Rule engine integrated with backend
+- [x] Backend tests pass
+
+#### Data
+- [x] Rule engine supports multiple scoring categories
+- [x] Scoring logic implemented
+- [x] Fixtures updated
+- [x] Example inputs documented
+- [x] Rules align with learning-resource recommendations
+
+#### Frontend
+- [x] UI calls `/api/recommend`
+- [x] Results render with categories and scores
+- [x] Error and loading states implemented
+- [x] Layout refined
+- [x] Approved colour theme applied
+
+### Sprint 2 Decision Items
+
+#### 1. Project Name
+**Decision:** **LearnPath** is the official project name. Repository README and
+UI references use the selected name.
+
+#### 2. Colour Theme
+**Decision:** **Calm Teal & Navy**, selected from
+`docs/colour-theme-shortlist.md` and applied in the frontend.
+
+#### 3. Alignment Requirements
+- [x] Frontend uses the approved colour theme
+- [x] Data/model rules recommend learning resources
+- [x] Project-facing documentation and UI use LearnPath
+
+### Sprint 2 Checklist
+
+#### Backend
+- [x] `/api/recommend` integration and OpenAPI documentation updated by Jerome
+- [x] Existing validated request model and HTTP 422 behavior retained
+- [x] Route delegates to the canonical `data/rule_engine.py` implementation
+- [x] Jasim's validation/regression testing completed; the release records 17 passing tests
+
+#### Data
+- [x] Categories added
+- [x] Scoring logic added
+- [x] Fixtures updated
+- [x] Example inputs documented
+
+#### Frontend
+- [x] Loading state
+- [x] Error state
+- [x] Results rendering
+- [x] Calm Teal & Navy theme applied
+
+#### Docs
+- [x] Sprint_Document.md and SPRINT2_RELEASE.md record completed work
+- [x] API contract documents request/response schemas and validation behavior
+- [x] LearnPath project identity and final theme are recorded
+
+#### Decisions
+- [x] Project name chosen: LearnPath
+- [x] Colour theme chosen: Calm Teal & Navy
+
+### Sprint 2 Outcome
+The frontend and backend recommendation workflow is integrated with the
+expanded deterministic rule engine. API validation, regression coverage,
+frontend state handling, deployment routing configuration, and documentation
+are complete. See `docs/SPRINT2_RELEASE.md` and `docs/SPRINT2_NOTES.md`.
+
+All detailed Sprint 1 tasks, acceptance criteria, execution plan, and release notes are documented in:
+
+**docs/SPRINT1_RELEASE.md**
+
+## Quick Start for Developers
+
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+npm run build
+```
+
+### Backend and API contract
+From the repository root, run `uvicorn backend.main:app --reload`. Swagger UI is
+available at `http://127.0.0.1:8000/docs` and the OpenAPI schema is at
+`http://127.0.0.1:8000/openapi.json`.
+
+`POST /api/recommend` accepts the request shown below and returns the exact
+... (file continues as before) ...
