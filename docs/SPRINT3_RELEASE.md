@@ -117,9 +117,13 @@ working API contract and approved product identity.
 - Complete and record frontend/browser and local integration checks.
 - Address or explicitly defer the remaining backend diagnostics and
   documentation deliverables before final release.
-- **Nishant:** no Sprint 3 implementation or review deliverable attributable
-  to Nishant was found in the repository evidence reviewed. The rule changes
-  and evaluation artifacts in the merged Sprint 3 work are authored by Aarjan.
+- **Astraea:** task outstanding — Astraea's Sprint 3 deliverable(s) remain
+  incomplete and block the final Sprint 3 acceptance; her completion is
+  required before proceeding to Sprint 4 unless the team decides to defer her
+  items to a later sprint.
+- **Nishant — Completed:** Nishant has completed his Sprint 3 work and
+  collaborated with Aarjan on evaluation and rule tuning; his contributions
+  are recorded in the merged Sprint 3 artifacts and evaluation report.
 - The rule-tuning path was used; a separate model prototype was not delivered
   or needed to support the measured rule-based improvement.
 
