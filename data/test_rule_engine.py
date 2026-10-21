@@ -133,7 +133,8 @@ def test_rules_land_in_correct_category(engine):
     r = next(x for x in engine.recommend_learning_resources(
         subject='programming', difficulty='beginner', keywords=['python'], limit=50)
         if x['id'] == 'R001')
-    assert r['score_breakdown']['relevance'] == 6.5   # subject 5 + 1 keyword 1.5
+    w = engine.weights
+    assert r['score_breakdown']['relevance'] == w['SUBJECT_MATCH_WEIGHT'] + w['KEYWORD_MATCH_WEIGHT']
     assert r['score_breakdown']['level_fit'] == 3.0   # exact difficulty
     assert r['score_breakdown']['quality'] == 0.0     # no min_rating given
     assert r['score_breakdown']['practicality'] == 0.0
@@ -182,6 +183,110 @@ def test_results_include_category_fields(engine):
     r = engine.recommend_learning_resources(subject='programming')[0]
     for field in ('format', 'topic', 'level', 'score_breakdown'):
         assert field in r
+
+
+# --- Sprint 3: edge cases ------------------------------------------------
+
+def test_empty_and_blank_keywords_do_not_crash(engine):
+    a = engine.recommend_learning_resources(subject='programming', keywords=[])
+    b = engine.recommend_learning_resources(subject='programming', keywords=['', '   '])
+    assert a == b
+
+
+def test_zero_duration_returns_empty(engine):
+    assert engine.recommend_learning_resources(subject='programming', max_duration_minutes=0) == []
+
+
+def test_max_rating_filter_returns_only_perfect_scores(engine):
+    # no resource is rated 5.0, so nothing should survive the hard filter
+    assert engine.recommend_learning_resources(subject='programming', min_rating=5) == []
+
+
+def test_matching_is_case_and_space_insensitive(engine):
+    a = engine.recommend_learning_resources(subject='programming', keywords=['python'])
+    b = engine.recommend_learning_resources(subject='  PROGRAMMING ', keywords=['PyThOn'])
+    assert [r['id'] for r in a] == [r['id'] for r in b]
+
+
+def test_unknown_difficulty_gives_no_level_points(engine):
+    results = engine.recommend_learning_resources(subject='programming', difficulty='expert')
+    assert results and all(r['score_breakdown']['level_fit'] == 0 for r in results)
+
+
+def test_ties_are_broken_by_id(engine):
+    results = engine.recommend_learning_resources(subject='programming', limit=50)
+    for a, b in zip(results, results[1:]):
+        if a['score'] == b['score']:
+            assert a['id'] < b['id']
+
+
+def test_missing_csv_returns_empty_not_crash(tmp_path):
+    engine = RuleEngine(str(tmp_path / 'does_not_exist.csv'))
+    assert engine.recommend_learning_resources(subject='programming') == []
+
+
+def test_rows_with_missing_rating_or_duration_are_kept(tmp_path):
+    csv_path = tmp_path / 'r.csv'
+    csv_path.write_text(
+        'id,title,topic,tags,level,format,url,duration_minutes,rating,cost\n'
+        'X1,No rating,programming,python,beginner,video,https://e.com,30,,0\n'
+        'X2,No duration,programming,python,beginner,video,https://e.com,,4.0,0\n',
+        encoding='utf-8')
+    results = RuleEngine(str(csv_path)).recommend_learning_resources(
+        subject='programming', max_duration_minutes=60, min_rating=4.0)
+    assert {r['id'] for r in results} == {'X1', 'X2'}
+
+
+def test_custom_weights_change_scores():
+    default = RuleEngine().recommend_learning_resources(subject='programming', keywords=['python'], limit=50)
+    heavier = RuleEngine(weights={'KEYWORD_MATCH_WEIGHT': 10}).recommend_learning_resources(
+        subject='programming', keywords=['python'], limit=50)
+    assert heavier[0]['score'] > default[0]['score']
+
+
+def test_unknown_weight_name_raises():
+    with pytest.raises(ValueError):
+        RuleEngine(weights={'NOT_A_WEIGHT': 1})
+
+
+def test_zero_min_rating_does_not_outweigh_difficulty(engine):
+    """The website sends min_rating=0 when the box is empty; level must still matter."""
+    results = engine.recommend_learning_resources(
+        subject='mathematics', difficulty='advanced', max_duration_minutes=30,
+        min_rating=0, keywords=['theory'])
+    assert results[0]['level'] == 'advanced'
+    assert all(r['score_breakdown']['quality'] <= engine.weights['QUALITY_BONUS_CAP'] for r in results)
+
+
+# --- Sprint 3: model prototype -------------------------------------------
+
+from model_prototype import SimilarityModel
+
+
+def test_model_prototype_respects_hard_filters(engine):
+    results = SimilarityModel().recommend_learning_resources(
+        subject='programming', max_duration_minutes=40, min_rating=4.5, limit=50)
+    by_id = {r['id']: r for r in engine.resources}
+    for r in results:
+        assert float(by_id[r['id']]['duration_minutes']) <= 40
+        assert float(by_id[r['id']]['rating']) >= 4.5
+
+
+# --- Sprint 4: frozen recommendation contract ----------------------------
+
+FROZEN_FIELDS = {
+    'id', 'title', 'score', 'score_breakdown', 'url', 'reason', 'format',
+    'topic', 'level', 'duration_minutes', 'rating', 'keywords',
+}
+
+
+def test_recommendation_fields_are_frozen(engine):
+    """Sprint 4 contract freeze: the frontend relies on exactly these fields."""
+    for r in engine.recommend_learning_resources(subject='programming', limit=50):
+        assert set(r) == FROZEN_FIELDS
+        assert isinstance(r['score'], float)
+        assert isinstance(r['score_breakdown'], dict)
+        assert isinstance(r['keywords'], list)
 
 
 if __name__ == '__main__':

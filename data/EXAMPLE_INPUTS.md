@@ -13,7 +13,7 @@ python -c "from rule_engine import RuleEngine; print(RuleEngine().recommend_lear
 ```
  total score = relevance + level_fit + quality + practicality
 
- relevance    subject match (+5) + each matching keyword (+1.5)
+ relevance    subject match (+5) + each matching keyword (+2.5, tuned in Sprint 3)
  level_fit    exact difficulty (+3) / one level off (+1)
  quality      rating above min_rating (+1 per rating point)
  practicality time headroom (up to +1) + preferred format match (+2)
@@ -28,9 +28,9 @@ python -c "from rule_engine import RuleEngine; print(RuleEngine().recommend_lear
 
 | Rank | ID | Title | Format | Score | relevance | level_fit | quality | practicality |
 |---|---|---|---|---|---|---|---|---|
-| 1 | R001 | Intro to Python Programming | video | 12.45 | 6.5 | 3.0 | 0.7 | 2.25 |
-| 2 | R012 | Git and GitHub Essentials | video | 11.033 | 5.0 | 3.0 | 0.7 | 2.333 |
-| 3 | R009 | Python Loops and Functions Practice | exercise | 10.5 | 6.5 | 3.0 | 0.5 | 0.5 |
+| 1 | R001 | Intro to Python Programming | video | 13.45 | 7.5 | 3.0 | 0.7 | 2.25 |
+| 2 | R009 | Python Loops and Functions Practice | exercise | 11.5 | 7.5 | 3.0 | 0.5 | 0.5 |
+| 3 | R010 | Understanding Variables and Data Types | article | 11.25 | 7.5 | 3.0 | 0.0 | 0.75 |
 
 ## Example 2 — same learner, but prefers **exercises**
 
@@ -43,9 +43,9 @@ Only `preferred_format` changes, and the top result changes with it.
 
 | Rank | ID | Title | Format | Score | relevance | level_fit | quality | practicality |
 |---|---|---|---|---|---|---|---|---|
-| 1 | R009 | Python Loops and Functions Practice | exercise | 12.5 | 6.5 | 3.0 | 0.5 | 2.5 |
-| 2 | R001 | Intro to Python Programming | video | 10.45 | 6.5 | 3.0 | 0.7 | 0.25 |
-| 3 | R005 | SQL for Beginners | exercise | 10.4 | 5.0 | 3.0 | 0.4 | 2.0 |
+| 1 | R009 | Python Loops and Functions Practice | exercise | 13.5 | 7.5 | 3.0 | 0.5 | 2.5 |
+| 2 | R001 | Intro to Python Programming | video | 11.45 | 7.5 | 3.0 | 0.7 | 0.25 |
+| 3 | R010 | Understanding Variables and Data Types | article | 11.25 | 7.5 | 3.0 | 0.0 | 0.75 |
 
 ## Example 3 — intermediate data-science learner who prefers **articles**
 
@@ -56,9 +56,9 @@ Only `preferred_format` changes, and the top result changes with it.
 
 | Rank | ID | Title | Format | Score | relevance | level_fit | quality | practicality |
 |---|---|---|---|---|---|---|---|---|
-| 1 | R028 | Decision Trees and Random Forests | article | 11.6 | 6.5 | 3.0 | 0.1 | 2.0 |
-| 2 | R006 | Statistics for Data Analysis | article | 10.3 | 5.0 | 3.0 | 0.3 | 2.0 |
-| 3 | R027 | Regression Models in Scikit-Learn | exercise | 9.9 | 6.5 | 3.0 | 0.4 | 0.0 |
+| 1 | R028 | Decision Trees and Random Forests | article | 12.6 | 7.5 | 3.0 | 0.1 | 2.0 |
+| 2 | R027 | Regression Models in Scikit-Learn | exercise | 10.9 | 7.5 | 3.0 | 0.4 | 0.0 |
+| 3 | R006 | Statistics for Data Analysis | article | 10.3 | 5.0 | 3.0 | 0.3 | 2.0 |
 
 ## Example 4 — advanced maths in a 30-minute slot (no format preference)
 
@@ -71,9 +71,9 @@ The 30-minute hard filter removes every longer resource before scoring.
 
 | Rank | ID | Title | Format | Score | relevance | level_fit | quality | practicality |
 |---|---|---|---|---|---|---|---|---|
-| 1 | R022 | Eigenvalues Explained Visually | video | 9.667 | 6.5 | 3.0 | 0.0 | 0.167 |
-| 2 | R023 | Graph Theory Introduction | article | 6.833 | 6.5 | 0.0 | 0.0 | 0.333 |
-| 3 | R003 | Linear Algebra Fundamentals | article | 6.667 | 6.5 | 0.0 | 0.0 | 0.167 |
+| 1 | R022 | Eigenvalues Explained Visually | video | 10.667 | 7.5 | 3.0 | 0.0 | 0.167 |
+| 2 | R023 | Graph Theory Introduction | article | 7.833 | 7.5 | 0.0 | 0.0 | 0.333 |
+| 3 | R003 | Linear Algebra Fundamentals | article | 7.667 | 7.5 | 0.0 | 0.0 | 0.167 |
 
 ## Example 5 — nothing to match
 

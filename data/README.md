@@ -10,10 +10,10 @@ reproducible and easy to justify in the project report.
 |---|---|
 | `rule_engine.py` | `RuleEngine` class — loads resources from CSV, scores and ranks them via `recommend_learning_resources()` |
 | `sample_resources.csv` | Sample dataset of 30 learning resources across programming, mathematics, and data-science, covering every format (video/article/exercise) at every level |
-| `evaluation_set.json`, `evaluate.py`, `baseline_results.json`, `tuned_results.json` | Sprint 3 evaluation: hand-judged cases, the scoring script, the before/after records (see `docs/SPRINT3_EVALUATION.md`) |
-| `test_sprint3_regression.py` | Sprint 3 edge-case and regression tests, plus a guard that evaluation results never get worse |
 | `test_rule_engine.py` | Unit tests covering determinism, hard filters, scoring rules, rule categories, format preference and fixture coverage |
 | `EXAMPLE_INPUTS.md` | Five documented example requests with their real outputs and score breakdowns |
+| `model_prototype.py` | TF-IDF similarity model, used for comparison only, not by the API |
+| `MODEL_CARD.md` | Final model summary: rules, results, limitations, future ML path |
 
 ## For whoever wires this into the backend/frontend
 
@@ -49,11 +49,10 @@ then id ascending.
 - **Hard filters** (resources failing these are excluded entirely, not down-ranked):
   - `max_duration_minutes` — resources longer than this are excluded
   - `min_rating` — resources rated lower than this are excluded
-- **Subject match** (+5): every word of `subject` must appear in the resource's topic, tags or title. Matching ignores case and treats hyphens as spaces (`data science` = `data-science`), and a few short forms are expanded (`maths`, `ml`, `js`, `stats`)
-- **Relevance gate** (Sprint 3): if the learner gives a subject or keywords, a resource must match at least one of them to be returned. Difficulty, rating, duration and format only rank relevant resources, so an unknown subject such as `cooking` returns no results instead of arbitrary beginner resources
+- **Subject match** (+5): `subject` compared against the resource's topic
 - **Difficulty match**: exact match (+3), one level off — e.g. beginner↔intermediate (+1), otherwise (+0)
-- **Keyword match** (+1.5 per match): each keyword compared against the resource's tags
-- **Rating bonus**: resources rated above `min_rating` score proportionally higher
+- **Keyword match** (+2.5 per match, tuned in Sprint 3): each keyword compared against the resource's tags; blank keywords are ignored
+- **Rating bonus**: resources rated above `min_rating` score proportionally higher, capped at +1
 - **Duration headroom**: resources well under `max_duration_minutes` score slightly higher
 - **Format match** (+2): resource `format` equals the optional `preferred_format`
 
@@ -70,8 +69,9 @@ to `score`.
 | `quality` | rating bonus |
 | `practicality` | duration headroom, format match |
 
-All weights are named constants at the top of `rule_engine.py`, easy to
-tune and justify during evaluation.
+All weights are named constants at the top of `rule_engine.py`. To try a
+different set without editing code: `RuleEngine(weights={"KEYWORD_MATCH_WEIGHT": 3.0})`.
+The current values were chosen by evaluation in Sprint 3 (see `MODEL_CARD.md`).
 
 ## Data schema (`sample_resources.csv`)
 
@@ -96,8 +96,5 @@ with their real outputs and score breakdowns.
 
 ```bash
 pip install pytest
-pytest test_rule_engine.py test_sprint3_regression.py -v
-
-# evaluation report and comparison with the recorded baseline
-python evaluate.py --compare
+pytest test_rule_engine.py -v
 ```
