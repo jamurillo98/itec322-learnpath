@@ -14,6 +14,7 @@ reproducible and easy to justify in the project report.
 | `test_sprint3_regression.py` | Sprint 3 edge-case and regression tests, plus a guard that evaluation results never get worse |
 | `test_rule_engine.py` | Unit tests covering determinism, hard filters, scoring rules, rule categories, format preference and fixture coverage |
 | `EXAMPLE_INPUTS.md` | Five documented example requests with their real outputs and score breakdowns |
+| `MODEL_CARD.md` | Final model summary: how it works, evaluation results, Sprint 4 fixes, limitations, future ML path |
 
 ## For whoever wires this into the backend/frontend
 
@@ -52,8 +53,8 @@ then id ascending.
 - **Subject match** (+5): every word of `subject` must appear in the resource's topic, tags or title. Matching ignores case and treats hyphens as spaces (`data science` = `data-science`), and a few short forms are expanded (`maths`, `ml`, `js`, `stats`)
 - **Relevance gate** (Sprint 3): if the learner gives a subject or keywords, a resource must match at least one of them to be returned. Difficulty, rating, duration and format only rank relevant resources, so an unknown subject such as `cooking` returns no results instead of arbitrary beginner resources
 - **Difficulty match**: exact match (+3), one level off — e.g. beginner↔intermediate (+1), otherwise (+0)
-- **Keyword match** (+1.5 per match): each keyword compared against the resource's tags
-- **Rating bonus**: resources rated above `min_rating` score proportionally higher
+- **Keyword match** (+1.5 per match): each keyword compared against the resource's tags; blank keywords are ignored
+- **Rating bonus**: resources rated above `min_rating` score proportionally higher, capped at +1 so an empty rating box (sent as 0) cannot outweigh difficulty
 - **Duration headroom**: resources well under `max_duration_minutes` score slightly higher
 - **Format match** (+2): resource `format` equals the optional `preferred_format`
 
