@@ -2,11 +2,12 @@
 
 ## Release Status
 
-Sprint 3 is in progress. **Sprint 1 and Sprint 2 are fully completed.** The
-Data/Model evaluation and measured rule changes are documented, and the Sprint
-3 pull request has been merged into `main`. Frontend runtime and integration
-verification and other remaining activities are still open; this is not a
-Sprint 3 completion or production-release claim.
+Sprint 3 is substantially complete. **Sprint 1 and Sprint 2 are complete.**
+The Data/Model evaluation and measured rule changes are documented, and the
+Sprint 3 pull request has been merged into `main`. One outstanding Sprint 3
+deliverable was not completed before release and was formally deferred. Sprint
+3 is not described as fully complete, and this document does not claim a
+production deployment.
 
 ## Overview
 
@@ -43,12 +44,13 @@ working API contract and approved product identity.
 
 ### Frontend
 - [x] Review and polish loading, error, empty-result, and successful-result states
-- [x] Verify that scores and explanations remain understandable and accessible
+- [ ] Verify that scores and explanations remain understandable and accessible
+  (Astraea's outstanding Sprint 3 deliverable; formally deferred)
 
 ### Documentation and release
 - [x] Record evaluation findings, changes, and known limitations
-- [ ] Update setup, API, and verification instructions to match the implementation
-- [ ] Prepare a concise Sprint 3 release summary after work and validation finish
+- [x] Update setup, API, and verification instructions to match the implementation
+- [x] Prepare a concise Sprint 3 release summary after work and validation finish
 
 ## Testing and validation objectives
 
@@ -79,6 +81,8 @@ working API contract and approved product identity.
 
 ## Completion criteria
 
+- [ ] Astraea's outstanding Sprint 3 deliverable is completed (formally
+  deferred; not completed in this release).
 - [x] Evaluation set, baseline, and comparison results are documented.
 - [x] Recommendation changes, if any, show a measured improvement without
   regressions in expected behavior.
@@ -97,13 +101,13 @@ working API contract and approved product identity.
 - **Maleesha — Frontend:** completed frontend tasks for Sprint 3, including build verification and UI updates; his contributions are recorded in the repository's Sprint 3 materials.
 - The frontend production build passes locally with `npm run build`.
 
-### In-progress deliverables
+### Deferred outstanding work
 
-- (none) — All planned deliverables are complete except for the remaining outstanding task below.
-
-### Remaining work
-
-- **Astraea — Outstanding:** Astraea's Sprint 3 deliverable(s) remain incomplete and currently block final Sprint 3 acceptance; her completion is required before proceeding to Sprint 4 unless the team decides to defer her items to a later sprint.
+- **Astraea — Deferred:** Astraea's outstanding Sprint 3 deliverable was not
+  completed before release. The team formally deferred the item so Sprint 4
+  release, final integration testing, and presentation readiness could
+  proceed. The item remains incomplete and is not counted as a completed
+  Sprint 3 deliverable.
 
 - The rule-tuning path was used; a separate model prototype was not delivered or needed to support the measured rule-based improvement.
 
@@ -112,9 +116,9 @@ working API contract and approved product identity.
 - Sprint 3 PR #16 was successfully merged into `main`; merge commit
   `5234b65` is present on the current `main`.
 - The PR was reviewed and approved before merge, as reported for this release.
-- Local verification is ongoing: the Python tests, baseline comparison, and
-  frontend production build passed. Frontend runtime/integration verification
-  and the remaining Sprint 3 activities are still open.
+- Final validation for the Sprint 4 release passed: 52 backend, API, and
+  recommendation regression tests; `python evaluate.py --compare`; and the
+  frontend production build. Production deployment is not claimed.
 
 ## Project progression
 
@@ -122,4 +126,17 @@ Sprint 1 established the frontend-to-backend-to-rule-engine baseline.
 Sprint 2 expanded scoring, integrated the user workflow, strengthened
 validation, and finalized the LearnPath identity and Calm Teal & Navy theme.
 Sprint 3 builds on that completed foundation with measured recommendation
-improvements; final frontend and integration verification remains in progress.
+improvements and is substantially complete with one formally deferred
+outstanding deliverable. Sprint 4 is released/finalised for project delivery;
+the Sprint 4 release record documents its fixes, validation, and known
+limitations.
+
+## Release Closure Addendum
+
+Astraea's outstanding Sprint 3 deliverable was not completed before release.
+The team formally deferred the outstanding item; it remains incomplete and is
+not counted as completed Sprint 3 work. The deferral was made to support Sprint
+4 release, final integration testing, and presentation readiness. Sprint 3 is
+therefore recorded as substantially complete, not fully complete. This
+administrative decision does not assign blame or change the status of the
+completed Sprint 3 work.

@@ -3,7 +3,7 @@
 ## Project Summary
 **Project name:** LearnPath
 **Goal:** Deliver an end‑to‑end prototype (frontend → backend → rule engine) by Week 12.
-**Current status:** Sprint 1 and Sprint 2 are complete. Sprint 3 work has been implemented and merged; most Sprint 3 deliverables are complete (data/model, backend, and frontend build verification) but one frontend verification task owned by Astraea remains outstanding. Sprint 4 will include final polish and a post‑Sprint‑3 Vercel deployment task to resolve the backend runtime configuration.
+**Current status:** Sprint 1 and Sprint 2 are complete. Sprint 3 is substantially complete, with one outstanding Astraea deliverable formally deferred. Sprint 4 is released/finalised for project delivery and presentation preparation; production deployment is not claimed.
 **Team size:** 6 members.
 **Repo state:** `frontend/` contains the React/Vite client; `backend/` contains the FastAPI API; `data/` contains the canonical deterministic rule engine and sample CSV; `vercel.json` contains the static‑build routing metadata for the frontend and an API route to `backend/main.py` (deployment runtime for the backend requires verification).
 
@@ -19,10 +19,10 @@ Maleesha — Frontend Support (styling, state)
 ## Timeline and Sprints
 **Sprint 1:** Complete — end-to-end frontend, API, and rule-engine baseline.  
 **Sprint 2 Week 6–8:** Complete — integrated recommendation workflow, expanded rule categories and scoring, validation, UI states, and approved branding.  
-**Sprint 3 Week 9–10:** In progress — majority of Sprint 3 work implemented and merged into `main`. Data/model evaluation and rule tuning, backend changes, tests, and a successful frontend production build are recorded; one remaining frontend verification and accessibility review task remains.  
-- Deliverables: Model tuning; caching/preprocessing; unit tests; UI polish; deployment verification (deferred to Sprint 4 for the backend runtime fix).  
-**Sprint 4 Week 11–12:** Planned — final polish, deployment verification, and presentation.  
-- Deliverables: Final UI; final rules or model; README and developer docs; presentation slides and demo script; Vercel backend runtime deployment and verification (pending post‑Sprint‑3).
+**Sprint 3 Week 9–10:** Substantially complete — implementation and evaluation work is merged into `main`. Data/model evaluation, backend changes, testing, and Maleesha's frontend work are complete. Astraea's outstanding Sprint 3 deliverable was not completed before release and has been formally deferred.
+- Deliverables: Evaluation and rule tuning; backend and regression testing; frontend work; release documentation. Astraea's outstanding deliverable remains deferred and is not counted as complete.
+**Sprint 4 Week 11–12:** Released / Finalised — recommendation reliability fixes, final automated validation, release documentation, and presentation preparation are complete.
+- Release activities: Fix blank-keyword matching and cap the rating bonus; add regression coverage and model-card/presentation material; run the backend/API and recommendation tests, evaluation comparison, and frontend production build. Astraea's outstanding Sprint 3 work was deferred to allow Sprint 4 release, final integration testing, and Wednesday presentation preparation. Production deployment is not claimed.
 
 ## 🔵 Sprint 1 — Completed (Finalised)
 
@@ -172,6 +172,38 @@ are complete. See `docs/SPRINT2_RELEASE.md` and `docs/SPRINT2_NOTES.md`.
 All detailed Sprint 1 tasks, acceptance criteria, execution plan, and release notes are documented in:
 
 **docs/SPRINT1_RELEASE.md**
+
+## Sprint 3 — Substantially Complete
+
+Sprint 3 delivered its recommendation evaluation framework, measured rule
+improvements, backend changes, regression testing, and Maleesha's frontend
+work. The implementation was merged into `main`. Sprint 3 is substantially
+complete, not fully complete: Astraea's outstanding Sprint 3 deliverable was
+not completed before release and has been formally deferred so Sprint 4
+delivery, final integration testing, and presentation preparation could
+continue.
+
+See `docs/SPRINT3_RELEASE.md` for the release closure addendum and
+`docs/SPRINT3_EVALUATION.md` for the evaluation evidence.
+
+## Sprint 4 — Released / Finalised
+
+Sprint 4 addressed two recommendation-engine edge cases: whitespace-only
+keywords no longer match resources, and the quality bonus is capped to prevent
+an empty rating value from overpowering difficulty. The fixes are covered by
+regression tests and documented in the model card. Presentation material
+includes rule-engine slide notes and a repeatable demonstration scenario.
+
+Release validation passed:
+
+- Backend, API, and recommendation regression tests: 52 passed.
+- Evaluation comparison: nDCG@5 0.993, expected-empty cases 4/4, no case
+  regressions, and zero hard-filter violations.
+- Frontend production build: passed.
+
+Sprint 4 is released/finalised for project delivery. Production deployment is
+not claimed. See `docs/SPRINT4_RELEASE.md` for the release record and known
+limitations.
 
 ## Quick Start for Developers
 
