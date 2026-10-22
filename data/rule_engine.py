@@ -32,6 +32,7 @@ DIFFICULTY_EXACT_MATCH_WEIGHT = 3.0
 DIFFICULTY_ADJACENT_MATCH_WEIGHT = 1.0   # one level off (e.g. beginner vs intermediate)
 KEYWORD_MATCH_WEIGHT = 1.5               # per matching keyword
 RATING_BONUS_WEIGHT = 1.0                # multiplied by (rating - min_rating)
+QUALITY_BONUS_CAP = 1.0                  # max rating bonus, so min_rating=0 (empty form box) cannot outweigh difficulty (Sprint 4 fix)
 DURATION_HEADROOM_WEIGHT = 1.0           # rewards resources comfortably under time budget
 FORMAT_MATCH_WEIGHT = 2.0                # resource format matches the learner's preferred format
 
@@ -164,7 +165,9 @@ class RuleEngine:
         then by id ascending as a stable tiebreaker so output never
         depends on input ordering.
         """
-        keywords = keywords or []
+        # drop blank keywords: a whitespace-only keyword used to match every resource
+        # and slip past the relevance gate (Sprint 4 fix)
+        keywords = [k.strip().lower() for k in (keywords or []) if k and k.strip()]
         fmt_pref = (preferred_format or "").strip().lower()
         if fmt_pref and fmt_pref not in VALID_FORMATS:
             raise ValueError(f"preferred_format must be one of {VALID_FORMATS}")
@@ -202,7 +205,7 @@ class RuleEngine:
                     reasons.append(f"{diff_reason} (+{diff_score})")
 
             # relevance: keywords
-            matched_keywords = [k for k in keywords if k and k.strip().lower() in tags]
+            matched_keywords = [k for k in keywords if k in tags]
             has_content_criteria = bool(subject and subject.strip()) or any(k and k.strip() for k in keywords)
             if REQUIRE_RELEVANCE_SIGNAL and has_content_criteria and not (subject_matched or matched_keywords):
                 continue  # asked for a subject/keywords but this resource matches neither
@@ -213,7 +216,7 @@ class RuleEngine:
 
             # quality: rating above the minimum
             if min_rating is not None and rating is not None:
-                bonus = RATING_BONUS_WEIGHT * max(0.0, rating - float(min_rating))
+                bonus = min(QUALITY_BONUS_CAP, RATING_BONUS_WEIGHT * max(0.0, rating - float(min_rating)))
                 if bonus > 0:
                     breakdown["quality"] += bonus
                     reasons.append(f"rating {rating} exceeds minimum {min_rating} (+{round(bonus, 2)})")

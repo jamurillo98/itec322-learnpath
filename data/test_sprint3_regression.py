@@ -149,6 +149,29 @@ def test_every_result_has_the_fields_the_api_exposes(engine):
         assert r['score'] > 0 and r['reason']
 
 
+# --- Sprint 4 release fixes ------------------------------------------------------
+
+def test_blank_keywords_are_ignored(engine):
+    """A whitespace-only keyword used to match every resource and inflate scores."""
+    plain = engine.recommend_learning_resources(subject='programming', keywords=[])
+    blank = engine.recommend_learning_resources(subject='programming', keywords=['', '   '])
+    assert plain == blank
+
+
+def test_blank_keyword_does_not_bypass_relevance_gate(engine):
+    """An unknown subject plus a blank keyword must still return nothing."""
+    assert engine.recommend_learning_resources(subject='cooking', difficulty='beginner', keywords=['   ']) == []
+
+
+def test_empty_rating_box_does_not_outweigh_difficulty(engine):
+    """The website sends min_rating=0 when the box is empty; level must still decide."""
+    results = engine.recommend_learning_resources(subject='mathematics', difficulty='advanced',
+                                                  max_duration_minutes=30, min_rating=0, keywords=['theory'])
+    assert results[0]['level'] == 'advanced'
+    assert all(r['score_breakdown']['quality'] <= 1.0 for r in results)
+    assert results[0]['score'] - results[1]['score'] >= 2.0
+
+
 if __name__ == '__main__':
     import sys
     sys.exit(pytest.main([__file__, '-v']))
