@@ -3,9 +3,13 @@
 ## Project Summary
 **Project name:** LearnPath
 **Goal:** Deliver an end‑to‑end prototype (frontend → backend → rule engine) by Week 12.
-**Current status:** Sprint 1 and Sprint 2 are complete. Sprint 3 is substantially complete, with one outstanding Astraea deliverable formally deferred. Sprint 4 is released/finalised for project delivery and presentation preparation; production deployment is not claimed.
+**Sprint status:**
+- Sprint 1 Complete
+- Sprint 2 Complete
+- Sprint 3 Substantially Complete (Deferred Deliverable Recorded)
+- Sprint 4 Released / Finalised
 **Team size:** 6 members.
-**Repo state:** `frontend/` contains the React/Vite client; `backend/` contains the FastAPI API; `data/` contains the canonical deterministic rule engine and sample CSV; `vercel.json` contains the static‑build routing metadata for the frontend and an API route to `backend/main.py` (deployment runtime for the backend requires verification).
+**Repo state:** `frontend/` contains the React/Vite client; `backend/` contains the FastAPI API; `data/` contains the canonical deterministic rule engine and sample CSV; `vercel.json` contains static-build routing metadata and an API route to `backend/main.py`. Sprint 4 deployment investigation and backend runtime assessment were conducted; this does not establish a verified production deployment.
 
 ## Team Roles and Assignments
 
@@ -19,10 +23,13 @@ Maleesha — Frontend Support (styling, state)
 ## Timeline and Sprints
 **Sprint 1:** Complete — end-to-end frontend, API, and rule-engine baseline.  
 **Sprint 2 Week 6–8:** Complete — integrated recommendation workflow, expanded rule categories and scoring, validation, UI states, and approved branding.  
-**Sprint 3 Week 9–10:** Substantially complete — implementation and evaluation work is merged into `main`. Data/model evaluation, backend changes, testing, and Maleesha's frontend work are complete. Astraea's outstanding Sprint 3 deliverable was not completed before release and has been formally deferred.
+**Sprint 3 Week 9–10:** Substantially Complete (Deferred Deliverable Recorded) — implementation and evaluation work is merged into `main`. Data/model evaluation, backend changes, testing, and Maleesha's frontend work are complete. Astraea's outstanding Sprint 3 deliverable was not completed before release and has been formally deferred.
+
 - Deliverables: Evaluation and rule tuning; backend and regression testing; frontend work; release documentation. Astraea's outstanding deliverable remains deferred and is not counted as complete.
+
 **Sprint 4 Week 11–12:** Released / Finalised — recommendation reliability fixes, final automated validation, release documentation, and presentation preparation are complete.
-- Release activities: Fix blank-keyword matching and cap the rating bonus; add regression coverage and model-card/presentation material; run the backend/API and recommendation tests, evaluation comparison, and frontend production build. Astraea's outstanding Sprint 3 work was deferred to allow Sprint 4 release, final integration testing, and Wednesday presentation preparation. Production deployment is not claimed.
+
+- Release activities: Fix blank-keyword matching and cap the rating bonus; add regression coverage and model-card/presentation material; run the backend/API and recommendation tests, evaluation comparison, and frontend production build. Astraea's outstanding Sprint 3 work was deferred to allow Sprint 4 release, final integration testing, and Wednesday presentation preparation.
 
 ## 🔵 Sprint 1 — Completed (Finalised)
 
@@ -201,9 +208,24 @@ Release validation passed:
   regressions, and zero hard-filter violations.
 - Frontend production build: passed.
 
-Sprint 4 is released/finalised for project delivery. Production deployment is
-not claimed. See `docs/SPRINT4_RELEASE.md` for the release record and known
-limitations.
+Sprint 4 is released/finalised for project delivery. The deployment assessment
+is recorded in `docs/SPRINT4_RELEASE.md`.
+
+### Sprint 4 Closure Note
+
+Recommendation-engine hardening, final validation, deployment investigation,
+release activities, and presentation preparation were completed. The frontend
+production build passed. Backend runtime verification and deployment
+assessment were conducted; no verified production deployment is claimed.
+
+- **Nishant — Sprint 4 Complete:** recommendation reliability improvements,
+  merged fixes, regression tests, supporting documentation, and presentation
+  materials.
+- **Jerome — Sprint 4 Complete:** release management and documentation,
+  deployment investigation, backend runtime verification and deployment
+  assessment, final release validation, and presentation readiness.
+
+See `docs/SPRINT4_RELEASE.md` for the closure and deployment assessment.
 
 ## Quick Start for Developers
 

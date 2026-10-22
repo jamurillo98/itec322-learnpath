@@ -4,8 +4,8 @@
 
 Sprint 4 finalises LearnPath for project delivery and presentation. Work focused
 on recommendation reliability, regression coverage, release documentation, and
-presentation preparation. Sprint 4 is released/finalised; this status does not
-claim a production deployment.
+presentation preparation. This document records the released/finalised scope
+and the release-readiness assessment.
 
 Sprint 3 is substantially complete. Astraea's outstanding Sprint 3 deliverable
 was not completed before release and has been formally deferred. The deferral
@@ -71,15 +71,14 @@ Validation performed for this release:
 - `npm run build` from `frontend/` — production build passed.
 
 The test run reported existing dependency deprecation warnings. They did not
-cause failures. Production deployment is not claimed by this release.
+cause failures.
 
 ## Release Outcome
 
-Sprint 4 is released/finalised for project delivery. The recommendation
-regression fixes, evaluation guard, frontend production build, model
-documentation, and presentation material are in place. Sprint 3 remains
-substantially complete, with one outstanding Astraea deliverable formally
-deferred rather than marked complete.
+The recommendation regression fixes, evaluation guard, frontend production
+build, model documentation, and presentation material are in place. Sprint 3
+remains substantially complete, with one outstanding Astraea deliverable
+formally deferred rather than marked complete.
 
 ## Known Limitations
 
@@ -91,8 +90,8 @@ deferred rather than marked complete.
   inside longer words.
 - Evaluation case E04 retains a known ranking imperfection (nDCG 0.89).
 - The API does not currently pass `preferred_format` through to the engine.
-- Production deployment and its backend runtime configuration are not verified
-  by this release.
+- The production backend runtime and deployment configuration were assessed,
+  but this release does not establish a verified production deployment.
 - Astraea's outstanding Sprint 3 deliverable remains deferred and incomplete.
 
 ## Future Improvements
@@ -105,8 +104,8 @@ deferred rather than marked complete.
 - Collect real learner feedback before assessing whether a trained ranking
   model is warranted.
 - Revisit the deferred Sprint 3 deliverable in a later planning decision.
-- Verify production deployment separately if deployment becomes a release
-  requirement.
+- If production deployment becomes a release requirement, validate the
+  production environment and deployment separately from this assessment.
 
 ## Presentation Readiness Summary
 
@@ -119,7 +118,39 @@ Sprint 3 item is explicitly distinguished from completed work.
 
 ## Sprint 4 Completion Statement
 
-Sprint 4 is released/finalised for project delivery and presentation
-preparation. Sprint 1 and Sprint 2 are complete; Sprint 3 is substantially
-complete with one deferred outstanding deliverable; Sprint 4 is released and
-finalised. The deferred Sprint 3 work is not represented as completed.
+Sprint progression is recorded as: Sprint 1 Complete; Sprint 2 Complete;
+Sprint 3 Substantially Complete (Deferred Deliverable Recorded); Sprint 4
+Released / Finalised. The deferred Sprint 3 work is not represented as
+completed.
+
+## Sprint 4 Closure and Release Validation
+
+### Nishant Completion Status
+
+- Recommendation reliability improvements were completed.
+- Sprint 4 fixes were reviewed, approved, merged, and released.
+- Regression tests were implemented.
+- Supporting documentation and presentation materials were produced.
+- Nishant's Sprint 4 contribution is complete.
+
+### Jerome Completion Status
+
+- Sprint 4 release management activities were completed.
+- Release documentation was completed.
+- Deployment investigation was performed.
+- Backend runtime verification and deployment assessment were conducted.
+- Final release validation and presentation-readiness activities were
+  completed.
+- Jerome's Sprint 4 contribution is complete.
+
+### Deployment Assessment
+
+LearnPath uses a React/Vite frontend and a FastAPI backend. Deployment
+verification was investigated as a Sprint 4 release-readiness activity. The
+frontend production build completed successfully. Production deployment and
+the backend runtime configuration were assessed; the available evidence does
+not establish a verified production deployment.
+
+The local frontend-to-API setup is a supported demonstration environment, as
+documented in the Sprint 3 frontend verification record. Deployment findings
+and remaining verification needs are recorded as future improvement work.

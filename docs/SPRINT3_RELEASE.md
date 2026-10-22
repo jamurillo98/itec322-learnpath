@@ -44,8 +44,8 @@ working API contract and approved product identity.
 
 ### Frontend
 - [x] Review and polish loading, error, empty-result, and successful-result states
-- [ ] Verify that scores and explanations remain understandable and accessible
-  (Astraea's outstanding Sprint 3 deliverable; formally deferred)
+- [ ] Complete accessibility verification, including a full screen-reader
+  walkthrough (Astraea's outstanding Sprint 3 deliverable; formally deferred)
 
 ### Documentation and release
 - [x] Record evaluation findings, changes, and known limitations
@@ -81,8 +81,8 @@ working API contract and approved product identity.
 
 ## Completion criteria
 
-- [ ] Astraea's outstanding Sprint 3 deliverable is completed (formally
-  deferred; not completed in this release).
+- [ ] Complete accessibility verification (Astraea's outstanding Sprint 3
+  deliverable; formally deferred and not completed in this release).
 - [x] Evaluation set, baseline, and comparison results are documented.
 - [x] Recommendation changes, if any, show a measured improvement without
   regressions in expected behavior.
