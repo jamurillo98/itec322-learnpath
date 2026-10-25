@@ -2,11 +2,12 @@
 
 ## Release Status
 
-Sprint 3 is substantially complete. **Sprint 1 and Sprint 2 are complete.**
-The Data/Model evaluation and measured rule changes are documented, and the
-Sprint 3 pull request has been merged into `main`. One outstanding Sprint 3
-deliverable was not completed before release and was formally deferred. Sprint
-3 is not described as fully complete, and this document does not claim a
+Sprint 3 is officially complete. **Sprints 1 and 2 are also complete.** The
+Data/Model evaluation, measured rule changes, backend and frontend work, and
+Astraea's scoped manual accessibility verification are documented, and the
+Sprint 3 pull request has been merged into `main`. Accessibility findings and
+the limits of the verification are recorded; comprehensive screen-reader
+coverage and WCAG conformance are not claimed. This document does not claim a
 production deployment.
 
 ## Overview
@@ -44,8 +45,10 @@ working API contract and approved product identity.
 
 ### Frontend
 - [x] Review and polish loading, error, empty-result, and successful-result states
-- [ ] Complete accessibility verification, including a full screen-reader
-  walkthrough (Astraea's outstanding Sprint 3 deliverable; formally deferred)
+- [x] Complete and document scoped manual accessibility verification of key
+  form, keyboard, results, empty-state, and service-error workflows
+  (Astraea; see `SPRINT3_ASTRAEA_ACCESSIBILITY.md`). Broader screen-reader
+  coverage and WCAG conformance remain outside the verified scope.
 
 ### Documentation and release
 - [x] Record evaluation findings, changes, and known limitations
@@ -81,13 +84,17 @@ working API contract and approved product identity.
 
 ## Completion criteria
 
-- [ ] Complete accessibility verification (Astraea's outstanding Sprint 3
-  deliverable; formally deferred and not completed in this release).
+- [x] Scoped manual accessibility verification is documented, with remaining
+  screen-reader coverage and WCAG conformance explicitly recorded as
+  limitations rather than completed tests.
 - [x] Evaluation set, baseline, and comparison results are documented.
 - [x] Recommendation changes, if any, show a measured improvement without
   regressions in expected behavior.
 - [x] Relevant rule-engine and API regression tests pass.
-- [x] Frontend and API states are validated across success and failure paths.
+- [x] Successful, empty-result, and service-error frontend/API paths are
+  validated. The loading UI is implemented and reviewed; its browser capture
+  was partial because the request completed too quickly (see
+  `SPRINT3_FRONTEND_VERIFICATION.md`).
 - [x] Frontend production build and documented integration checks pass.
 - [x] Documentation reflects the verified implementation and remaining
   limitations.
@@ -99,17 +106,26 @@ working API contract and approved product identity.
 - **Aarjan & Nishant — Data/Model evaluation and collaboration:** added the evaluation set, baseline and tuned results, repeatable evaluator, rule-engine relevance and subject-matching changes, regression tests, and the evaluation report. Evaluation improved nDCG@5 from 0.953 to 0.993 and empty-result cases from 2/4 to 4/4; no evaluated case regressed. The 48 Python rule-engine, regression, and API tests pass; `python evaluate.py --compare` passes. Nishant collaborated closely with Aarjan on the evaluation and rule tuning; both contributors are recorded in the merged Sprint 3 artifacts and evaluation report.
 - **Jerome & Jasim — Backend:** implemented and verified backend changes and integration steps; backend regression tests and routing checks are included in the Sprint 3 artifacts and verification evidence.
 - **Maleesha — Frontend:** completed frontend tasks for Sprint 3, including build verification and UI updates; his contributions are recorded in the repository's Sprint 3 materials.
+- **Astraea — Frontend accessibility verification:** completed the documented
+  manual verification of keyboard navigation, form controls, validation,
+  successful and empty results, service-error feedback, and recovery. The
+  report records that comprehensive traversal of every result and automatic
+  announcement of every dynamic update were not verified; no WCAG-conformance
+  claim is made.
+- Frontend verification notes that the loading-state browser capture was
+  partial; the implemented state is visible in the UI code, and this
+  limitation is not represented as a fully captured manual test.
 - The frontend production build passes locally with `npm run build`.
+- The rule-tuning path was used; a separate model prototype was not delivered
+  or needed to support the measured rule-based improvement.
 
-### Deferred outstanding work
+### Remaining accessibility limitations
 
-- **Astraea — Deferred:** Astraea's outstanding Sprint 3 deliverable was not
-  completed before release. The team formally deferred the item so Sprint 4
-  release, final integration testing, and presentation readiness could
-  proceed. The item remains incomplete and is not counted as a completed
-  Sprint 3 deliverable.
-
-- The rule-tuning path was used; a separate model prototype was not delivered or needed to support the measured rule-based improvement.
+- The report does not establish automatic announcements for every dynamic
+  update, full traversal of every recommendation-card element, cross-browser
+  screen-reader behavior, automated accessibility-audit results, or formal
+  WCAG conformance. These limits are documented and are not represented as
+  passed tests; the assigned scoped manual verification is complete.
 
 ## Merge Status
 
@@ -126,17 +142,16 @@ Sprint 1 established the frontend-to-backend-to-rule-engine baseline.
 Sprint 2 expanded scoring, integrated the user workflow, strengthened
 validation, and finalized the LearnPath identity and Calm Teal & Navy theme.
 Sprint 3 builds on that completed foundation with measured recommendation
-improvements and is substantially complete with one formally deferred
-outstanding deliverable. Sprint 4 is released/finalised for project delivery;
-the Sprint 4 release record documents its fixes, validation, and known
-limitations.
+improvements and the documented scoped accessibility verification. Sprint 3
+is officially complete with the verification limitations recorded. Sprint 4
+is officially complete for project delivery; the Sprint 4 release record
+documents its fixes, validation, team completion, and known limitations.
 
-## Release Closure Addendum
+## Release Closure
 
-Astraea's outstanding Sprint 3 deliverable was not completed before release.
-The team formally deferred the outstanding item; it remains incomplete and is
-not counted as completed Sprint 3 work. The deferral was made to support Sprint
-4 release, final integration testing, and presentation readiness. Sprint 3 is
-therefore recorded as substantially complete, not fully complete. This
-administrative decision does not assign blame or change the status of the
-completed Sprint 3 work.
+Astraea completed the scoped manual accessibility verification documented in
+`SPRINT3_ASTRAEA_ACCESSIBILITY.md`. The report's unverified areas remain
+explicitly listed limitations and are not converted into passed checks.
+Together with the completed Data/Model, backend, frontend, regression, and
+release work, this closes Sprint 3. No comprehensive WCAG or production
+deployment claim is made.

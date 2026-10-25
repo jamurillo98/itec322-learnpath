@@ -7,10 +7,10 @@ on recommendation reliability, regression coverage, release documentation, and
 presentation preparation. This document records the released/finalised scope
 and the release-readiness assessment.
 
-Sprint 3 is substantially complete. Astraea's outstanding Sprint 3 deliverable
-was not completed before release and has been formally deferred. The deferral
-allows Sprint 4 release activities, final integration testing, and presentation
-readiness to proceed without describing Sprint 3 as fully complete.
+Sprint 3 is officially complete, including Astraea's documented scoped manual
+accessibility verification; broader screen-reader coverage and WCAG
+conformance remain documented limitations. Sprint 4 is officially complete
+with all six team members' contributions recorded below.
 
 ## Sprint 4 Objectives
 
@@ -20,7 +20,7 @@ readiness to proceed without describing Sprint 3 as fully complete.
 - Record the release outcome, known limitations, and future improvements.
 - Prepare concise technical material and a repeatable demonstration for the
   Wednesday presentation.
-- Formally document the outstanding Sprint 3 deliverable as deferred.
+- Record Sprint 3 closure and its accessibility verification scope.
 
 ## Completed Work
 
@@ -33,8 +33,9 @@ readiness to proceed without describing Sprint 3 as fully complete.
 - Re-ran the evaluation comparison with no regressions against the recorded
   baseline.
 - Built the frontend production bundle successfully.
-- Recorded Sprint 3 as substantially complete, with Astraea's outstanding
-  deliverable formally deferred.
+- Closed Sprint 3 after recording Astraea's scoped accessibility verification
+  and its remaining limitations.
+- Recorded completion for the Data/Model, backend, and frontend team members.
 
 ## Recommendation Engine Improvements
 
@@ -76,9 +77,10 @@ cause failures.
 ## Release Outcome
 
 The recommendation regression fixes, evaluation guard, frontend production
-build, model documentation, and presentation material are in place. Sprint 3
-remains substantially complete, with one outstanding Astraea deliverable
-formally deferred rather than marked complete.
+build, model documentation, presentation material, and team closure record are
+in place. Sprints 1 through 4 are officially complete. The documented
+accessibility limitations and lack of verified production deployment remain
+explicitly stated.
 
 ## Known Limitations
 
@@ -90,9 +92,15 @@ formally deferred rather than marked complete.
   inside longer words.
 - Evaluation case E04 retains a known ranking imperfection (nDCG 0.89).
 - The API does not currently pass `preferred_format` through to the engine.
+- The Sprint 4 browser report marks the whitespace-only keyword check as
+  partially verified and empty minimum rating as not tested at API level.
+  Automated regression/API tests pass, but those manual observations are not
+  represented as comprehensive browser/API coverage.
 - The production backend runtime and deployment configuration were assessed,
   but this release does not establish a verified production deployment.
-- Astraea's outstanding Sprint 3 deliverable remains deferred and incomplete.
+- Accessibility verification was manual and scoped to the workflows listed
+  in `SPRINT3_ASTRAEA_ACCESSIBILITY.md`; comprehensive screen-reader coverage
+  and formal WCAG conformance are not claimed.
 
 ## Future Improvements
 
@@ -103,7 +111,8 @@ formally deferred rather than marked complete.
 - Wire the optional preferred-format field through the API if it is in scope.
 - Collect real learner feedback before assessing whether a trained ranking
   model is warranted.
-- Revisit the deferred Sprint 3 deliverable in a later planning decision.
+- Consider broader screen-reader and accessibility testing if it becomes a
+  project requirement.
 - If production deployment becomes a release requirement, validate the
   production environment and deployment separately from this assessment.
 
@@ -113,17 +122,24 @@ The repository includes rule-engine slide content, speaker notes, likely
 question guidance, and a repeatable demo scenario. The recommendation tests,
 evaluation comparison, and production frontend build pass, providing
 reproducible technical evidence for the presentation. Final slide review and
-rehearsal should remain aligned with the Wednesday deadline. The deferred
-Sprint 3 item is explicitly distinguished from completed work.
+rehearsal should remain aligned with the Wednesday deadline. Sprint 3 and
+Sprint 4 closure are recorded separately from the explicitly documented
+accessibility and deployment limitations.
 
 ## Sprint 4 Completion Statement
 
 Sprint progression is recorded as: Sprint 1 Complete; Sprint 2 Complete;
-Sprint 3 Substantially Complete (Deferred Deliverable Recorded); Sprint 4
-Released / Finalised. The deferred Sprint 3 work is not represented as
-completed.
+Sprint 3 Complete (Astraea's scoped accessibility verification completed);
+Sprint 4 Complete. The accessibility report's unverified areas remain
+limitations and are not represented as passed checks.
 
 ## Sprint 4 Closure and Release Validation
+
+### Aarjan Completion Status — Data/Model
+
+- Completed Sprint 4 Data/Model contributions and presentation preparation,
+  including the demo scenarios and future-ML material.
+- Aarjan's Sprint 4 contribution is complete.
 
 ### Nishant Completion Status
 
@@ -132,6 +148,11 @@ completed.
 - Regression tests were implemented.
 - Supporting documentation and presentation materials were produced.
 - Nishant's Sprint 4 contribution is complete.
+
+### Jasim Completion Status — Backend
+
+- Completed Sprint 4 API validation and regression-test contributions.
+- Jasim's Sprint 4 contribution is complete.
 
 ### Jerome Completion Status
 
@@ -142,6 +163,18 @@ completed.
 - Final release validation and presentation-readiness activities were
   completed.
 - Jerome's Sprint 4 contribution is complete.
+
+### Astraea Completion Status — Frontend
+
+- Completed Sprint 4 frontend and integration verification, documented in the
+  final verification report.
+- Astraea's Sprint 4 contribution is complete.
+
+### Maleesha Completion Status — Frontend
+
+- Completed Sprint 4 frontend support and release-readiness contributions as
+  confirmed by the team.
+- Maleesha's Sprint 4 contribution is complete.
 
 ### Deployment Assessment
 

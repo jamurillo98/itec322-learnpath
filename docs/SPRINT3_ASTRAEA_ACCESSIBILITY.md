@@ -113,7 +113,8 @@ The following areas were not fully verified during this testing session:
 - Automated accessibility audits and formal WCAG conformance assessment.
 - Loading-state announcement and keyboard behaviour during delayed requests.
 
-These items should be treated as outstanding verification activities rather than completed tests.
+These items remain follow-up verification activities outside the scoped
+manual checks completed in this report; they are not counted as passed tests.
 
 ## 10. Conclusion
 
@@ -124,3 +125,10 @@ The application also recovered successfully after the backend was restarted.
 The tested behaviours passed, but additional testing is required before claiming comprehensive screen-reader accessibility or WCAG compliance.
 
 **Overall result:** Manual accessibility verification completed for the tested workflows, with explicitly documented limitations.
+
+## Sprint 3 Deliverable Closure
+
+Astraea's scoped manual accessibility verification deliverable is complete.
+The tests and their results are documented above. The unverified areas listed
+in Section 9 remain limitations: this report does not claim exhaustive
+screen-reader coverage or formal WCAG conformance.
