@@ -1,31 +1,31 @@
 id,title,topic,tags,level,format,url,duration_minutes,rating,cost
-R001,Intro to Python Programming,programming,python;coding-basics;self-paced,beginner,video,https://example.com/r001,45,4.7,0
-R002,Data Structures & Algorithms Deep Dive,programming,algorithms;interview-prep;java,advanced,exercise,https://example.com/r002,480,4.5,49
-R003,Linear Algebra Fundamentals,mathematics,algebra;theory;self-paced,beginner,article,https://example.com/r003,25,4.2,0
-R004,Machine Learning with Neural Networks,data-science,machine-learning;python;hands-on,advanced,video,https://example.com/r004,360,4.8,99
-R005,SQL for Beginners,programming,sql;databases;hands-on,beginner,exercise,https://example.com/r005,60,4.4,0
-R006,Statistics for Data Analysis,data-science,statistics;theory;self-paced,intermediate,article,https://example.com/r006,90,4.3,29
-R007,Calculus: Limits and Derivatives,mathematics,calculus;theory;exam-prep,intermediate,video,https://example.com/r007,55,4.1,0
-R008,Hands-On Web Development Bootcamp,programming,javascript;hands-on;project-based,intermediate,exercise,https://example.com/r008,600,4.6,149
-R009,Python Loops and Functions Practice,programming,python;coding-basics;hands-on,beginner,exercise,https://example.com/r009,30,4.5,0
-R010,Understanding Variables and Data Types,programming,python;coding-basics;theory,beginner,article,https://example.com/r010,15,4.0,0
-R011,Object-Oriented Programming in Python,programming,python;oop;self-paced,intermediate,video,https://example.com/r011,75,4.6,0
-R012,Git and GitHub Essentials,programming,git;version-control;hands-on,beginner,video,https://example.com/r012,40,4.7,0
-R013,REST APIs with FastAPI,programming,python;web;api;project-based,intermediate,exercise,https://example.com/r013,120,4.5,0
-R014,JavaScript DOM Basics,programming,javascript;web;coding-basics,beginner,article,https://example.com/r014,20,3.9,0
-R015,Writing Unit Tests with Pytest,programming,python;testing;hands-on,intermediate,exercise,https://example.com/r015,50,4.4,0
-R016,System Design Interview Patterns,programming,architecture;interview-prep;theory,advanced,article,https://example.com/r016,35,4.3,0
-R017,Concurrency and Async Python,programming,python;async;performance,advanced,video,https://example.com/r017,95,4.2,19
-R018,Probability Basics,mathematics,probability;theory;self-paced,beginner,video,https://example.com/r018,30,4.4,0
-R019,Matrix Operations Drill,mathematics,algebra;matrices;hands-on,intermediate,exercise,https://example.com/r019,40,4.0,0
-R020,Discrete Mathematics for Computing,mathematics,logic;sets;theory,intermediate,article,https://example.com/r020,45,4.1,0
-R021,Integration Techniques Problem Set,mathematics,calculus;exam-prep;hands-on,advanced,exercise,https://example.com/r021,70,3.8,0
-R022,Eigenvalues Explained Visually,mathematics,algebra;theory;visual,advanced,video,https://example.com/r022,25,4.9,0
-R023,Graph Theory Introduction,mathematics,graphs;logic;theory,beginner,article,https://example.com/r023,20,3.7,0
-R024,Data Cleaning with Pandas,data-science,python;pandas;hands-on,beginner,exercise,https://example.com/r024,45,4.6,0
-R025,Data Visualisation Principles,data-science,visualisation;theory;self-paced,beginner,article,https://example.com/r025,25,4.2,0
-R026,Exploratory Data Analysis Walkthrough,data-science,python;pandas;statistics,intermediate,video,https://example.com/r026,60,4.5,0
-R027,Regression Models in Scikit-Learn,data-science,machine-learning;python;hands-on,intermediate,exercise,https://example.com/r027,80,4.4,0
-R028,Decision Trees and Random Forests,data-science,machine-learning;theory;classification,intermediate,article,https://example.com/r028,30,4.1,0
-R029,Model Evaluation and Cross-Validation,data-science,machine-learning;evaluation;python,advanced,video,https://example.com/r029,50,4.7,0
-R030,Feature Engineering Challenge,data-science,machine-learning;feature-engineering;hands-on,advanced,exercise,https://example.com/r030,120,4.3,0
+R001,Intro to Python Programming,programming,python;coding-basics;self-paced,beginner,video,https://www.freecodecamp.org/news/learn-python-free-python-courses-for-beginners/,45,4.7,0
+R002,Data Structures & Algorithms Deep Dive,programming,algorithms;interview-prep;java,advanced,exercise,https://leetcode.com/problemset/,480,4.5,49
+R003,Linear Algebra Fundamentals,mathematics,algebra;theory;self-paced,beginner,article,https://www.khanacademy.org/math/linear-algebra,25,4.2,0
+R004,Machine Learning with Neural Networks,data-science,machine-learning;python;hands-on,advanced,video,https://www.3blue1brown.com/topics/neural-networks,360,4.8,99
+R005,SQL for Beginners,programming,sql;databases;hands-on,beginner,exercise,https://sqlbolt.com/,60,4.4,0
+R006,Statistics for Data Analysis,data-science,statistics;theory;self-paced,intermediate,article,https://www.khanacademy.org/math/statistics-probability,90,4.3,29
+R007,Calculus: Limits and Derivatives,mathematics,calculus;theory;exam-prep,intermediate,video,https://www.khanacademy.org/math/calculus-1,55,4.1,0
+R008,Hands-On Web Development Bootcamp,programming,javascript;hands-on;project-based,intermediate,exercise,https://www.theodinproject.com/,600,4.6,149
+R009,Python Loops and Functions Practice,programming,python;coding-basics;hands-on,beginner,exercise,https://www.w3schools.com/python/python_exercises.asp,30,4.5,0
+R010,Understanding Variables and Data Types,programming,python;coding-basics;theory,beginner,article,https://docs.python.org/3/tutorial/introduction.html,15,4.0,0
+R011,Object-Oriented Programming in Python,programming,python;oop;self-paced,intermediate,video,https://docs.python.org/3/tutorial/classes.html,75,4.6,0
+R012,Git and GitHub Essentials,programming,git;version-control;hands-on,beginner,video,https://www.youtube.com/watch?v=RGOj5yH7evk,40,4.7,0
+R013,REST APIs with FastAPI,programming,python;web;api;project-based,intermediate,exercise,https://fastapi.tiangolo.com/tutorial/,120,4.5,0
+R014,JavaScript DOM Basics,programming,javascript;web;coding-basics,beginner,article,https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction,20,3.9,0
+R015,Writing Unit Tests with Pytest,programming,python;testing;hands-on,intermediate,exercise,https://docs.pytest.org/en/stable/getting-started.html,50,4.4,0
+R016,System Design Interview Patterns,programming,architecture;interview-prep;theory,advanced,article,https://github.com/donnemartin/system-design-primer,35,4.3,0
+R017,Concurrency and Async Python,programming,python;async;performance,advanced,video,https://docs.python.org/3/library/asyncio.html,95,4.2,19
+R018,Probability Basics,mathematics,probability;theory;self-paced,beginner,video,https://www.khanacademy.org/math/statistics-probability/probability-library,30,4.4,0
+R019,Matrix Operations Drill,mathematics,algebra;matrices;hands-on,intermediate,exercise,https://www.khanacademy.org/math/precalculus,40,4.0,0
+R020,Discrete Mathematics for Computing,mathematics,logic;sets;theory,intermediate,article,https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/,45,4.1,0
+R021,Integration Techniques Problem Set,mathematics,calculus;exam-prep;hands-on,advanced,exercise,https://tutorial.math.lamar.edu/,70,3.8,0
+R022,Eigenvalues Explained Visually,mathematics,algebra;theory;visual,advanced,video,https://www.3blue1brown.com/lessons/eigenvalues,25,4.9,0
+R023,Graph Theory Introduction,mathematics,graphs;logic;theory,beginner,article,https://en.wikipedia.org/wiki/Graph_theory,20,3.7,0
+R024,Data Cleaning with Pandas,data-science,python;pandas;hands-on,beginner,exercise,https://www.kaggle.com/learn/data-cleaning,45,4.6,0
+R025,Data Visualisation Principles,data-science,visualisation;theory;self-paced,beginner,article,https://clauswilke.com/dataviz/,25,4.2,0
+R026,Exploratory Data Analysis Walkthrough,data-science,python;pandas;statistics,intermediate,video,https://pandas.pydata.org/docs/getting_started/intro_tutorials/index.html,60,4.5,0
+R027,Regression Models in Scikit-Learn,data-science,machine-learning;python;hands-on,intermediate,exercise,https://www.kaggle.com/learn/intro-to-machine-learning,80,4.4,0
+R028,Decision Trees and Random Forests,data-science,machine-learning;theory;classification,intermediate,article,https://scikit-learn.org/stable/modules/tree.html,30,4.1,0
+R029,Model Evaluation and Cross-Validation,data-science,machine-learning;evaluation;python,advanced,video,https://scikit-learn.org/stable/modules/cross_validation.html,50,4.7,0
+R030,Feature Engineering Challenge,data-science,machine-learning;feature-engineering;hands-on,advanced,exercise,https://www.kaggle.com/learn/feature-engineering,120,4.3,0
