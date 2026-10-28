@@ -2,7 +2,7 @@ import "./LoadingSpinner.css";
 
 /**
  * LoadingSpinner
- * Shown while the frontend waits for /api/recommend.
+ * Shown while the frontend waits for the recommendation API.
  *
  * Usage:
  *   {loading && <LoadingSpinner />}

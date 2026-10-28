@@ -4,6 +4,10 @@ import Results from "./components/Results";
 import LoadingSpinner from "./components/LoadingSpinner";
 import "./theme.css";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL?.replace(/\/+$/, "") ||
+  (import.meta.env.DEV ? "http://127.0.0.1:8000/api" : "");
+
 // Friendly names for the API's field names, used in validation messages.
 const FIELD_LABELS = {
   subject: "Subject",
@@ -43,9 +47,17 @@ export default function App() {
     setError("");
     setResults([]);
 
+    if (!API_BASE_URL) {
+      setError(
+        "The recommendation service is not configured. Please set the VITE_API_URL environment variable."
+      );
+      setStatus("error");
+      return;
+    }
+
     let response;
     try {
-      response = await fetch("/api/recommend", {
+      response = await fetch(`${API_BASE_URL}/recommend`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
